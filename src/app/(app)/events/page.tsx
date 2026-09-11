@@ -188,9 +188,10 @@ export default function EventsPage() {
   };
 
   return (
-    <div className="min-h-screen -m-8 p-8 space-y-8 font-manrope bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
-      {/* Top Section */}
-      <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#D8D2C8] pb-4">
+    <div className="min-h-screen -m-8 p-8 font-manrope bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
+      <div className="max-w-7xl mx-auto space-y-6 w-full">
+        {/* Top Section */}
+        <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#D8D2C8] pb-4">
         <div>
           <h2 className="text-2xl font-bold text-[#133020] dark:text-white tracking-tight leading-tight">
             {locale === "en" ? "Exhibition records" : "展会记录库"}
@@ -408,6 +409,7 @@ export default function EventsPage() {
         eventName={deletingEvent?.eventName}
         isDeleting={isDeleting}
       />
+      </div>
     </div>
   );
 }

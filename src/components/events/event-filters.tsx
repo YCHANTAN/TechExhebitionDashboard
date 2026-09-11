@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { REGIONS, BUSINESS_LINES, PRIORITIES } from "@/lib/constants/business-lines";
-import { Search, X, Filter, Plus, ArrowUpDown, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { Search, X, Filter, Plus, ArrowUpDown, ChevronDown, SlidersHorizontal, Check } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/use-translation";
 import { REGIONS_MAP, BUSINESS_LINES_MAP, PRIORITIES_MAP } from "@/lib/i18n/event-localization";
 import { LifewoodDropdown, LifewoodMultiSelectDropdown } from "@/components/shared/lifewood-dropdown";
@@ -25,6 +25,7 @@ interface EventFiltersProps {
 export function EventFilters({ filters, viewMode = "card", onChange, onClear, onAddEvent }: EventFiltersProps) {
   const { locale, t } = useTranslation();
   const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [showSortPanel, setShowSortPanel] = useState(false);
 
   // Count active non-default filters
   let activeFilterCount = 0;
@@ -100,19 +101,22 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
             <button
               type="button"
               onClick={() => onChange("search", "")}
-              className="absolute right-2.5 top-2.5 text-slate-400 hover:text-[#133020] dark:hover:text-white"
+              className="absolute right-2.5 top-2.5 text-slate-400 hover:text-[#133020] dark:hover:text-white cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
 
-        {/* Action Controls: Filter Toggle Button + Add Event */}
+        {/* Action Controls: Filter Toggle Button + Sort Options Button + Add Event */}
         <div className="flex items-center gap-2.5 flex-wrap">
           {/* Main Filter Panel Toggle Button */}
           <button
             type="button"
-            onClick={() => setShowFilterPanel(!showFilterPanel)}
+            onClick={() => {
+              setShowFilterPanel(!showFilterPanel);
+              setShowSortPanel(false);
+            }}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-[8px] border-[1.5px] text-xs font-bold transition-all shadow-2xs cursor-pointer ${
               showFilterPanel || activeFilterCount > 0
                 ? "bg-[#133020] dark:bg-[#046241] text-white border-[#133020] dark:border-[#046241]"
@@ -129,6 +133,28 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
             <ChevronDown
               className={`w-3.5 h-3.5 transition-transform duration-200 ${
                 showFilterPanel ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {/* Main Sort/Order Options Toggle Button (Identical Style) */}
+          <button
+            type="button"
+            onClick={() => {
+              setShowSortPanel(!showSortPanel);
+              setShowFilterPanel(false);
+            }}
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-[8px] border-[1.5px] text-xs font-bold transition-all shadow-2xs cursor-pointer ${
+              showSortPanel || (filters.sortBy && filters.sortBy !== "NUMBER_ASC")
+                ? "bg-[#133020] dark:bg-[#046241] text-white border-[#133020] dark:border-[#046241]"
+                : "bg-white dark:bg-[#1A3D2A] text-[#133020] dark:text-slate-200 border-[#D8D2C8] dark:border-[#235338] hover:bg-[#F9F7F7]"
+            }`}
+          >
+            <ArrowUpDown className="w-4 h-4 text-[#FFB347]" />
+            <span>{locale === "zh" ? "排序方式" : "Sort Options"}</span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                showSortPanel ? "rotate-180" : ""
               }`}
             />
           </button>
@@ -217,6 +243,42 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
                 aria-label="Filter by priority"
               />
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* EXPANDABLE SORT OPTIONS PANEL */}
+      {showSortPanel && (
+        <div className="p-4 rounded-[10px] bg-white dark:bg-[#1A3D2A] border border-[#D8D2C8] dark:border-[#235338] space-y-3 shadow-sm animate-in fade-in duration-200">
+          <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-[#235338] pb-2">
+            <span className="text-xs font-bold text-[#133020] dark:text-white flex items-center gap-1.5">
+              <ArrowUpDown className="w-3.5 h-3.5 text-[#046241] dark:text-[#FFB347]" />
+              <span>{locale === "zh" ? "选择展会排序规则" : "Select Event Ordering"}</span>
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {sortOptions.map((opt) => {
+              const isSelected = (filters.sortBy || "NUMBER_ASC") === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => {
+                    onChange("sortBy", opt.value);
+                    setShowSortPanel(false);
+                  }}
+                  className={`p-2.5 rounded-lg border text-left text-xs transition cursor-pointer flex items-center justify-between ${
+                    isSelected
+                      ? "bg-[#133020] dark:bg-[#046241] text-white border-[#133020] dark:border-[#046241] font-bold shadow-2xs"
+                      : "bg-[#F9F7F7] dark:bg-[#133020] text-[#133020] dark:text-slate-200 border-[#D8D2C8] dark:border-[#235338] hover:border-[#046241]"
+                  }`}
+                >
+                  <span>{opt.label}</span>
+                  {isSelected && <Check className="w-3.5 h-3.5 text-[#FFB347]" />}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
