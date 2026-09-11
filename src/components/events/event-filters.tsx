@@ -107,7 +107,7 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
           )}
         </div>
 
-        {/* Action Controls: Filter Toggle Button + Sort Dropdown + Add Event */}
+        {/* Action Controls: Filter Toggle Button + Add Event */}
         <div className="flex items-center gap-2.5 flex-wrap">
           {/* Main Filter Panel Toggle Button */}
           <button
@@ -132,20 +132,6 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
               }`}
             />
           </button>
-
-          {/* Sort Dropdown (Shown in Card View only; Table View uses clickable column headers) */}
-          {viewMode !== "table" && (
-            <div className="flex items-center gap-1.5 bg-white dark:bg-[#1A3D2A] border-[1.5px] border-[#D8D2C8] dark:border-[#235338] rounded-[8px] px-2.5 py-1">
-              <ArrowUpDown className="w-3.5 h-3.5 text-[#046241] dark:text-[#FFB347] shrink-0" />
-              <LifewoodDropdown
-                variant="pill"
-                value={filters.sortBy || "NUMBER_ASC"}
-                onChange={(val) => onChange("sortBy", val)}
-                options={sortOptions}
-                aria-label="Sort events by"
-              />
-            </div>
-          )}
 
           {/* Add Event Button */}
           {onAddEvent && (

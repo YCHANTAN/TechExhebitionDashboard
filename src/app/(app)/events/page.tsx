@@ -64,10 +64,19 @@ export default function EventsPage() {
 
   const [pagination, setPagination] = useState({
     page: 1,
-    limit: 10,
+    limit: 9,
     totalCount: 0,
     totalPages: 1,
   });
+
+  const handleViewModeToggle = (mode: "card" | "table") => {
+    setViewMode(mode);
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      limit: mode === "card" ? 9 : 10,
+    }));
+  };
 
   const [pageInput, setPageInput] = useState<string>("1");
 
@@ -197,8 +206,8 @@ export default function EventsPage() {
           {/* View Toggle */}
           <div className="flex items-center p-1 bg-white border-[1.5px] border-[#D8D2C8] rounded-[8px] shadow-2xs">
             <button
-              onClick={() => setViewMode("card")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] text-xs font-medium transition ${
+              onClick={() => handleViewModeToggle("card")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] text-xs font-medium transition cursor-pointer ${
                 viewMode === "card"
                   ? "bg-[#133020] text-white shadow-2xs"
                   : "text-[#666666] hover:text-[#133020]"
@@ -208,8 +217,8 @@ export default function EventsPage() {
               <span>{locale === "en" ? "Cards" : "卡片视图"}</span>
             </button>
             <button
-              onClick={() => setViewMode("table")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] text-xs font-medium transition ${
+              onClick={() => handleViewModeToggle("table")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] text-xs font-medium transition cursor-pointer ${
                 viewMode === "table"
                   ? "bg-[#133020] text-white shadow-2xs"
                   : "text-[#666666] hover:text-[#133020]"
@@ -275,7 +284,7 @@ export default function EventsPage() {
 
           {/* Interactive Pagination Controls with Centered Navigation */}
           {pagination.totalPages > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-4 text-xs font-manrope bg-white dark:bg-[#133020] p-4 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-2xs">
+            <div className="mt-8 flex items-center justify-center gap-4 text-xs font-manrope bg-transparent p-2 border-none shadow-none">
               {/* Centered Prev / Input Page / Next Block */}
               <div className="flex items-center justify-center gap-3">
                 <button
