@@ -8,6 +8,13 @@ import {
   resetRateLimit,
 } from "@/lib/rate-limit";
 
+if (!process.env.NEXTAUTH_SECRET) {
+  process.env.NEXTAUTH_SECRET = "lifewood-secret-key-super-secure-2026";
+}
+if (!process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = "http://localhost:3000";
+}
+
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET || "lifewood-secret-key-super-secure-2026",
   session: {
