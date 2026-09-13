@@ -94,6 +94,42 @@ export default function EventDetailPage() {
     }
   };
 
+  const handleToggleAttended = async () => {
+    if (!event) return;
+    try {
+      const newAttended = !event.isAttended;
+      const res = await fetch(`/api/events/${event.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isAttended: newAttended }),
+      });
+      if (res.ok) {
+        setEvent({ ...event, isAttended: newAttended });
+        if (newAttended) {
+          toast.success(
+            locale === "zh"
+              ? "展会已成功标记为已参展，正跳转至参展历史档案库！"
+              : "Event marked as Attended! Redirecting to Attendance History..."
+          );
+          router.push("/history?tab=ATTENDED");
+          router.refresh();
+        } else {
+          toast.success(
+            locale === "zh"
+              ? "已取消展会参展标记"
+              : "Event attendance removed"
+          );
+        }
+      }
+    } catch {
+      toast.error(
+        locale === "zh"
+          ? "更新参展状态失败"
+          : "Failed to update attendance status"
+      );
+    }
+  };
+
   if (loading) {
     return (
       <div className="py-20 flex flex-col items-center justify-center text-[#046241]">
@@ -196,60 +232,6 @@ export default function EventDetailPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={async () => {
-                  try {
-                    const newAttended = !event.isAttended;
-                    const res = await fetch(`/api/events/${event.id}`, {
-                      method: "PATCH",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ isAttended: newAttended }),
-                    });
-                    if (res.ok) {
-                      setEvent({ ...event, isAttended: newAttended });
-                      if (newAttended) {
-                        toast.success(
-                          locale === "zh"
-                            ? "展会已成功标记为已参展，正跳转至参展历史档案库！"
-                            : "Event marked as Attended! Redirecting to Attendance History..."
-                        );
-                        router.push("/history?tab=ATTENDED");
-                        router.refresh();
-                      } else {
-                        toast.success(
-                          locale === "zh"
-                            ? "已取消展会参展标记"
-                            : "Event attendance removed"
-                        );
-                      }
-                    }
-                  } catch {
-                    toast.error(
-                      locale === "zh"
-                        ? "更新参展状态失败"
-                        : "Failed to update attendance status"
-                    );
-                  }
-                }}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-xs border ${
-                  event.isAttended
-                    ? "bg-[#046241] text-white border-[#046241]"
-                    : "bg-[#F5EEDB] text-[#133020] border-[#D8D2C8] hover:border-[#046241]"
-                }`}
-              >
-                <CheckCircle2 className="w-4 h-4 text-[#FFB347]" />
-                <span>
-                  {event.isAttended
-                    ? locale === "zh"
-                      ? "已参展 ✓"
-                      : "Already Attended ✓"
-                    : locale === "zh"
-                    ? "标记为已参展"
-                    : "Mark as Attended"}
-                </span>
-              </button>
-
               <FitScoreBadge score={localized?.fitScore} size="xl" showLevel />
             </div>
           </div>
@@ -493,19 +475,43 @@ export default function EventDetailPage() {
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            {/* Mark as Attended Button at Bottom */}
+            <button
+              type="button"
+              onClick={handleToggleAttended}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-[8px] text-xs font-bold transition-all shadow-xs cursor-pointer border ${
+                event.isAttended
+                  ? "bg-[#046241] text-white border-[#046241]"
+                  : "bg-[#F5EEDB] text-[#133020] border-[#D8D2C8] hover:bg-white"
+              }`}
+            >
+              <CheckCircle2 className="w-4 h-4 text-[#FFB347]" />
+              <span>
+                {event.isAttended
+                  ? locale === "zh"
+                    ? "已参展 ✓"
+                    : "Already Attended ✓"
+                  : locale === "zh"
+                  ? "标记为已参展"
+                  : "Mark as Attended"}
+              </span>
+            </button>
+
             {(userRole === "SUPERADMIN" || userRole === "ADMIN") && (
               <button
+                type="button"
                 onClick={() => setShowEditModal(true)}
-                className="flex items-center gap-1.5 px-4 py-2 bg-[#FFB347] hover:bg-[#FFC370] text-[#133020] font-medium text-xs rounded-[8px] transition shadow-2xs"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#FFB347] hover:bg-[#FFC370] text-[#133020] font-medium text-xs rounded-[8px] transition shadow-2xs cursor-pointer"
               >
                 <Edit className="w-3.5 h-3.5" />
                 <span>{locale === "zh" ? "编辑记录" : "Edit record"}</span>
               </button>
             )}
 
-            {userRole === "SUPERADMIN" && (
+            {(userRole === "SUPERADMIN" || userRole === "ADMIN") && (
               <button
+                type="button"
                 onClick={() => setShowDeleteModal(true)}
                 className="flex items-center gap-1.5 px-4 py-2 bg-[#B91C1C] hover:bg-[#B91C1C]/90 text-white font-medium text-xs rounded-[8px] transition cursor-pointer"
               >

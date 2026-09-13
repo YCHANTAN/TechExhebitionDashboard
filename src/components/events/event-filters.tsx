@@ -137,18 +137,20 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
             />
           </button>
 
-          {/* Main Sort Options Popover Dropdown (Identical Button Styling) */}
-          <div className="flex items-center gap-1.5 bg-white dark:bg-[#1A3D2A] border-[1.5px] border-[#D8D2C8] dark:border-[#235338] rounded-[8px] px-3.5 py-1.5 text-xs font-bold shadow-2xs hover:bg-[#F9F7F7] transition cursor-pointer">
-            <ArrowUpDown className="w-4 h-4 text-[#FFB347] shrink-0" />
-            <LifewoodDropdown
-              variant="compact"
-              value={filters.sortBy || "NUMBER_ASC"}
-              onChange={(val) => onChange("sortBy", val)}
-              options={sortOptions}
-              aria-label="Sort events by"
-              triggerClassName="border-none bg-transparent p-0 font-bold text-xs shadow-none text-[#133020] dark:text-slate-200"
-            />
-          </div>
+          {/* Main Sort Options Popover Dropdown (Visible only in Card View) */}
+          {viewMode === "card" && (
+            <div className="flex items-center gap-1.5 bg-white dark:bg-[#1A3D2A] border-[1.5px] border-[#D8D2C8] dark:border-[#235338] rounded-[8px] px-3.5 py-1.5 text-xs font-bold shadow-2xs hover:bg-[#F9F7F7] transition cursor-pointer">
+              <ArrowUpDown className="w-4 h-4 text-[#FFB347] shrink-0" />
+              <LifewoodDropdown
+                variant="compact"
+                value={filters.sortBy || "NUMBER_ASC"}
+                onChange={(val) => onChange("sortBy", val)}
+                options={sortOptions}
+                aria-label="Sort events by"
+                triggerClassName="border-none bg-transparent p-0 font-bold text-xs shadow-none text-[#133020] dark:text-slate-200"
+              />
+            </div>
+          )}
 
           {/* Add Event Button */}
           {onAddEvent && (
