@@ -224,7 +224,7 @@ export default function UsersPage() {
           </div>
         </div>
 
-        {userRole === "SUPERADMIN" && (
+        {(userRole === "SUPERADMIN" || userRole === "ADMIN") && (
           <button
             onClick={() => setShowAddModal(true)}
             className="flex items-center gap-1.5 px-4 py-2 bg-[#FFB347] hover:bg-[#FFC370] text-[#133020] font-bold text-xs rounded-xl transition shadow-sm cursor-pointer"
@@ -354,7 +354,7 @@ export default function UsersPage() {
                     {new Date(u.createdAt).toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US")}
                   </td>
                   <td className="p-3.5 px-4 text-right">
-                    {userRole === "SUPERADMIN" ? (
+                    {(userRole === "SUPERADMIN" || userRole === "ADMIN") ? (
                       <div className="flex items-center justify-end gap-2">
                         {editingUser?.id === u.id ? (
                           <>

@@ -237,7 +237,7 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
                         </Link>
                       )
                     )}
-                    {userRole === "SUPERADMIN" && onDelete && (
+                    {(userRole === "SUPERADMIN" || userRole === "ADMIN") && onDelete && (
                       <button
                         onClick={() => onDelete(evt.id)}
                         title={locale === "zh" ? "删除展会" : "Delete Event"}

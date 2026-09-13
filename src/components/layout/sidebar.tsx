@@ -75,6 +75,8 @@ export function Sidebar() {
 
   const getRoleBadgeStyle = (role: string) => {
     switch (role) {
+      case "SUPERADMIN":
+        return "bg-[#046241] text-white font-extrabold";
       case "ADMIN":
         return "bg-[#FFB347] text-[#133020] font-bold";
       case "SUPERVISOR":
