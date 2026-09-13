@@ -14,6 +14,8 @@ export async function GET(req: Request) {
     const search = searchParams.get("search");
     const status = searchParams.get("status");
     const isAttendedParam = searchParams.get("isAttended");
+    const startDateParam = searchParams.get("startDate");
+    const endDateParam = searchParams.get("endDate");
 
     const sortBy = searchParams.get("sortBy") || "NUMBER_ASC";
     const page = parseInt(searchParams.get("page") || "1");
@@ -56,6 +58,27 @@ export async function GET(req: Request) {
       where.status = status;
     } else {
       where.status = "PUBLISHED";
+    }
+
+    // Date Range Filtering (startDate & endDate)
+    if (startDateParam || endDateParam) {
+      where.AND = where.AND || [];
+      if (startDateParam) {
+        where.AND.push({
+          OR: [
+            { startDate: { gte: new Date(startDateParam) } },
+            { endDate: { gte: new Date(startDateParam) } },
+          ],
+        });
+      }
+      if (endDateParam) {
+        where.AND.push({
+          OR: [
+            { startDate: { lte: new Date(endDateParam) } },
+            { endDate: { lte: new Date(endDateParam) } },
+          ],
+        });
+      }
     }
 
     if (search && search.trim() !== "") {

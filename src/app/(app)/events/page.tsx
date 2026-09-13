@@ -60,6 +60,8 @@ export default function EventsPage() {
     priority: "ALL",
     search: "",
     sortBy: "NUMBER_ASC",
+    startDate: "",
+    endDate: "",
   });
 
   const [pagination, setPagination] = useState({
@@ -107,6 +109,9 @@ export default function EventsPage() {
         sortBy: filters.sortBy,
       });
 
+      if (filters.startDate) params.append("startDate", filters.startDate);
+      if (filters.endDate) params.append("endDate", filters.endDate);
+
       const res = await fetch(`/api/events?${params.toString()}`);
       const data = await res.json();
 
@@ -150,6 +155,8 @@ export default function EventsPage() {
       priority: "ALL",
       search: "",
       sortBy: "NUMBER_ASC",
+      startDate: "",
+      endDate: "",
     });
     setPagination((prev) => ({ ...prev, page: 1 }));
   };

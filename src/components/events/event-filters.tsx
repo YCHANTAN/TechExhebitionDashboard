@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { REGIONS, BUSINESS_LINES, PRIORITIES } from "@/lib/constants/business-lines";
-import { Search, X, Filter, Plus, ArrowUpDown, ChevronDown, SlidersHorizontal, Check } from "lucide-react";
+import { Search, X, Filter, Plus, ArrowUpDown, ChevronDown, SlidersHorizontal, Check, Calendar } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/use-translation";
 import { REGIONS_MAP, BUSINESS_LINES_MAP, PRIORITIES_MAP } from "@/lib/i18n/event-localization";
 import { LifewoodDropdown, LifewoodMultiSelectDropdown } from "@/components/shared/lifewood-dropdown";
@@ -15,6 +15,8 @@ interface EventFiltersProps {
     priority: string;
     search: string;
     sortBy: string;
+    startDate?: string;
+    endDate?: string;
   };
   viewMode?: "card" | "table";
   onChange: (key: string, value: string) => void;
@@ -32,6 +34,8 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
   if (filters.businessLine !== "ALL") activeFilterCount++;
   if (filters.fitScore !== "ALL") activeFilterCount++;
   if (filters.priority !== "ALL") activeFilterCount++;
+  if (filters.startDate) activeFilterCount++;
+  if (filters.endDate) activeFilterCount++;
 
   const isFiltered = activeFilterCount > 0 || filters.search !== "";
 
@@ -229,6 +233,56 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
                 options={priorityOptions}
                 aria-label="Filter by priority"
               />
+            </div>
+          </div>
+
+          {/* Date Range Section */}
+          <div className="pt-3 border-t border-[#D8D2C8] dark:border-[#235338] flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#133020] dark:text-white">
+              <Calendar className="w-3.5 h-3.5 text-[#046241] dark:text-[#FFB347]" />
+              <span>{locale === "zh" ? "展会日期范围 (Start – End Date)" : "Event Date Range"}</span>
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1.5 bg-white dark:bg-[#133020] px-3 py-1.5 rounded-lg border border-[#D8D2C8] dark:border-[#235338] text-xs">
+                <span className="font-bold text-[#666666] dark:text-slate-300">{locale === "zh" ? "从" : "From"}:</span>
+                <input
+                  type="date"
+                  value={filters.startDate || ""}
+                  onChange={(e) => onChange("startDate", e.target.value)}
+                  className="bg-transparent font-semibold text-[#133020] dark:text-white focus:outline-none cursor-pointer text-xs"
+                />
+                {filters.startDate && (
+                  <button
+                    type="button"
+                    onClick={() => onChange("startDate", "")}
+                    className="text-slate-400 hover:text-rose-600 cursor-pointer"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
+
+              <span className="text-[#999999] dark:text-slate-400 font-bold">—</span>
+
+              <div className="flex items-center gap-1.5 bg-white dark:bg-[#133020] px-3 py-1.5 rounded-lg border border-[#D8D2C8] dark:border-[#235338] text-xs">
+                <span className="font-bold text-[#666666] dark:text-slate-300">{locale === "zh" ? "至" : "To"}:</span>
+                <input
+                  type="date"
+                  value={filters.endDate || ""}
+                  onChange={(e) => onChange("endDate", e.target.value)}
+                  className="bg-transparent font-semibold text-[#133020] dark:text-white focus:outline-none cursor-pointer text-xs"
+                />
+                {filters.endDate && (
+                  <button
+                    type="button"
+                    onClick={() => onChange("endDate", "")}
+                    className="text-slate-400 hover:text-rose-600 cursor-pointer"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

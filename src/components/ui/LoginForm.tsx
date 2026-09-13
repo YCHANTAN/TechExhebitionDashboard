@@ -224,6 +224,6 @@ export function LoginForm() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
