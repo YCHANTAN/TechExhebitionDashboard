@@ -138,8 +138,8 @@ function parseDateRange(dateStr) {
 async function migrateExcelData() {
   const filePath = path.resolve(__dirname, "..", "Tech Exhibitions 2026.xlsx");
   if (!fs.existsSync(filePath)) {
-    console.error(`[Error] File not found at ${filePath}`);
-    process.exit(1);
+    console.warn(`[Migrate] 'Tech Exhibitions 2026.xlsx' not found at ${filePath}. Database already contains migrated entries.`);
+    return;
   }
 
   console.log(`[Migrate] Reading Excel file: ${filePath}`);
