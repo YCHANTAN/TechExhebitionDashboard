@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AlertCircle, ArrowRight, Clock, Mail, Lock } from "lucide-react";
+import { AlertCircle, ArrowRight, Clock, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { useLocaleStore } from "@/stores/locale-store";
@@ -16,6 +16,7 @@ export function LoginForm() {
 
   const [email, setEmail] = useState("admin@lifewood.com");
   const [password, setPassword] = useState("admin123");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [cooldownSeconds, setCooldownSeconds] = useState<number>(0);
@@ -166,14 +167,46 @@ export function LoginForm() {
           <div className="relative">
             <Lock className="w-4 h-4 text-[#999999] dark:text-white/40 absolute left-3.5 top-3" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               disabled={cooldownSeconds > 0}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              disabled={cooldownSeconds > 0}
+              aria-label={
+                showPassword
+                  ? locale === "zh"
+                    ? "隐藏密码"
+                    : "Hide password"
+                  : locale === "zh"
+                  ? "显示密码"
+                  : "Show password"
+              }
+              tabIndex={-1}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-[#999999] dark:text-white/40 hover:text-[#046241] dark:hover:text-[#FFB347] hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none cursor-pointer disabled:pointer-events-none"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={showPassword ? "visible" : "hidden"}
+                  initial={{ opacity: 0, scale: 0.75, rotate: -20 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  exit={{ opacity: 0, scale: 0.75, rotate: 20 }}
+                  transition={{ duration: 0.15, ease: "easeInOut" }}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </button>
           </div>
         </div>
 
