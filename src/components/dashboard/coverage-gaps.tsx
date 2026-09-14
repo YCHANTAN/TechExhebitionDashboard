@@ -134,21 +134,21 @@ export function CoverageGapsWidget({
   ];
 
   return (
-    <div className="bg-white p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] shadow-[0_2px_16px_rgba(0,0,0,0.05)] flex flex-col h-full font-manrope">
+    <div className="bg-white dark:bg-[#081C12] p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark flex flex-col h-full font-manrope transition-all">
 
       {/* Header */}
-      <div className="border-b border-[#D8D2C8] pb-3 mb-3.5">
+      <div className="border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-3.5">
         <div className="flex items-center gap-2 mb-1">
-          <AlertCircle className="w-4 h-4 text-[#C17110] shrink-0" />
+          <AlertCircle className="w-4 h-4 text-[#C17110] dark:text-[#FFB347] shrink-0" />
 
-          <h3 className="text-[14px] font-semibold text-[#133020]">
+          <h3 className="text-[14px] font-semibold text-[#133020] dark:text-white">
             {locale === "zh"
               ? "覆盖缺口评估"
               : "Coverage gap assessment"}
           </h3>
         </div>
 
-        <p className="text-[11px] text-[#666666] mb-3">
+        <p className="text-[11px] text-[#666666] dark:text-white/70 mb-3">
           {view === "months"
             ? locale === "zh"
               ? "高匹配展会少于 5 场的月份，需补充采集"
@@ -175,14 +175,14 @@ export function CoverageGapsWidget({
                 onClick={() => setView(btn.id)}
                 className={`h-12 px-2 text-xs font-semibold rounded-[8px] transition-all duration-150 flex items-center justify-center gap-1.5 select-none ${
                   isActive
-                    ? "bg-[#133020] text-white border border-[#133020] shadow-xs"
-                    : "bg-[#F5EEDB] text-[#133020] hover:bg-[#EDE5D0] border border-[#D8D2C8]/80 font-medium"
+                    ? "bg-[#046241] text-white border border-[#046241] shadow-xs"
+                    : "bg-[#F5EEDB] dark:bg-white/5 text-[#133020] dark:text-white hover:bg-[#EDE5D0] dark:hover:bg-white/10 border border-[#D8D2C8]/80 dark:border-white/10 font-medium"
                 }`}
                 aria-pressed={isActive}
               >
                 <Icon
                   className={`w-4 h-4 shrink-0 ${
-                    isActive ? "text-white" : "text-[#133020]/75"
+                    isActive ? "text-white" : "text-[#133020]/75 dark:text-white/70"
                   }`}
                 />
 
@@ -197,7 +197,7 @@ export function CoverageGapsWidget({
 
       {/* Content */}
       {currentGaps.length === 0 ? (
-        <div className="h-[300px] flex items-center justify-center p-4 text-center text-xs text-[#046241] font-medium bg-[#046241]/10 rounded-[8px] border border-[#046241]/20">
+        <div className="h-[300px] flex items-center justify-center p-4 text-center text-xs text-[#046241] dark:text-[#52B788] font-medium bg-[#046241]/10 dark:bg-[#046241]/20 rounded-[8px] border border-[#046241]/20 dark:border-[#52B788]/30">
           {view === "months"
             ? locale === "zh"
               ? "✓ 所有月份均已达到目标覆盖阈值（≥5 场展会）"
@@ -216,14 +216,14 @@ export function CoverageGapsWidget({
             {currentGaps.map((item) => (
               <div
                 key={item.id}
-                className="p-2.5 bg-[#F5EEDB] border border-[#FFB347]/50 rounded-[8px] flex items-center justify-between shadow-2xs hover:border-[#FFB347] transition"
+                className="p-2.5 bg-[#F5EEDB] dark:bg-white/5 border border-[#FFB347]/50 dark:border-white/10 rounded-[8px] flex items-center justify-between shadow-2xs hover:border-[#FFB347] transition"
               >
                 <div className="min-w-0 pr-1.5">
-                  <span className="text-xs font-semibold text-[#133020] block truncate">
+                  <span className="text-xs font-semibold text-[#133020] dark:text-white block truncate">
                     {item.name}
                   </span>
 
-                  <span className="text-[10px] text-[#666666] font-medium block">
+                  <span className="text-[10px] text-[#666666] dark:text-white/70 font-medium block">
                     {locale === "zh"
                       ? `已录入 ${item.count} 场`
                       : `${item.count} listed`}

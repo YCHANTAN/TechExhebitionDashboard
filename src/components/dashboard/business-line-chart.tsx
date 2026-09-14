@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -45,6 +45,20 @@ const CustomTooltip = ({ active, payload, locale }: any) => {
 
 export function BusinessLineChart({ data }: BusinessLineChartProps) {
   const { locale } = useLocaleStore();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkDark();
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const chartData = useMemo(() => {
     return (data || []).map((d) => ({
@@ -55,12 +69,12 @@ export function BusinessLineChart({ data }: BusinessLineChartProps) {
   }, [data, locale]);
 
   return (
-    <div className="bg-white p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] shadow-[0_2px_16px_rgba(0,0,0,0.05)] font-manrope h-[400px] flex flex-col">
-      <div className="border-b border-[#D8D2C8] pb-3 mb-4">
-        <h3 className="text-[14px] font-semibold text-[#133020]">
+    <div className="bg-white dark:bg-[#081C12] p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark font-manrope h-[400px] flex flex-col transition-all">
+      <div className="border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-4">
+        <h3 className="text-[14px] font-semibold text-[#133020] dark:text-white">
           {locale === "zh" ? "业务线展会分布" : "Business line distribution"}
         </h3>
-        <p className="text-[11px] text-[#666666]">
+        <p className="text-[11px] text-[#666666] dark:text-white/70">
           {locale === "zh"
             ? "展会匹配 Lifewood 6 大核心业务线分布"
             : "Exhibitions mapped across Lifewood's 6 core business lines"}
@@ -74,14 +88,18 @@ export function BusinessLineChart({ data }: BusinessLineChartProps) {
             data={chartData}
             margin={{ top: 5, right: 35, left: 10, bottom: 5 }}
           >
-            <XAxis type="number" tick={{ fontSize: 10, fill: "#133020", fontWeight: 500 }} allowDecimals={false} />
+            <XAxis
+              type="number"
+              tick={{ fontSize: 10, fill: isDark ? "#FFFFFF" : "#133020", fontWeight: 500 }}
+              allowDecimals={false}
+            />
             <YAxis
               dataKey="name"
               type="category"
-              tick={{ fontSize: 10, fill: "#133020", fontWeight: 500 }}
+              tick={{ fontSize: 10, fill: isDark ? "#FFFFFF" : "#133020", fontWeight: 500 }}
               width={160}
               tickLine={false}
-              axisLine={{ stroke: "#D8D2C8" }}
+              axisLine={{ stroke: isDark ? "rgba(255,255,255,0.15)" : "#D8D2C8" }}
             />
             <Tooltip content={<CustomTooltip locale={locale} />} />
             <Bar dataKey="exhibitions" radius={[0, 4, 4, 0]}>
@@ -91,7 +109,11 @@ export function BusinessLineChart({ data }: BusinessLineChartProps) {
                   fill={LOB_COLORS[entry.rawName] || "#046241"}
                 />
               ))}
-              <LabelList dataKey="exhibitions" position="right" style={{ fontSize: 11, fontWeight: 700, fill: "currentColor" }} />
+              <LabelList
+                dataKey="exhibitions"
+                position="right"
+                style={{ fontSize: 11, fontWeight: 700, fill: isDark ? "#FFFFFF" : "currentColor" }}
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

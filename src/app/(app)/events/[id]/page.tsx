@@ -197,7 +197,7 @@ export default function EventDetailPage() {
       </div>
 
       {/* Main Full-Width Standalone Card Container */}
-      <div className="bg-white rounded-[12px] border-[1.5px] border-[#D8D2C8] shadow-[0_2px_16px_rgba(0,0,0,0.05)] overflow-hidden relative">
+      <div className="bg-white dark:bg-[#081C12] rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark overflow-hidden relative transition-all">
         {/* 6px Left Accent Bar */}
         <div
           className="absolute left-0 top-0 bottom-0 w-[6px] z-10 rounded-l-[12px]"
@@ -205,10 +205,10 @@ export default function EventDetailPage() {
         />
 
         {/* HEADER AREA */}
-        <div className="p-6 pl-8 border-b border-[#D8D2C8] bg-white">
+        <div className="p-6 pl-8 border-b border-[#D8D2C8] dark:border-white/10 bg-white dark:bg-[#081C12]">
           <div className="flex items-center justify-between gap-4 flex-wrap mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-[12px] font-semibold text-[#133020]">
+              <span className="text-[12px] font-semibold text-[#133020] dark:text-white">
                 {locale === "zh"
                   ? `记录编号 #${localized?.eventNumber} · ${localized?.region}`
                   : `Record #${localized?.eventNumber} · ${localized?.region}`}
@@ -216,8 +216,8 @@ export default function EventDetailPage() {
               <span
                 className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium tracking-tight ${
                   isFree
-                    ? "bg-[#046241]/10 text-[#046241]"
-                    : "bg-[#FFB347]/25 text-[#133020]"
+                    ? "bg-[#046241]/10 text-[#046241] dark:bg-emerald-500/20 dark:text-emerald-300"
+                    : "bg-[#FFB347]/25 text-[#133020] dark:text-amber-300 dark:bg-amber-500/20"
                 }`}
               >
                 <Ticket className="w-3 h-3" />
@@ -232,11 +232,65 @@ export default function EventDetailPage() {
             </div>
 
             <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={async () => {
+                  try {
+                    const newAttended = !event.isAttended;
+                    const res = await fetch(`/api/events/${event.id}`, {
+                      method: "PATCH",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ isAttended: newAttended }),
+                    });
+                    if (res.ok) {
+                      setEvent({ ...event, isAttended: newAttended });
+                      if (newAttended) {
+                        toast.success(
+                          locale === "zh"
+                            ? "展会已成功标记为已参展，正跳转至参展历史档案库！"
+                            : "Event marked as Attended! Redirecting to Attendance History..."
+                        );
+                        router.push("/history?tab=ATTENDED");
+                        router.refresh();
+                      } else {
+                        toast.success(
+                          locale === "zh"
+                            ? "已取消展会参展标记"
+                            : "Event attendance removed"
+                        );
+                      }
+                    }
+                  } catch {
+                    toast.error(
+                      locale === "zh"
+                        ? "更新参展状态失败"
+                        : "Failed to update attendance status"
+                    );
+                  }
+                }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-xs border ${
+                  event.isAttended
+                    ? "bg-[#046241] text-white border-[#046241]"
+                    : "bg-[#F5EEDB] dark:bg-white/10 text-[#133020] dark:text-white border-[#D8D2C8] dark:border-white/15 hover:border-[#046241]"
+                }`}
+              >
+                <CheckCircle2 className="w-4 h-4 text-[#FFB347]" />
+                <span>
+                  {event.isAttended
+                    ? locale === "zh"
+                      ? "已参展 ✓"
+                      : "Already Attended ✓"
+                    : locale === "zh"
+                    ? "标记为已参展"
+                    : "Mark as Attended"}
+                </span>
+              </button>
+
               <FitScoreBadge score={localized?.fitScore} size="xl" showLevel />
             </div>
           </div>
 
-          <h1 className="text-[28px] font-semibold text-[#133020] tracking-tight leading-tight mb-3">
+          <h1 className="text-[28px] font-semibold text-[#133020] dark:text-white tracking-tight leading-tight mb-3">
             {localized?.eventName}
           </h1>
 
@@ -247,12 +301,12 @@ export default function EventDetailPage() {
           </div>
 
           {/* Logistics & Official Website CTA */}
-          <div className="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-[#D8D2C8]">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-[#133020]">
+          <div className="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-[#D8D2C8] dark:border-white/10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-[#133020] dark:text-white">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-emerald-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-[#666666] block uppercase font-medium">
+                  <span className="text-[10px] text-[#666666] dark:text-white/60 block uppercase font-medium">
                     {locale === "zh" ? "展会日期" : "Dates"}
                   </span>
                   <span className="font-semibold text-sm">{localized?.dates}</span>
@@ -262,7 +316,7 @@ export default function EventDetailPage() {
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-emerald-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-[#666666] block uppercase font-medium">
+                  <span className="text-[10px] text-[#666666] dark:text-white/60 block uppercase font-medium">
                     {locale === "zh" ? "地点" : "Location"}
                   </span>
                   <span className="font-semibold text-sm">
@@ -274,7 +328,7 @@ export default function EventDetailPage() {
               <div className="flex items-center gap-2">
                 <Building className="w-4 h-4 text-emerald-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-[#666666] block uppercase font-medium">
+                  <span className="text-[10px] text-[#666666] dark:text-white/60 block uppercase font-medium">
                     {locale === "zh" ? "展馆场地" : "Venue"}
                   </span>
                   <span className="font-semibold text-sm truncate block max-w-[200px]">
@@ -316,19 +370,19 @@ export default function EventDetailPage() {
         </div>
 
         {/* BODY (2-Column Grid) */}
-        <div className="p-6 pl-8 grid grid-cols-1 md:grid-cols-2 gap-6 border-b border-[#D8D2C8]">
+        <div className="p-6 pl-8 grid grid-cols-1 md:grid-cols-2 gap-6 border-b border-[#D8D2C8] dark:border-white/10">
           {/* Left Column: Strategic Assessment */}
           <div className="space-y-4">
             <div>
-              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#046241] mb-1.5 flex items-center gap-1.5">
-                <FileCheck className="w-3.5 h-3.5 text-[#046241]" />
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#046241] dark:text-emerald-400 mb-1.5 flex items-center gap-1.5">
+                <FileCheck className="w-3.5 h-3.5 text-[#046241] dark:text-emerald-400" />
                 <span>
                   {locale === "zh"
                     ? "战略侧重点与展会定位"
                     : "Strategic focus & purpose"}
                 </span>
               </h3>
-              <p className="text-xs text-[#133020] leading-relaxed bg-[#F9F7F7] p-3.5 rounded-[8px] border border-[#D8D2C8]">
+              <p className="text-xs text-[#133020] dark:text-white leading-relaxed bg-[#F9F7F7] dark:bg-white/5 p-3.5 rounded-[8px] border border-[#D8D2C8] dark:border-white/10">
                 {localized?.strategicFocus ||
                   (locale === "zh"
                     ? "重点产业科技情报展会"
@@ -337,10 +391,10 @@ export default function EventDetailPage() {
             </div>
 
             <div>
-              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#046241] mb-1.5">
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#046241] dark:text-emerald-400 mb-1.5">
                 {locale === "zh" ? "与 Lifewood 的相关性" : "Relevance to Lifewood"}
               </h3>
-              <p className="text-xs font-medium text-[#133020] leading-relaxed bg-[#F0F5F2] p-3.5 rounded-[8px] border border-[#046241]/20">
+              <p className="text-xs font-medium text-[#133020] dark:text-white leading-relaxed bg-[#F0F5F2] dark:bg-white/5 p-3.5 rounded-[8px] border border-[#046241]/20 dark:border-white/10">
                 {localized?.relevanceToLifewood ||
                   (locale === "zh"
                     ? "与 Lifewood 目标买家群体高度契合"
@@ -349,10 +403,10 @@ export default function EventDetailPage() {
             </div>
 
             <div>
-              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#666666] mb-1.5">
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#666666] dark:text-white/70 mb-1.5">
                 {locale === "zh" ? "目标受众与买家画像" : "Target audience & buyers"}
               </h3>
-              <p className="text-xs text-[#133020] bg-white p-3 rounded-[8px] border border-[#D8D2C8]">
+              <p className="text-xs text-[#133020] dark:text-white bg-white dark:bg-[#081C12] p-3 rounded-[8px] border border-[#D8D2C8] dark:border-white/10">
                 {localized?.targetAudience ||
                   (locale === "zh"
                     ? "企业买家、AI 技术负责人、战略采购团队"
@@ -361,7 +415,7 @@ export default function EventDetailPage() {
             </div>
 
             {/* Location card */}
-            <div className="bg-[#F5EEDB] p-3.5 rounded-[8px] border border-[#D8D2C8] space-y-1.5 text-xs text-[#133020]">
+            <div className="bg-[#F5EEDB] dark:bg-white/5 p-3.5 rounded-[8px] border border-[#D8D2C8] dark:border-white/10 space-y-1.5 text-xs text-[#133020] dark:text-white">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-[13px]">{localized?.venue}</span>
                 {localized?.locationAddress &&
@@ -373,89 +427,89 @@ export default function EventDetailPage() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] text-[#046241] hover:underline font-semibold"
+                      className="inline-flex items-center gap-1 text-[11px] text-[#046241] dark:text-emerald-400 hover:underline font-semibold"
                     >
                       <span>{locale === "zh" ? "谷歌地图" : "Google Maps"}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   )}
               </div>
-              <p className="text-[#666666] text-[11.5px]">
+              <p className="text-[#666666] dark:text-white/60 text-[11.5px]">
                 {localized?.locationAddress || `${localized?.city}, ${localized?.country}`}
               </p>
             </div>
           </div>
 
           {/* Right Column: Commercial & Organizer Specs */}
-          <div className="space-y-4 bg-[#F9F7F7] p-5 rounded-[8px] border border-[#D8D2C8] text-xs">
-            <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#133020] border-b border-[#D8D2C8] pb-2">
+          <div className="space-y-4 bg-[#F9F7F7] dark:bg-white/5 p-5 rounded-[8px] border border-[#D8D2C8] dark:border-white/10 text-xs">
+            <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#133020] dark:text-white border-b border-[#D8D2C8] dark:border-white/10 pb-2">
               {locale === "zh" ? "商业规格与主办方信息" : "Commercial & organizer detail"}
             </h3>
 
             <div className="grid grid-cols-2 gap-3.5">
               <div className="col-span-2">
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "主办机构" : "Organizer"}
                 </span>
-                <span className="font-semibold text-[#133020] text-sm">
+                <span className="font-semibold text-[#133020] dark:text-white text-sm">
                   {localized?.organizer || (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "参会规模预估" : "Estimated attendees"}
                 </span>
-                <span className="font-semibold text-[#046241]">
+                <span className="font-semibold text-[#046241] dark:text-emerald-400">
                   {localized?.estimatedAttendees ||
                     (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "展位 / 赞助费用" : "Booth / sponsorship cost"}
                 </span>
-                <span className="font-semibold text-[#133020]">
+                <span className="font-semibold text-[#133020] dark:text-white">
                   {localized?.boothCost || (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "报名截止日期" : "Registration deadline"}
                 </span>
-                <span className="font-medium text-[#133020]">
+                <span className="font-medium text-[#133020] dark:text-white">
                   {localized?.registrationDeadline ||
                     (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "联络人" : "Contact person"}
                 </span>
-                <span className="font-medium text-[#133020]">
+                <span className="font-medium text-[#133020] dark:text-white">
                   {localized?.contactPerson ||
                     (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div className="col-span-2">
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "联络邮箱" : "Contact email"}
                 </span>
-                <span className="font-medium text-[#046241]">
+                <span className="font-medium text-[#046241] dark:text-emerald-400">
                   {localized?.contactEmail ||
                     (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>
               </div>
 
               <div className="col-span-2">
-                <span className="text-[10px] uppercase font-medium text-[#666666] block">
+                <span className="text-[10px] uppercase font-medium text-[#666666] dark:text-white/60 block">
                   {locale === "zh" ? "参展与赞助商合作权益" : "Exhibitor opportunities"}
                 </span>
-                <span className="text-[#133020]">
+                <span className="text-[#133020] dark:text-white">
                   {localized?.exhibitorOpportunity ||
                     (locale === "zh" ? "未公开披露" : "Not publicly disclosed")}
                 </span>

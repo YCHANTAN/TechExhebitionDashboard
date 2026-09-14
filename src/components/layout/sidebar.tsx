@@ -119,18 +119,18 @@ export function Sidebar() {
           <div className="relative flex items-center justify-center w-full h-6">
             {/* Light Mode Logo */}
             <Image
-              src="/LifeScout Light Mode.png"
-              alt="LifeScout logo"
+              src="/LIFEVENT Light Mode.png"
+              alt="LIFEVENT logo"
               width={150}
-              height={20}
+              height={28}
               className="object-contain dark:hidden"
             />
             {/* Dark Mode Logo */}
             <Image
-              src="/LifeScout Dark Mode.png"
-              alt="LifeScout logo"
+              src="/LIFEVENT Dark Mode.png"
+              alt="LIFEVENT logo"
               width={150}
-              height={20}
+              height={28}
               className="object-contain hidden dark:block"
             />
           </div>

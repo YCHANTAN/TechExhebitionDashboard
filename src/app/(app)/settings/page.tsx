@@ -125,7 +125,7 @@ export default function SettingsPage() {
           className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
             activeTab === "general"
               ? "bg-[#046241] text-white shadow-sm"
-              : "bg-white dark:bg-[#1A3828] text-[#666666] dark:text-white/70 border border-[#D8D2C8] dark:border-[#1E4830] hover:text-[#046241]"
+              : "bg-white dark:bg-[#081C12] text-[#666666] dark:text-white/70 border border-[#D8D2C8] dark:border-white/10 hover:text-[#046241] shadow-2xs dark:shadow-floating-dark"
           }`}
         >
           <User className="w-3.5 h-3.5" />
@@ -137,7 +137,7 @@ export default function SettingsPage() {
           className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
             activeTab === "security"
               ? "bg-[#046241] text-white shadow-sm"
-              : "bg-white dark:bg-[#1A3828] text-[#666666] dark:text-white/70 border border-[#D8D2C8] dark:border-[#1E4830] hover:text-[#046241]"
+              : "bg-white dark:bg-[#081C12] text-[#666666] dark:text-white/70 border border-[#D8D2C8] dark:border-white/10 hover:text-[#046241] shadow-2xs dark:shadow-floating-dark"
           }`}
         >
           <Lock className="w-3.5 h-3.5" />
@@ -149,39 +149,39 @@ export default function SettingsPage() {
       {activeTab === "general" && (
         <div className="space-y-6">
           {/* User Profile Card */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] shadow-sm">
-            <div className="flex items-center justify-between border-b border-[#D8D2C8] pb-4 mb-6">
+          <div className="bg-white dark:bg-[#081C12] p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+            <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-white/10 pb-4 mb-6">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#046241] text-white flex items-center justify-center font-extrabold text-base shadow-sm">
                   {userName.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#133020]">{userName}</h3>
-                  <p className="text-xs text-[#666666]">{userEmail}</p>
+                  <h3 className="text-base font-bold text-[#133020] dark:text-white">{userName}</h3>
+                  <p className="text-xs text-[#666666] dark:text-white/60">{userEmail}</p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full bg-[#046241]/10 border border-[#046241]/30 text-[#046241] text-xs font-extrabold">
+              <span className="px-3 py-1 rounded-full bg-[#046241]/10 dark:bg-emerald-500/20 border border-[#046241]/30 dark:border-emerald-400/30 text-[#046241] dark:text-emerald-300 text-xs font-extrabold">
                 {userRole}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
-              <div className="bg-[#F9F7F7] p-4 rounded-xl border border-[#D8D2C8]">
-                <span className="text-[10px] text-[#666666] uppercase font-bold block mb-1">
+              <div className="bg-[#F9F7F7] dark:bg-white/5 p-4 rounded-xl border border-[#D8D2C8] dark:border-white/10">
+                <span className="text-[10px] text-[#666666] dark:text-white/60 uppercase font-bold block mb-1">
                   {locale === "en" ? "Organization" : "所属机构"}
                 </span>
-                <span className="font-bold text-[#133020] text-sm">Lifewood Data Technology</span>
+                <span className="font-bold text-[#133020] dark:text-white text-sm">Lifewood Data Technology</span>
               </div>
 
-              <div className="bg-[#F9F7F7] p-4 rounded-xl border border-[#D8D2C8]">
-                <span className="text-[10px] text-[#666666] uppercase font-bold block mb-1">
+              <div className="bg-[#F9F7F7] dark:bg-white/5 p-4 rounded-xl border border-[#D8D2C8] dark:border-white/10">
+                <span className="text-[10px] text-[#666666] dark:text-white/60 uppercase font-bold block mb-1">
                   {locale === "en" ? "Target Exhibition Scope" : "展会规划周期"}
                 </span>
-                <span className="font-bold text-[#133020] text-sm">2026-09-01 — 2027-12-31</span>
+                <span className="font-bold text-[#133020] dark:text-white text-sm">2026-09-01 — 2027-12-31</span>
               </div>
 
-              <div className="bg-[#F9F7F7] p-4 rounded-xl border border-[#D8D2C8]">
-                <span className="text-[10px] text-[#666666] uppercase font-bold block mb-1">
+              <div className="bg-[#F9F7F7] dark:bg-white/5 p-4 rounded-xl border border-[#D8D2C8] dark:border-white/10">
+                <span className="text-[10px] text-[#666666] dark:text-white/60 uppercase font-bold block mb-1">
                   {locale === "en" ? "Active Language" : "当前界面语言"}
                 </span>
                 <div className="flex items-center gap-2 mt-1">
@@ -189,8 +189,8 @@ export default function SettingsPage() {
                     onClick={() => setLocale("en")}
                     className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                       locale === "en"
-                        ? "bg-[#046241] text-white"
-                        : "bg-white text-[#133020] border border-[#D8D2C8]"
+                        ? "bg-[#046241] text-white shadow-xs"
+                        : "bg-white dark:bg-white/10 text-[#133020] dark:text-white border border-[#D8D2C8] dark:border-white/15"
                     }`}
                   >
                     EN
@@ -199,8 +199,8 @@ export default function SettingsPage() {
                     onClick={() => setLocale("zh")}
                     className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                       locale === "zh"
-                        ? "bg-[#046241] text-white"
-                        : "bg-white text-[#133020] border border-[#D8D2C8]"
+                        ? "bg-[#046241] text-white shadow-xs"
+                        : "bg-white dark:bg-white/10 text-[#133020] dark:text-white border border-[#D8D2C8] dark:border-white/15"
                     }`}
                   >
                     中文
@@ -211,14 +211,14 @@ export default function SettingsPage() {
           </div>
 
           {/* Role Access Matrix */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] shadow-sm space-y-4">
-            <div className="flex items-center gap-2.5 border-b border-[#D8D2C8] pb-4">
-              <Shield className="w-5 h-5 text-[#046241]" />
+          <div className="bg-white dark:bg-[#081C12] p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark space-y-4 transition-all">
+            <div className="flex items-center gap-2.5 border-b border-[#D8D2C8] dark:border-white/10 pb-4">
+              <Shield className="w-5 h-5 text-[#046241] dark:text-emerald-400" />
               <div>
-                <h3 className="text-base font-bold text-[#133020]">
+                <h3 className="text-base font-bold text-[#133020] dark:text-white">
                   {locale === "en" ? "Role-Based Access Control (RBAC) Matrix" : "角色权限与数据管控矩阵"}
                 </h3>
-                <p className="text-xs text-[#666666]">
+                <p className="text-xs text-[#666666] dark:text-white/60">
                   {locale === "en"
                     ? "Enforced server-side permissions across Superadmin, Admin, and User accounts"
                     : "平台服务端实施的超级管理员、管理员与普通用户权限边界"}
@@ -236,9 +236,9 @@ export default function SettingsPage() {
                     <th className="p-3 text-center rounded-r-xl">{locale === "zh" ? "普通用户 (User)" : "User"}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#D8D2C8]">
+                <tbody className="divide-y divide-[#D8D2C8] dark:divide-white/10">
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "查看大屏看板、展会档案与历史" : "View Dashboard, Exhibitions & Logs"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -246,7 +246,7 @@ export default function SettingsPage() {
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "录入新展会（送入待审核队列）" : "Submit New Event (To Review Queue)"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -254,7 +254,7 @@ export default function SettingsPage() {
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "直接发布展会至全球公开库" : "Publish Event Directly"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -262,7 +262,7 @@ export default function SettingsPage() {
                     <td className="p-3 text-center text-[#B91C1C] font-bold">❌</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "批准或驳回审核队列记录" : "Approve or Reject Review Queue Items"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -270,7 +270,7 @@ export default function SettingsPage() {
                     <td className="p-3 text-center text-[#B91C1C] font-bold">❌</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "触发实时 AI 抓取与导入" : "Run Live AI Scraper Engine"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -278,7 +278,7 @@ export default function SettingsPage() {
                     <td className="p-3 text-center text-[#B91C1C] font-bold">❌</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#133020]">
+                    <td className="p-3 font-semibold text-[#133020] dark:text-white">
                       {locale === "zh" ? "永久删除展会记录" : "Delete Exhibition Permanently"}
                     </td>
                     <td className="p-3 text-center text-[#046241] font-bold">✅</td>
@@ -294,14 +294,14 @@ export default function SettingsPage() {
 
       {/* Tab: Security & Password */}
       {activeTab === "security" && (
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] shadow-sm space-y-6 max-w-xl">
-          <div className="flex items-center gap-2.5 border-b border-[#D8D2C8] pb-4">
-            <Lock className="w-5 h-5 text-[#046241]" />
+        <div className="bg-white dark:bg-[#081C12] p-6 sm:p-8 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark space-y-6 max-w-xl transition-all">
+          <div className="flex items-center gap-2.5 border-b border-[#D8D2C8] dark:border-white/10 pb-4">
+            <Lock className="w-5 h-5 text-[#046241] dark:text-emerald-400" />
             <div>
-              <h3 className="text-base font-bold text-[#133020]">
+              <h3 className="text-base font-bold text-[#133020] dark:text-white">
                 {locale === "en" ? "Change Administrator Password" : "修改管理员密码"}
               </h3>
-              <p className="text-xs text-[#666666]">
+              <p className="text-xs text-[#666666] dark:text-white/60">
                 {locale === "en"
                   ? "Ensure your account is protected with a strong, distinct password"
                   : "设置高强度密码以保障系统管理安全"}
@@ -311,7 +311,7 @@ export default function SettingsPage() {
 
           <form onSubmit={handleChangePassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] dark:text-white mb-1.5">
                 {locale === "en" ? "Current Password" : "当前密码"}
               </label>
               <input
@@ -320,12 +320,12 @@ export default function SettingsPage() {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] text-xs text-[#133020] bg-[#F9F7F7] focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] dark:text-white mb-1.5">
                 {locale === "en" ? "New Password (min 6 chars)" : "新密码 (至少6位字符)"}
               </label>
               <input
@@ -335,12 +335,12 @@ export default function SettingsPage() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] text-xs text-[#133020] bg-[#F9F7F7] focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#133020] dark:text-white mb-1.5">
                 {locale === "en" ? "Confirm New Password" : "确认新密码"}
               </label>
               <input
@@ -350,7 +350,7 @@ export default function SettingsPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] text-xs text-[#133020] bg-[#F9F7F7] focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:outline-hidden focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition"
               />
             </div>
 

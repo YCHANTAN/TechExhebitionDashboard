@@ -70,7 +70,7 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
   };
 
   return (
-    <div className="w-full overflow-x-auto rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-[#1E4830] bg-white dark:bg-[#133020] shadow-[0_2px_16px_rgba(0,0,0,0.05)] font-manrope">
+    <div className="w-full overflow-x-auto rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 bg-white dark:bg-[#081C12] shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark font-manrope transition-all">
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="bg-[#133020] text-white text-[10.5px] uppercase tracking-[0.08em] font-semibold border-b border-[#133020]">
@@ -142,7 +142,7 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#D8D2C8] dark:divide-[#1E4830] text-xs text-[#133020] dark:text-slate-100">
+        <tbody className="divide-y divide-[#D8D2C8] dark:divide-white/10 text-xs text-[#133020] dark:text-white">
           {sortedEvents.map((evt) => {
             let businessLines: string[] = [];
             try {
@@ -156,9 +156,9 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
             return (
               <tr
                 key={evt.id}
-                className="hover:bg-[#F0F5F2] dark:hover:bg-[#1A3D2A] transition-colors duration-150"
+                className="hover:bg-[#F0F5F2] dark:hover:bg-white/5 transition-colors duration-150"
               >
-                <td className="py-3 px-4 font-bold text-center text-[#666666] dark:text-slate-400">
+                <td className="py-3 px-4 font-bold text-center text-[#666666] dark:text-white/70">
                   {evt.eventNumber}
                 </td>
                 <td className="py-3 px-4">
@@ -168,18 +168,18 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
                   >
                     {evt.eventName}
                   </Link>
-                  <span className="text-[11px] text-[#666666] dark:text-slate-400 block truncate mt-0.5">
+                  <span className="text-[11px] text-[#666666] dark:text-white/70 block truncate mt-0.5">
                     {evt.venue}
                   </span>
                 </td>
-                <td className="py-3 px-4 font-medium text-[#133020] dark:text-slate-200 whitespace-nowrap">
+                <td className="py-3 px-4 font-medium text-[#133020] dark:text-white whitespace-nowrap">
                   {evt.dates}
                 </td>
                 <td className="py-3 px-4 whitespace-nowrap">
                   <span className="font-semibold text-[#133020] dark:text-white block">
                     {evt.city}
                   </span>
-                  <span className="text-[#666666] dark:text-slate-400 block text-[11px]">
+                  <span className="text-[#666666] dark:text-white/70 block text-[11px]">
                     {evt.country} ({evt.region})
                   </span>
                 </td>
@@ -223,7 +223,7 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
                             onEdit(original);
                           }}
                           title={locale === "zh" ? "编辑展会" : "Edit Event"}
-                          className="p-1.5 text-[#133020] dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/10 rounded transition cursor-pointer"
+                          className="p-1.5 text-[#133020] dark:text-white hover:bg-black/10 dark:hover:bg-white/10 rounded transition cursor-pointer"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
@@ -231,7 +231,7 @@ export function EventTable({ events, onDelete, onEdit }: EventTableProps) {
                         <Link
                           href={`/events/${evt.id}/edit`}
                           title={locale === "zh" ? "编辑展会" : "Edit Event"}
-                          className="p-1.5 text-[#133020] dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/10 rounded transition"
+                          className="p-1.5 text-[#133020] dark:text-white hover:bg-black/10 dark:hover:bg-white/10 rounded transition"
                         >
                           <Edit className="w-4 h-4" />
                         </Link>

@@ -744,7 +744,7 @@ export default function EventScraperDashboard() {
                     ? "可选关键词提示（如：AI, Healthcare, IoT - 选填）..."
                     : "e.g. AI, Healthcare, IoT - strictly optional..."
                 }
-                className="w-full h-[42px] px-3.5 rounded-xl border border-[#d1d5db] bg-white text-sm text-[#111827] placeholder-[#9ca3af] focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition-all"
+                className="w-full h-[42px] px-3.5 rounded-xl border border-[#d1d5db] dark:border-white/15 bg-white dark:bg-white/5 text-sm text-[#111827] dark:text-white placeholder-[#9ca3af] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241] transition-all"
               />
             </div>
 
@@ -778,19 +778,19 @@ export default function EventScraperDashboard() {
 
       {/* Real-Time User Experience & Progress Stepper */}
       {loading && (
-        <div className="bg-[#F5EEDB]/60 border border-[#D8D2C8] rounded-[10px] p-4.5 space-y-3.5 transition-all">
+        <div className="bg-[#F5EEDB]/60 dark:bg-white/5 border border-[#D8D2C8] dark:border-white/10 rounded-[10px] p-4.5 space-y-3.5 transition-all">
           {/* Top Status line + Elapsed Stopwatch */}
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-2.5">
-              <Loader2 className="w-4 h-4 text-[#046241] animate-spin shrink-0" />
-              <span className="text-xs font-semibold text-[#133020]">
+              <Loader2 className="w-4 h-4 text-[#046241] dark:text-emerald-400 animate-spin shrink-0" />
+              <span className="text-xs font-semibold text-[#133020] dark:text-white">
                 {statusText ||
                   (locale === "zh" ? "正在智能发现展会..." : "Discovering exhibitions...")}
               </span>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#133020] bg-white px-2.5 py-1 rounded-[6px] border border-[#D8D2C8] shadow-2xs">
-              <Clock className="w-3.5 h-3.5 text-[#C17110]" />
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#133020] dark:text-white bg-white dark:bg-white/10 px-2.5 py-1 rounded-[6px] border border-[#D8D2C8] dark:border-white/15 shadow-2xs">
+              <Clock className="w-3.5 h-3.5 text-[#C17110] dark:text-amber-400" />
               <span>
                 {locale === "zh" ? "耗时：" : "Elapsed: "}
                 {formatTimer(elapsedSeconds)}
@@ -804,13 +804,13 @@ export default function EventScraperDashboard() {
             <div
               className={`p-3 rounded-[8px] border text-xs transition ${
                 currentStep >= 1
-                  ? "bg-white border-[#046241] text-[#133020] shadow-xs"
-                  : "bg-white/50 border-[#D8D2C8] text-[#999999]"
+                  ? "bg-white dark:bg-[#081C12] border-[#046241] text-[#133020] dark:text-white shadow-xs dark:shadow-floating-dark"
+                  : "bg-white/50 dark:bg-white/5 border-[#D8D2C8] dark:border-white/10 text-[#999999] dark:text-white/40"
               }`}
             >
               <div className="flex items-center gap-2 font-semibold">
                 {currentStep > 1 ? (
-                  <CheckCircle2 className="w-4 h-4 text-[#046241]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#046241] dark:text-emerald-400" />
                 ) : (
                   <span className="w-4 h-4 rounded-full bg-[#046241] text-white text-[10px] flex items-center justify-center font-bold">
                     1
@@ -820,7 +820,7 @@ export default function EventScraperDashboard() {
                   {locale === "zh" ? "1. 搜索引擎智能发现" : "1. Google Discovery"}
                 </span>
               </div>
-              <p className="text-[11px] text-[#666666] mt-1 pl-6">
+              <p className="text-[11px] text-[#666666] dark:text-white/60 mt-1 pl-6">
                 {locale === "zh"
                   ? "多引擎并发扫描全球展会官方候选站点"
                   : "Organic candidate event search via Apify"}
@@ -831,17 +831,17 @@ export default function EventScraperDashboard() {
             <div
               className={`p-3 rounded-[8px] border text-xs transition ${
                 currentStep >= 2
-                  ? "bg-white border-[#046241] text-[#133020] shadow-xs"
-                  : "bg-white/50 border-[#D8D2C8] text-[#999999]"
+                  ? "bg-white dark:bg-[#081C12] border-[#046241] text-[#133020] dark:text-white shadow-xs dark:shadow-floating-dark"
+                  : "bg-white/50 dark:bg-white/5 border-[#D8D2C8] dark:border-white/10 text-[#999999] dark:text-white/40"
               }`}
             >
               <div className="flex items-center gap-2 font-semibold">
                 {currentStep > 2 ? (
-                  <CheckCircle2 className="w-4 h-4 text-[#046241]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#046241] dark:text-emerald-400" />
                 ) : currentStep === 2 ? (
-                  <Loader2 className="w-4 h-4 text-[#046241] animate-spin" />
+                  <Loader2 className="w-4 h-4 text-[#046241] dark:text-emerald-400 animate-spin" />
                 ) : (
-                  <span className="w-4 h-4 rounded-full bg-[#D8D2C8] text-[#666666] text-[10px] flex items-center justify-center font-bold">
+                  <span className="w-4 h-4 rounded-full bg-[#D8D2C8] dark:bg-white/20 text-[#666666] dark:text-white/60 text-[10px] flex items-center justify-center font-bold">
                     2
                   </span>
                 )}
@@ -849,7 +849,7 @@ export default function EventScraperDashboard() {
                   {locale === "zh" ? "2. 高速页面并行抓取" : "2. High-Speed Crawl"}
                 </span>
               </div>
-              <p className="text-[11px] text-[#666666] mt-1 pl-6">
+              <p className="text-[11px] text-[#666666] dark:text-white/60 mt-1 pl-6">
                 {locale === "zh"
                   ? "深度提取展会详情与正文内容"
                   : "Parallel page content extraction"}
@@ -860,15 +860,15 @@ export default function EventScraperDashboard() {
             <div
               className={`p-3 rounded-[8px] border text-xs transition ${
                 currentStep >= 3
-                  ? "bg-white border-[#046241] text-[#133020] shadow-xs"
-                  : "bg-white/50 border-[#D8D2C8] text-[#999999]"
+                  ? "bg-white dark:bg-[#081C12] border-[#046241] text-[#133020] dark:text-white shadow-xs dark:shadow-floating-dark"
+                  : "bg-white/50 dark:bg-white/5 border-[#D8D2C8] dark:border-white/10 text-[#999999] dark:text-white/40"
               }`}
             >
               <div className="flex items-center gap-2 font-semibold">
                 {currentStep === 3 ? (
-                  <Loader2 className="w-4 h-4 text-[#046241] animate-spin" />
+                  <Loader2 className="w-4 h-4 text-[#046241] dark:text-emerald-400 animate-spin" />
                 ) : (
-                  <span className="w-4 h-4 rounded-full bg-[#D8D2C8] text-[#666666] text-[10px] flex items-center justify-center font-bold">
+                  <span className="w-4 h-4 rounded-full bg-[#D8D2C8] dark:bg-white/20 text-[#666666] dark:text-white/60 text-[10px] flex items-center justify-center font-bold">
                     3
                   </span>
                 )}
@@ -876,7 +876,7 @@ export default function EventScraperDashboard() {
                   {locale === "zh" ? "3. Gemini 智能对齐审计" : "3. Gemini AI Audit"}
                 </span>
               </div>
-              <p className="text-[11px] text-[#666666] mt-1 pl-6">
+              <p className="text-[11px] text-[#666666] dark:text-white/60 mt-1 pl-6">
                 {locale === "zh"
                   ? "27个维度解析与战略适配度评分"
                   : "27-column audit & Fit Score calculation"}
@@ -887,7 +887,7 @@ export default function EventScraperDashboard() {
           {/* Candidate URLs Pill Chips */}
           {candidateUrls.length > 0 && (
             <div className="pt-1">
-              <span className="text-[11px] font-semibold text-[#666666] block mb-1.5">
+              <span className="text-[11px] font-semibold text-[#666666] dark:text-white/60 block mb-1.5">
                 {locale === "zh"
                   ? `发现候选展会网址 (${candidateUrls.length}):`
                   : `Found Candidate Exhibition URLs (${candidateUrls.length}):`}
@@ -899,9 +899,9 @@ export default function EventScraperDashboard() {
                     href={u}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[6px] bg-white border border-[#D8D2C8] text-[11px] font-medium text-[#046241] hover:text-[#133020] hover:border-[#046241] transition truncate max-w-xs"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[6px] bg-white dark:bg-white/5 border border-[#D8D2C8] dark:border-white/15 text-[11px] font-medium text-[#046241] dark:text-emerald-400 hover:text-[#133020] dark:hover:text-white hover:border-[#046241] transition truncate max-w-xs"
                   >
-                    <Globe className="w-3 h-3 text-[#046241] shrink-0" />
+                    <Globe className="w-3 h-3 text-[#046241] dark:text-emerald-400 shrink-0" />
                     <span className="truncate">{new URL(u).hostname}</span>
                   </a>
                 ))}
@@ -915,8 +915,8 @@ export default function EventScraperDashboard() {
       {events.length > 0 && (
         <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="text-xs font-semibold text-[#133020] flex items-center gap-1.5 mr-2">
-              <Filter className="w-3.5 h-3.5 text-[#046241]" />
+            <div className="text-xs font-semibold text-[#133020] dark:text-white flex items-center gap-1.5 mr-2">
+              <Filter className="w-3.5 h-3.5 text-[#046241] dark:text-emerald-400" />
               <span>{locale === "zh" ? "筛选：" : "Filter:"}</span>
             </div>
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AlertCircle, ArrowRight, Clock } from "lucide-react";
+import { AlertCircle, ArrowRight, Clock, Mail, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { useLocaleStore } from "@/stores/locale-store";
@@ -19,7 +19,6 @@ export function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [cooldownSeconds, setCooldownSeconds] = useState<number>(0);
-  const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
     if (cooldownSeconds <= 0) return;
@@ -70,13 +69,12 @@ export function LoginForm() {
                 : "Failed to sign in. Please check credentials."),
           );
         }
-        setLoading(false);
       } else if (res?.ok) {
-        setShowIntro(true);
-        setTimeout(() => {
-          router.push(callbackUrl);
-          router.refresh();
-        }, 1400);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("lifevent_auth_intro", "true");
+        }
+        router.push(callbackUrl);
+        router.refresh();
       }
     } catch {
       setError(
@@ -93,69 +91,80 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-lg bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-6 sm:p-8 border border-[#D8D2C8] relative font-manrope z-10">
+    <div className="w-full max-w-lg bg-white/95 dark:bg-[#081C12]/95 backdrop-blur-md rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-floating-dark-lg p-6 sm:p-8 border border-[#D8D2C8] dark:border-white/15 relative font-manrope z-10">
       {/* Brand Logo & Portal Access Badge Side-by-Side */}
       <div className="flex items-center justify-between gap-4 mb-5">
         <img
-          src="/LifeScout Light Mode.png"
-          alt="Lifewood Data Technology"
-          className="h-12 sm:h-20 w-auto object-contain shrink-0"
+          src="/LIFEVENT Light Mode.png"
+          alt="LIFEVENT Data Technology"
+          className="h-12 sm:h-20 w-auto object-contain shrink-0 dark:hidden"
         />
-        <span className="text-[10px] font-bold text-[#046241] uppercase tracking-wider bg-[#046241]/10 px-3 py-1.5 rounded-full shrink-0">
+        <img
+          src="/LIFEVENT Dark Mode.png"
+          alt="LIFEVENT Data Technology"
+          className="h-12 sm:h-20 w-auto object-contain shrink-0 hidden dark:block"
+        />
+        <span className="text-[10px] font-bold text-[#046241] dark:text-[#52B788] uppercase tracking-wider bg-[#046241]/10 dark:bg-[#046241]/30 px-3 py-1.5 rounded-full shrink-0">
           Portal Access
         </span>
       </div>
 
-        <div className="mb-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#133020] tracking-tight">
-            {locale === "zh" ? "欢迎回来" : "Welcome back"}
-          </h2>
-          <p className="text-xs text-[#666666] mt-1">
-            {locale === "zh"
-              ? "请输入您的安全凭证以访问展会情报工作台"
-              : "Enter your credentials to access the intelligence platform"}
-          </p>
-        </div>
+      <div className="mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#133020] dark:text-white tracking-tight">
+          {locale === "zh" ? "欢迎回来" : "Welcome back"}
+        </h2>
+        <p className="text-xs text-[#666666] dark:text-white/70 mt-1">
+          {locale === "zh"
+            ? "请输入您的安全凭证以访问展会情报工作台"
+            : "Enter your credentials to access the intelligence platform"}
+        </p>
+      </div>
 
-        {error && (
-          <div className="mb-4 p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/30 rounded-xl flex items-start gap-2.5 text-xs text-[#B91C1C]">
-            {cooldownSeconds > 0 ? (
-              <Clock className="w-4 h-4 shrink-0 mt-0.5 text-[#B91C1C]" />
-            ) : (
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+      {error && (
+        <div className="mb-4 p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/30 rounded-xl flex items-start gap-2.5 text-xs text-[#B91C1C]">
+          {cooldownSeconds > 0 ? (
+            <Clock className="w-4 h-4 shrink-0 mt-0.5 text-[#B91C1C]" />
+          ) : (
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          )}
+          <div className="flex-1">
+            <span className="font-semibold block">{error}</span>
+            {cooldownSeconds > 0 && (
+              <span className="text-[11px] text-[#B91C1C]/90 font-mono mt-0.5 block">
+                {locale === "zh" ? "请稍候重试：" : "Try again in: "}{" "}
+                {formatTime(cooldownSeconds)}
+              </span>
             )}
-            <div className="flex-1">
-              <span className="font-semibold block">{error}</span>
-              {cooldownSeconds > 0 && (
-                <span className="text-[11px] text-[#B91C1C]/90 font-mono mt-0.5 block">
-                  {locale === "zh" ? "请稍候重试：" : "Try again in: "}{" "}
-                  {formatTime(cooldownSeconds)}
-                </span>
-              )}
-            </div>
           </div>
-        )}
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit} className="space-y-3.5">
-          <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#133020] mb-1">
-              {locale === "zh" ? "电子邮箱或用户名" : "Email or Username"}
-            </label>
+      {/* Primary Credentials Form */}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold text-[#133020] dark:text-white flex items-center justify-between">
+            <span>{locale === "zh" ? "工作邮箱" : "Work Email"}</span>
+          </label>
+          <div className="relative">
+            <Mail className="w-4 h-4 text-[#999999] dark:text-white/40 absolute left-3.5 top-3" />
             <input
               type="email"
               required
               disabled={cooldownSeconds > 0}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="user@lifewood.com"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] text-xs text-[#133020] bg-white placeholder-[#999999] focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+              placeholder="admin@lifewood.com"
+              className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
           </div>
+        </div>
 
-          <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#133020] mb-1">
-              {locale === "zh" ? "密码" : "Password"}
-            </label>
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold text-[#133020] dark:text-white flex items-center justify-between">
+            <span>{locale === "zh" ? "密码" : "Password"}</span>
+          </label>
+          <div className="relative">
+            <Lock className="w-4 h-4 text-[#999999] dark:text-white/40 absolute left-3.5 top-3" />
             <input
               type="password"
               required
@@ -163,9 +172,10 @@ export function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#D8D2C8] text-xs text-[#133020] bg-white placeholder-[#999999] focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
           </div>
+        </div>
 
         <button
           type="submit"
@@ -193,37 +203,10 @@ export function LoginForm() {
 
       <SocialLinks />
 
-      <div className="mt-6 pt-3 flex items-center justify-between text-[10px] font-semibold text-[#8C9B9E] tracking-wider uppercase border-t border-[#D8D2C8]">
+      <div className="mt-6 pt-3 flex items-center justify-between text-[10px] font-semibold text-[#8C9B9E] tracking-wider uppercase border-t border-[#D8D2C8] dark:border-white/10">
         <span>© 2026 LIFEWOOD DATA TECHNOLOGY</span>
         <div className="flex items-center gap-1.5"></div>
       </div>
-
-      {/* Post-login Intro Splash */}
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[999] bg-[#F5EEDB] flex items-center justify-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative"
-            >
-              <img
-                src="/LifeScout Light Mode.png"
-                alt="Lifewood Data Technology"
-                className="h-20 w-auto object-contain"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -388,11 +388,11 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
   const getInputClass = (fieldName: string) => {
     const base =
-      "w-full px-3 py-2 rounded-lg border text-xs text-[#133020] dark:text-white bg-white dark:bg-[#1A3D2A] transition duration-150";
+      "w-full px-3 py-2 rounded-lg border text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 transition duration-150";
     if (errors[fieldName]) {
       return `${base} border-rose-500 ring-2 ring-rose-500/20 dark:border-rose-500 dark:ring-rose-500/30`;
     }
-    return `${base} border-[#D8D2C8] dark:border-[#235338] focus:border-[#046241] focus:outline-none focus:ring-1 focus:ring-[#046241]`;
+    return `${base} border-[#D8D2C8] dark:border-white/15 focus:border-[#046241] focus:outline-none focus:ring-1 focus:ring-[#046241]`;
   };
 
   const renderFieldError = (fieldName: string) => {
@@ -453,8 +453,8 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
       />
 
       {/* GROUP A: Identity & Location */}
-      <div className="bg-white dark:bg-[#133020] p-6 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-sm">
-        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-[#1E4830] pb-3 mb-5">
+      <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-5">
           <span className="w-6 h-6 rounded-full bg-[#133020] dark:bg-[#FFB347] text-white dark:text-[#133020] text-xs font-bold flex items-center justify-center">
             A
           </span>
@@ -465,7 +465,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "所在大区 *" : "Region *"}
             </label>
             <LifewoodDropdown
@@ -477,7 +477,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "展会名称 *" : "Event Name *"}
             </label>
             <input
@@ -493,7 +493,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "举办国家/地区 *" : "Country *"}
             </label>
             <input
@@ -508,7 +508,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "举办城市 *" : "City *"}
             </label>
             <input
@@ -523,31 +523,31 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "起始日期 (日历选择)" : "Start Date (Calendar Picker)"}
             </label>
             <input
               type="date"
               value={formData.startDate}
               onChange={(e) => handleStartDatePicker(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241] cursor-pointer"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241] cursor-pointer"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "截止日期 (日历选择)" : "End Date (Calendar Picker)"}
             </label>
             <input
               type="date"
               value={formData.endDate}
               onChange={(e) => handleEndDatePicker(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241] cursor-pointer"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241] cursor-pointer"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "展期字符串格式化显示 *" : "Formatted Event Date Display *"}
             </label>
             <input
@@ -559,7 +559,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               className={getInputClass("dates")}
             />
             {renderFieldError("dates")}
-            <span className="text-[10px] text-[#666666] dark:text-slate-400 block mt-1">
+            <span className="text-[10px] text-[#666666] dark:text-white/60 block mt-1">
               {locale === "zh"
                 ? "根据日历选择自动生成，亦支持手动编辑 (例如：\"Apr 6–9, 2026\")"
                 : "Auto-generated from calendar pickers or manually editable (e.g. \"Apr 6–9, 2026\")"}
@@ -567,7 +567,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "展馆场地名称 *" : "Venue Name *"}
             </label>
             <input
@@ -582,8 +582,8 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-[#046241]" />
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-[#046241] dark:text-emerald-400" />
               <span>
                 {locale === "zh"
                   ? "详细地址与地图导航地址 (可选 — 街道/区/邮编)"
@@ -595,15 +595,15 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               value={formData.locationAddress}
               onChange={(e) => handleFieldChange("locationAddress", e.target.value)}
               placeholder={locale === "zh" ? "例如：1 Harbour Road, Wan Chai, Hong Kong (用于谷歌地图导航链接)" : "e.g. 1 Harbour Road, Wan Chai, Hong Kong (Used for Google Maps location links)"}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
             />
           </div>
         </div>
       </div>
 
       {/* GROUP B: Source & Organizer */}
-      <div className="bg-white dark:bg-[#133020] p-6 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-sm">
-        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-[#1E4830] pb-3 mb-5">
+      <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-5">
           <span className="w-6 h-6 rounded-full bg-[#133020] dark:bg-[#FFB347] text-white dark:text-[#133020] text-xs font-bold flex items-center justify-center">
             B
           </span>
@@ -614,7 +614,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "官方网站网址 *" : "Official Website URL *"}
             </label>
             <input
@@ -629,7 +629,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "主办机构 *" : "Organizer Body *"}
             </label>
             <input
@@ -644,7 +644,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "展会类别" : "Event Category"}
             </label>
             <input
@@ -652,15 +652,15 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               value={formData.eventCategory}
               onChange={(e) => handleFieldChange("eventCategory", e.target.value)}
               placeholder={locale === "zh" ? "例如：企业级 AI 峰会与博览会" : "e.g. Enterprise AI Summit & Expo"}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
             />
           </div>
         </div>
       </div>
 
       {/* GROUP C: Strategic Assessment */}
-      <div className="bg-white dark:bg-[#133020] p-6 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-sm">
-        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-[#1E4830] pb-3 mb-5">
+      <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-5">
           <span className="w-6 h-6 rounded-full bg-[#133020] dark:bg-[#FFB347] text-white dark:text-[#133020] text-xs font-bold flex items-center justify-center">
             C
           </span>
@@ -672,7 +672,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
         <div className="space-y-5">
           {/* Business Lines Multi-select */}
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
               {locale === "zh" ? "Lifewood 对应业务线 (至少选择 1 项) *" : "Lifewood Business Line(s) (Select at least 1) *"}
             </label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
@@ -687,7 +687,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
                     className={`p-3 rounded-lg border text-left text-xs transition flex flex-col justify-between cursor-pointer ${
                       selected
                         ? "bg-[#133020] dark:bg-[#046241] text-white border-[#133020] dark:border-[#046241] shadow-xs font-semibold"
-                        : "bg-[#F9F7F7] dark:bg-[#1A3D2A] text-[#133020] dark:text-slate-200 border-[#D8D2C8] dark:border-[#235338] hover:border-[#046241]"
+                        : "bg-[#F9F7F7] dark:bg-white/5 text-[#133020] dark:text-white border-[#D8D2C8] dark:border-white/15 hover:border-[#046241]"
                     }`}
                   >
                     <span>{displayName}</span>
@@ -703,7 +703,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "战略侧重点与定位 *" : "Strategic Focus / Purpose *"}
               </label>
               <textarea
@@ -718,7 +718,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "与 Lifewood 的战略相关性 (目标客户群体 + 提供的服务) *" : "Relevance to Lifewood (Buyer + Service) *"}
               </label>
               <textarea
@@ -735,7 +735,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "目标受众 / 参会群体" : "Target Audience"}
               </label>
               <input
@@ -743,12 +743,12 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
                 value={formData.targetAudience}
                 onChange={(e) => handleFieldChange("targetAudience", e.target.value)}
                 placeholder={locale === "zh" ? "CTO、AI 工程师、数据总监、研发团队..." : "CTOs, AI Engineers, Data leads..."}
-                className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+                className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "参会/参展建议" : "Participation Recommendation"}
               </label>
               <LifewoodDropdown
@@ -763,7 +763,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "战略契合度评分 (1–5 分，强制要求 3 分及以上) *" : "Fit Score (1–5, Minimum 3 Enforced) *"}
               </label>
               <div className="flex gap-2">
@@ -779,7 +779,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
                           : score === 4
                           ? "bg-[#046241] text-white border-[#046241]"
                           : "bg-[#708E7C] text-white border-[#708E7C]"
-                        : "bg-white dark:bg-[#1A3D2A] text-[#133020] dark:text-slate-200 border-[#D8D2C8] dark:border-[#235338] hover:bg-[#F9F7F7]"
+                        : "bg-white dark:bg-white/5 text-[#133020] dark:text-white border-[#D8D2C8] dark:border-white/15 hover:bg-[#F9F7F7] dark:hover:bg-white/10"
                     }`}
                   >
                     {locale === "zh"
@@ -799,8 +799,8 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
       </div>
 
       {/* GROUP D: Commercial Detail with NPD Quick Fill Buttons */}
-      <div className="bg-white dark:bg-[#133020] p-6 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-sm">
-        <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-[#1E4830] pb-3 mb-5">
+      <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+        <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-5">
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-[#133020] dark:bg-[#FFB347] text-white dark:text-[#133020] text-xs font-bold flex items-center justify-center">
               D
@@ -809,7 +809,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               {locale === "zh" ? "组 D — 商业运营与商务细节 (尽力获取)" : "Group D — Commercial Detail (Best-Effort)"}
             </h3>
           </div>
-          <span className="text-[11px] text-[#666666] dark:text-slate-400">
+          <span className="text-[11px] text-[#666666] dark:text-white/60">
             {locale === "zh" ? "若尚未公开披露，可点击 [未披露快捷填入]" : "Use [NPD] button if details are unannounced"}
           </span>
         </div>
@@ -825,7 +825,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
           ].map((item) => (
             <div key={item.field}>
               <div className="flex items-center justify-between mb-1">
-                <label className="text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider">
+                <label className="text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider">
                   {item.label}
                 </label>
                 <button
@@ -840,14 +840,14 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
                 type="text"
                 value={(formData as any)[item.field]}
                 onChange={(e) => handleFieldChange(item.field, e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+                className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
               />
             </div>
           ))}
 
           <div className="md:col-span-2">
             <div className="flex items-center justify-between mb-1">
-              <label className="text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider">
+              <label className="text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider">
                 {locale === "zh" ? "参展商及赞助合作详情" : "Exhibitor & Sponsorship Details"}
               </label>
               <button
@@ -862,15 +862,15 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               rows={2}
               value={formData.exhibitorOpportunity}
               onChange={(e) => handleFieldChange("exhibitorOpportunity", e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
             />
           </div>
         </div>
       </div>
 
       {/* GROUP E: Provenance & Source Links */}
-      <div className="bg-white dark:bg-[#133020] p-6 rounded-xl border border-[#D8D2C8] dark:border-[#1E4830] shadow-sm">
-        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-[#1E4830] pb-3 mb-5">
+      <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-sm dark:shadow-floating-dark transition-all">
+        <div className="flex items-center gap-2 border-b border-[#D8D2C8] dark:border-white/10 pb-3 mb-5">
           <span className="w-6 h-6 rounded-full bg-[#133020] dark:bg-[#FFB347] text-white dark:text-[#133020] text-xs font-bold flex items-center justify-center">
             E
           </span>
@@ -881,7 +881,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
 
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
               {locale === "zh" ? "关键备注 (同馆联展、届数、演讲征集截止等...)" : "Key Notes (Co-located shows, edition #, CFP deadline...)"}
             </label>
             <textarea
@@ -889,13 +889,13 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
               value={formData.keyNotes}
               onChange={(e) => handleFieldChange("keyNotes", e.target.value)}
               placeholder={locale === "zh" ? "例如：与 InnoEX 2026 同期举办。演讲征集于 2025 年 12 月截止。" : "e.g. Co-located with InnoEX 2026. CFP closes Dec 2025."}
-              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white focus:border-[#046241]"
+              className="w-full px-3 py-2 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-white/5 text-xs text-[#133020] dark:text-white focus:border-[#046241]"
             />
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold text-[#133020] dark:text-slate-200 uppercase tracking-wider">
+              <label className="text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider">
                 {locale === "zh" ? "核实佐证链接 (至少 1 条) *" : "Verification Source Link(s) (Minimum 1) *"}
               </label>
               <button
@@ -941,7 +941,7 @@ export function EventForm({ initialData, isEditing = false, onSuccess, onCancel 
         <button
           type="button"
           onClick={() => (onCancel ? onCancel() : router.push("/events"))}
-          className="px-6 py-3 rounded-lg border border-[#D8D2C8] dark:border-[#1E4830] bg-white dark:bg-[#1A3D2A] text-xs font-bold text-[#133020] dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer"
+          className="px-6 py-3 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-[#081C12] text-xs font-bold text-[#133020] dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer shadow-2xs dark:shadow-floating-dark"
         >
           {locale === "zh" ? "取消" : "Cancel"}
         </button>

@@ -184,7 +184,7 @@ export default function QueuesPage() {
           </span>
         </div>
       ) : filteredItems.length === 0 ? (
-        <div className="bg-white dark:bg-[#1A3828] border border-[#D8D2C8] dark:border-[#1E4830] rounded-3xl p-16 md:p-20 text-center max-w-2xl mx-auto my-12 font-manrope shadow-sm">
+        <div className="bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-3xl p-16 md:p-20 text-center max-w-2xl mx-auto my-12 font-manrope shadow-sm dark:shadow-floating-dark">
           <div className="w-20 h-20 rounded-2xl bg-[#046241]/10 dark:bg-[#046241]/25 border border-[#046241]/20 flex items-center justify-center text-[#046241] dark:text-[#52B788] mx-auto mb-6 shadow-inner">
             <CheckCircle className="w-10 h-10 stroke-[1.75]" />
           </div>
@@ -196,14 +196,14 @@ export default function QueuesPage() {
               ? "所有待处理的手动提交与改动均已完成审核评估并录入展会库。"
               : "All exhibition submissions have been evaluated, reviewed, and published. No pending items require your attention."}
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F9F7F7] dark:bg-[#133020] border border-[#D8D2C8] dark:border-[#1E4830] text-xs text-[#046241] dark:text-[#52B788] font-semibold">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8] dark:border-white/15 text-xs text-[#046241] dark:text-[#52B788] font-semibold">
             <span className="w-2 h-2 rounded-full bg-[#046241] dark:bg-[#52B788] animate-pulse" />
             <span>{locale === "zh" ? "系统流水线监控中 · 一切就绪" : "Pipeline active · All systems operational"}</span>
           </div>
         </div>
       ) : (
         /* UNIFIED EVENT CARD GRID VIEW FOR QUEUE ITEMS */
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           <AnimatePresence>
             {filteredItems.map((item) => {
               const localizedEvt = localizeEvent(item.event, locale);
@@ -257,7 +257,7 @@ export default function QueuesPage() {
                   exit={{ opacity: 0, scale: 0.96, y: -12 }}
                   transition={{ duration: 0.2 }}
                   onClick={() => setInspectItem(item)}
-                  className="bg-white dark:bg-[#133020] rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-[#1E4830] shadow-[0_2px_16px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.08)] hover:-translate-y-[1px] transition-all duration-180 overflow-hidden flex flex-col justify-between relative group font-manrope cursor-pointer"
+                  className="bg-white dark:bg-[#081C12] rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark hover:shadow-[0_6px_30px_rgba(0,0,0,0.08)] dark:hover:shadow-floating-dark-lg hover:-translate-y-[1px] transition-all duration-180 overflow-hidden flex flex-col justify-between relative group font-manrope cursor-pointer"
                 >
                   {/* 6px Color Accent Bar on Left Edge */}
                   <div
@@ -343,9 +343,9 @@ export default function QueuesPage() {
                   </div>
 
                   {/* BODY GRID (3 columns like EventCard) */}
-                  <div className="border-t border-[#D8D2C8] dark:border-[#1E4830] bg-white dark:bg-[#133020] px-5 pl-6 py-3 grid grid-cols-3 gap-2.5 text-[12px]">
+                  <div className="border-t border-[#D8D2C8] dark:border-white/10 bg-white dark:bg-[#081C12] px-5 pl-6 py-3 grid grid-cols-3 gap-2.5 text-[12px]">
                     <div className="min-w-0">
-                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-slate-400 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-white/70 font-medium block">
                         {locale === "zh" ? "主办机构" : "Organizer"}
                       </span>
                       <span className="text-[12px] font-medium text-[#133020] dark:text-white truncate block" title={localizedEvt?.organizer}>
@@ -353,7 +353,7 @@ export default function QueuesPage() {
                       </span>
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-slate-400 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-white/70 font-medium block">
                         {locale === "zh" ? "目标受众" : "Audience"}
                       </span>
                       <span className="text-[12px] font-medium text-[#133020] dark:text-white truncate block" title={localizedEvt?.targetAudience}>
@@ -361,7 +361,7 @@ export default function QueuesPage() {
                       </span>
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-slate-400 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-[#666666] dark:text-white/70 font-medium block">
                         {locale === "zh" ? "参会人数" : "Attendees"}
                       </span>
                       <span className="text-[12px] font-medium text-[#133020] dark:text-white truncate block" title={localizedEvt?.estimatedAttendees}>
@@ -371,17 +371,17 @@ export default function QueuesPage() {
                   </div>
 
                   {/* SUBMITTER RATIONALE BOX */}
-                  <div className="border-t border-[#D8D2C8] dark:border-[#1E4830] bg-[#F0F5F2] dark:bg-[#1A3D2A] px-5 pl-6 py-2.5 text-xs">
-                    <span className="text-[10px] font-bold text-[#046241] dark:text-[#FFB347] uppercase tracking-wider block mb-0.5">
+                  <div className="border-t border-[#D8D2C8] dark:border-white/10 bg-[#F0F5F2] dark:bg-[#046241]/15 px-5 pl-6 py-2.5 text-xs">
+                    <span className="text-[10px] font-bold text-[#046241] dark:text-[#52B788] uppercase tracking-wider block mb-0.5">
                       {locale === "zh" ? "提交理由与说明" : "Submission Rationale"}
                     </span>
-                    <p className="text-[12px] text-[#133020] dark:text-slate-200 line-clamp-2 leading-relaxed font-normal italic">
+                    <p className="text-[12px] text-[#133020] dark:text-white line-clamp-2 leading-relaxed font-normal italic">
                       "{item.reason || (locale === "zh" ? "手动录入新展会档案待审核" : "Manually added exhibition record awaiting review")}"
                     </p>
                   </div>
 
                   {/* ACTION FOOTER */}
-                  <div className="border-t border-[#D8D2C8] dark:border-[#1E4830] bg-[#F9F7F7] dark:bg-[#1A3D2A]/80 px-5 pl-6 py-3 flex items-center justify-end gap-3 text-xs">
+                  <div className="border-t border-[#D8D2C8] dark:border-white/10 bg-[#F9F7F7] dark:bg-[#081C12] px-5 pl-6 py-3 flex items-center justify-end gap-3 text-xs">
                     {(userRole === "SUPERADMIN" || userRole === "ADMIN") && (
                       <div className="flex items-center gap-2">
                         <button
@@ -453,9 +453,9 @@ export default function QueuesPage() {
             </div>
 
             {/* Scrollable Modal Content Body */}
-            <div className="p-6 sm:p-8 bg-white dark:bg-[#133020] text-[#133020] dark:text-slate-100 max-h-[78vh] overflow-y-auto space-y-6">
+            <div className="p-6 sm:p-8 bg-white dark:bg-[#081C12] text-[#133020] dark:text-white max-h-[78vh] overflow-y-auto space-y-6">
               {/* Top Summary Banner */}
-              <div className="p-5 rounded-2xl bg-[#F9F7F7] dark:bg-[#1A3D2A] border border-[#D8D2C8] dark:border-[#235338] space-y-4">
+              <div className="p-5 rounded-2xl bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8] dark:border-white/10 space-y-4">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div className="space-y-1">
                     <span className="text-[10px] font-bold text-[#046241] dark:text-[#FFB347] uppercase tracking-wider block">
@@ -755,11 +755,11 @@ export default function QueuesPage() {
             </div>
 
             {/* Modal Bottom Footer Actions */}
-            <div className="p-5 px-7 bg-[#F9F7F7] dark:bg-[#1A3D2A] border-t border-[#D8D2C8] dark:border-[#1E4830] flex items-center justify-between gap-4">
+            <div className="p-5 px-7 bg-[#F9F7F7] dark:bg-[#081C12] border-t border-[#D8D2C8] dark:border-white/10 flex items-center justify-between gap-4">
               <button
                 type="button"
                 onClick={() => setInspectItem(null)}
-                className="px-5 py-2.5 bg-white dark:bg-[#133020] border border-[#D8D2C8] dark:border-[#235338] text-[#133020] dark:text-white rounded-xl text-xs font-bold hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer"
+                className="px-5 py-2.5 bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 text-[#133020] dark:text-white rounded-xl text-xs font-bold hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer"
               >
                 {locale === "zh" ? "关闭" : "Close"}
               </button>

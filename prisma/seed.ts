@@ -55,7 +55,20 @@ async function main() {
 
   console.log("Seeded users: Superadmin (admin@lifewood.com), Admin (supervisor@lifewood.com), User (intern@lifewood.com).");
 
-  // Seed sample exhibitions
+  const fs = await import("fs");
+  const path = await import("path");
+  const { createRequire } = await import("module");
+  const require = createRequire(import.meta.url);
+  const excelPath = path.resolve(process.cwd(), "Tech Exhibitions 2026.xlsx");
+
+  if (fs.existsSync(excelPath)) {
+    console.log("Found Tech Exhibitions 2026.xlsx! Seeding complete dataset...");
+    const { migrateExcelData } = require("../scripts/migrate-excel.js");
+    await migrateExcelData();
+    return;
+  }
+
+  // Fallback: Seed sample exhibitions
   const sampleEvents = [
     {
       eventNumber: 1,

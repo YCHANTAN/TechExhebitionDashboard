@@ -113,7 +113,7 @@ export function LifewoodDropdown({
           <SelectPrimitive.Content
             position="popper"
             sideOffset={5}
-            className={`z-[999999] min-w-[var(--radix-select-trigger-width)] max-w-[28rem] overflow-hidden rounded-xl border-[1.5px] border-[#D8D2C8] dark:border-[#1E4830] bg-white dark:bg-[#133020] text-[#133020] dark:text-white shadow-[0_12px_36px_rgba(19,48,32,0.16)] p-1.5 font-manrope animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2 ${contentClassName}`}
+            className={`z-[999999] min-w-[var(--radix-select-trigger-width)] max-w-[28rem] overflow-hidden rounded-xl border-[1.5px] border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-[#081C12] text-[#133020] dark:text-white shadow-[0_12px_36px_rgba(19,48,32,0.16)] dark:shadow-floating-dark p-1.5 font-manrope animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2 ${contentClassName}`}
           >
             <SelectPrimitive.Viewport className="p-0.5 max-h-72 overflow-y-auto">
               {options.map((opt) => {
@@ -123,7 +123,7 @@ export function LifewoodDropdown({
                     key={optRadixVal}
                     value={optRadixVal}
                     disabled={opt.disabled}
-                    className="relative flex w-full cursor-pointer select-none items-center justify-between gap-3 rounded-lg px-3 py-2 text-xs font-semibold text-[#133020] dark:text-slate-100 outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-40 data-[highlighted]:bg-[#F5EEDB] dark:data-[highlighted]:bg-[#1A3D2A] data-[highlighted]:text-[#046241] dark:data-[highlighted]:text-[#FFB347] data-[state=checked]:bg-[#046241]/10 dark:data-[state=checked]:bg-[#046241]/30 data-[state=checked]:text-[#046241] dark:data-[state=checked]:text-[#FFB347] data-[state=checked]:font-bold"
+                    className="relative flex w-full cursor-pointer select-none items-center justify-between gap-3 rounded-lg px-3 py-2 text-xs font-semibold text-[#133020] dark:text-white outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-40 data-[highlighted]:bg-[#F5EEDB] dark:data-[highlighted]:bg-white/10 data-[highlighted]:text-[#046241] dark:data-[highlighted]:text-[#FFB347] data-[state=checked]:bg-[#046241]/10 dark:data-[state=checked]:bg-[#046241]/30 data-[state=checked]:text-[#046241] dark:data-[state=checked]:text-[#FFB347] data-[state=checked]:font-bold"
                   >
                     <SelectPrimitive.ItemText>
                       {opt.label}
@@ -237,7 +237,7 @@ export function LifewoodMultiSelectDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-1.5 w-full min-w-[200px] z-[999999] bg-white dark:bg-[#133020] border border-[#D8D2C8] dark:border-[#1E4830] rounded-xl shadow-xl p-1.5 space-y-0.5 max-h-60 overflow-y-auto animate-in fade-in duration-150 font-manrope">
+        <div className="absolute top-full left-0 mt-1.5 w-full min-w-[200px] z-[999999] bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-xl shadow-xl dark:shadow-floating-dark p-1.5 space-y-0.5 max-h-60 overflow-y-auto animate-in fade-in duration-150 font-manrope">
           {options.map((opt) => {
             const isSelected = opt.value === "ALL" ? isAllSelected : selectedList.includes(opt.value);
             return (
@@ -248,7 +248,7 @@ export function LifewoodMultiSelectDropdown({
                 className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition text-left cursor-pointer ${
                   isSelected
                     ? "bg-[#046241]/10 dark:bg-[#046241]/40 text-[#046241] dark:text-[#FFB347] font-bold"
-                    : "text-[#133020] dark:text-slate-200 hover:bg-[#F9F7F7] dark:hover:bg-[#1A3D2A]"
+                    : "text-[#133020] dark:text-white hover:bg-[#F9F7F7] dark:hover:bg-white/10"
                 }`}
               >
                 <span className="truncate">{opt.label}</span>
