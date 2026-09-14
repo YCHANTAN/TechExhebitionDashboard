@@ -19,7 +19,6 @@ export function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [cooldownSeconds, setCooldownSeconds] = useState<number>(0);
-  const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
     if (cooldownSeconds <= 0) return;
@@ -70,13 +69,12 @@ export function LoginForm() {
                 : "Failed to sign in. Please check credentials."),
           );
         }
-        setLoading(false);
       } else if (res?.ok) {
-        setShowIntro(true);
-        setTimeout(() => {
-          router.push(callbackUrl);
-          router.refresh();
-        }, 1400);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("lifescout_auth_intro", "true");
+        }
+        router.push(callbackUrl);
+        router.refresh();
       }
     } catch {
       setError(
@@ -209,33 +207,6 @@ export function LoginForm() {
         <span>© 2026 LIFEWOOD DATA TECHNOLOGY</span>
         <div className="flex items-center gap-1.5"></div>
       </div>
-
-      {/* Post-login Intro Splash */}
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[999] bg-[#F5EEDB] flex items-center justify-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative"
-            >
-              <img
-                src="/LifeScout Light Mode.png"
-                alt="Lifewood Data Technology"
-                className="h-20 w-auto object-contain"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

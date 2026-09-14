@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Topbar } from "@/components/layout/topbar";
+import { AuthIntroTransition } from "@/components/shared/auth-intro-transition";
 
 export default function AppLayout({
   children,
@@ -7,7 +9,10 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
+    <div className="flex min-h-screen bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300 relative">
+      <Suspense fallback={null}>
+        <AuthIntroTransition />
+      </Suspense>
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar />
