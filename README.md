@@ -1,232 +1,197 @@
-# ❖ Lifewood Tech Exhibition Intelligence Platform (Full-Stack Application)
+# ❖ LIFEVENT — Global Tech Exhibition Intelligence Platform
 
-> **Version:** 1.0.0  
+> **Brand:** LIFEVENT  
 > **Platform:** Full-Stack Next.js 14 (App Router) + TypeScript + Tailwind CSS + Prisma ORM + NextAuth.js  
 > **Organization:** Lifewood Data Technology  
+> **Version:** 1.2.0  
 
 ---
 
-## 📖 Executive Summary & Core Purpose
+## 📖 Executive Summary & Purpose
 
-The **Lifewood Tech Exhibition Intelligence Platform** is a web-based intelligence hub designed specifically for **Lifewood Data Technology**. The platform systematically crawls, extracts, classifies, scores, and manages global technology exhibitions and industrial summits relevant to Lifewood’s core business lines:
+**LIFEVENT** is a centralized business intelligence and exhibition sourcing platform developed specifically for **Lifewood Data Technology**. The platform systematically discovers, crawls, audits, scores, and visualizes global technology exhibitions and industrial summits aligned with Lifewood’s six strategic business pillars:
 
-* **Global AI Data Annotation & Fine-Tuning**
-* **AIGC & Generative AI Datasets**
-* **Autonomous Driving (ADAS, LiDAR, Vision Data)**
+* **Global AI Data Annotation & RLHF Fine-Tuning**
+* **AIGC, Generative AI & Red Teaming Datasets**
+* **Autonomous Driving (3D LiDAR, Radar & Spatial Vision Data)**
 * **Answer-Engine Optimization (AEO) & Generative Engine Optimization (GEO)**
-* **EDGE Intelligence & Embedded Vision**
-* **Global Scanning, OCR & Catalog Indexing**
+* **EDGE Intelligence, IoT & Embedded Vision**
+* **High-Volume Document Scanning, OCR & Catalog Indexing**
 
-The platform equips executive decision-makers, business development leaders, and data team supervisors with real-time pipeline visibility, strategic fit scoring (1.0–5.0 scale), regional coverage gap alerts, executive report generation, and role-based governance workflows.
+The platform provides BD leadership, global delegates, and executive management with forward pipeline visibility, strategic fit scoring (1.0–5.0 scale), multi-tier review governance, automated web crawling via Apify + Gemini, board-level briefing exports, and granular role-based access control.
+
+---
+
+## 🎨 Design System & Theme Architecture
+
+LIFEVENT features an adaptive dual-theme design system engineered for high legibility and contrast:
+
+### ☀️ Light Mode
+* **Canvas Body**: Pure White (`#FFFFFF` / `bg-white`) providing a clean, modern SaaS aesthetic.
+* **Header Navigation**: Frosted **Sea Salt** (`#F9F7F7` at 85% opacity) with liquid glassmorphism (`backdrop-blur-xl`), accompanied by subtle neutral borders (`border-gray-200`).
+* **Cards & Surfaces**: Crisp solid white containers with refined shadows and subtle borders to establish clear visual depth over the canvas.
+
+### 🌙 Dark Mode
+* **Canvas Body**: True **Black** (`#000000` / `bg-black`), eliminating muddy green tones for a sleek OLED appearance.
+* **Cards & Surfaces**: Elevated Zinc-950 (`dark:bg-zinc-950`) panels bordered by semi-transparent white boundaries (`dark:border-white/10` to `dark:border-white/15`).
+* **Accents**: High-contrast Saffron Gold (`#FFB347`) highlights and Emerald badges for fit scores and status indicators.
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Technology | Version | Purpose |
-|---|---|---|---|
-| **Frontend Framework** | Next.js (App Router) | 14.2.x | SSR, React 18, Server Components & Client SPA routing |
-| **Language** | TypeScript | 5.x | Strict type safety across client & API routes |
-| **Styling & Icons** | Tailwind CSS + Lucide Icons | 3.4.x | Modern UI components, responsive layout & custom brand palette |
-| **State & i18n** | Zustand | 4.5.x | Global client state & English (`EN`) / Simplified Chinese (`中文`) i18n |
-| **Database & ORM** | Prisma ORM (SQLite / PostgreSQL) | 5.x | Database schema management, migrations, and type-safe queries |
-| **Authentication** | NextAuth.js | 4.24.x | JWT session strategy, credential provider & RBAC middleware |
-| **Charts & Analytics** | Recharts | 2.12.x | Bar charts, pie/donut charts & custom high-contrast tooltips |
-| **Notifications** | Sonner | 1.5.x | Interactive toast notifications |
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Framework** | Next.js 14.2 (App Router) | SSR, React Server Components & client SPA transitions |
+| **Language** | TypeScript 5.x | Strict type safety across client, database models & API routes |
+| **Styling** | Tailwind CSS 3.4 + Lucide Icons | Responsive layout, theme variables & custom iconography |
+| **State & i18n** | Zustand 4.5 | Global client store, theme persistence & instant EN / 中文 switching |
+| **Database & ORM** | Prisma 5.x + SQLite | Relational schema, automated migrations & type-safe queries |
+| **Authentication** | NextAuth.js 4.24 | JWT session strategy, credential provider & role middleware |
+| **Visualizations** | Recharts 2.12 | Monthly distribution bars, regional breakdowns & fit score meters |
+| **Excel Ingestion** | XLSX (SheetJS) | Data parsing from `Tech Exhibitions 2026.xlsx` into database |
+| **Microservice** | Express + Apify + Gemini | Real-time web crawling and AI structured extraction |
 
 ---
 
-## ✨ Core Features & Module Breakdown
+## ✨ Core Features & Platform Modules
 
-### 📊 1. Executive Intelligence Dashboard (`/dashboard`)
-* **KPI Metrics Grid:** Real-time counters for Total Exhibitions, Forward Pipeline Count, Average Fit Score, and Global Region Coverage.
-* **Exhibitions Distribution by Month Chart:** Interactive bar chart with time-frame dropdown filters and high-contrast hover tooltips displaying monthly exhibition numbers.
-* **Business Line Distribution Chart:** Vertical horizontal bar chart mapping exhibitions across Lifewood’s 6 core offerings with numerical data labels.
-* **Events by Region Doughnut Chart:** Pie visualization mapping exhibitions across APAC, North America, Europe, and Middle East.
-* **Coverage Gap Assessment Widget:** Highlights months with fewer than 5 high-fit entries requiring proactive search.
-* **Recently Added Exhibitions Grid:** Visual cards grid showcasing the latest 5 verified entries with enlarged, highlighted Fit Score Badges (`Score 5.0 / 5.0`).
+### 🌐 1. Cinematic Landing Page (`/`)
+* **Interactive 3D Tilt Hero**: Live dashboard mockup with interactive tabs (Preview, Signals, Fit Score Breakdown).
+* **Live Exhibition Marquee**: Continuously scrolling ticker showcasing global summits (CES, MWC, AutoSens, Embedded World) with click-to-inspect modal dossiers.
+* **Interactive Scroll Text Reveal**: Dynamic paragraph highlighting Lifewood's core mission upon viewport scroll.
+* **Signature 4-Card Bento Grid**: Highlighting AI Discovery, 6-Service Strategic Fit Scoring, Global Footprint (38+ Countries), and Data Governance (99.8% accuracy).
+* **6 Business Lines Filter Showcase**: Interactive service selector displaying matched event counts, average fit scores, and target conference pills.
+* **Step-by-Step Interactive Timeline**: 3-step connected workflow visualizer from web discovery to board-level reporting.
+* **High-Impact CTA**: Instant access triggers to the Intelligence Portal and exhibitions directory.
 
-### 🗂️ 2. Exhibition Records Catalog (`/events`)
-* **Card & Table View Switcher:** Toggle between responsive visual cards grid and structured tabular views.
-* **Multi-Criteria Filter Bar:** Filter exhibitions by Region, Business Line, Fit Score threshold, Priority Level, or keyword search.
-* **Interactive Add Event Modal:** In-page pop-up modal attached via React Portal with smooth scale animations and full-screen backdrop overlay (`z-[99999]`).
-* **Automated Queue Submission:** Submitting a manual event automatically registers a `QueueItem` record in `db.queueItem` with status `PENDING_REVIEW` and redirects directly to `/queues`.
-* **Enhanced Validation Error Handling:** Visual error summary box with auto-scrolling to errors, inline error messages, and red border highlights (`border-rose-500`) for all required fields in Groups A through E.
-* **Custom Delete Confirmation Modal:** Replacing browser `confirm()` and `alert()` popups with a branded, responsive `DeleteEventModal`.
+### 📊 2. Executive Intelligence Dashboard (`/dashboard`)
+* **KPI Metrics Grid**: Live counters for Total Exhibitions, Forward Pipeline, Average Fit Score, and Global Regions.
+* **Monthly Distribution Chart**: Monthly cadence bar chart with period filters and high-contrast tooltips.
+* **Business Line Distribution Chart**: Horizontal bar chart mapping events across Lifewood's 6 core offerings.
+* **Regional Breakdown**: Visual doughnut chart mapping events across APAC, North America, EMEA, and LATAM.
+* **Coverage Gap Alerts**: Automated identification of months with sparse high-fit opportunities.
+* **Recently Added Exhibitions**: 5 latest verified events with prominent fit score badges.
 
-### 🔍 3. Single Event Specification & Map Details (`/events/[id]`)
-* **Header & Rating Badge:** Displays record number, region tag, pricing status (`Free Entry` vs `Paid / Ticketed`), priority tag, and an enlarged, highlighted top-right Fit Score pill.
-* **Google Maps Location Card:** Shows venue name, full street address (`locationAddress`), and a direct CTA button (`Open Location in Google Maps ↗`). Includes fallback badge when address is omitted.
-* **Mark as Attended & Auto-Redirection:** Marking an exhibition as attended automatically updates the database, toasts success, and redirects to the Attended History Archives (`/history?tab=ATTENDED`).
-* **Prominent Official Website CTA:** Direct high-contrast button to visit official event websites.
-* **Pop-Up Edit Modal:** In-page modal allowing Admins and Supervisors to update record details without leaving the page.
+### 🗂️ 3. Exhibition Catalog & Specification (`/events`)
+* **Card & Table Switcher**: Toggle between responsive grid cards and data-dense tables.
+* **Multi-Criteria Filter Bar**: Search by keyword, region, business line, minimum fit score, and pricing model.
+* **Interactive Add Event Modal**: Attached via React Portal with smooth scale animations.
+* **Single Event Specification (`/events/[id]`)**: Detailed 27-column breakdown, Google Maps location integration, attendee tiers, official website links, and "Mark as Attended" workflow.
 
-### 🤖 4. AI Scraper Control Engine (`/scraper`)
-* **Instant Crawler Trigger:** One-click execution calling the Python FastAPI microservice (`/api/scrape`).
-* **Source Tier Selection:** Toggle search targets across Tier 1 (Official Organizers), Tier 2 (Convention Centers), and Tier 3 (Curated AI Calendars).
-* **Automated Schedule Panel:** Configure daily/weekly background crawling jobs.
-* **Staging Review Table:** Review extracted items, inspect AI confidence scores, and transfer accepted entries directly to the Review Queue (`/queues`).
+### ⚡ 4. Cinematic Post-Authentication Transition
+* **Fluid Flythrough Animation**: Smooth ~1s logo zoom transition seamlessly introducing the dashboard upon user login, without jarring loading spinners.
 
-### 📥 5. Governance & Review Queues (`/queues`)
-* **Unified Event Card Grid:** Queue items are displayed in a responsive grid of Event Cards matching catalog and history aesthetics (featuring left 6px business line color accent bars, numeric fit score badges, submitter role pills, and rationale boxes).
-* **Directly Clickable Cards:** Clicking anywhere on a Queue Card instantly opens a full-specification pop-up modal (`ModalPortal`) detailing all Groups A through E fields (Identity, Source, Strategic Assessment, Commercial Details, Provenance, and Google Maps location button).
-* **In-Modal & Card Governance Controls:** Supervisors and Admins can approve (`APPROVE`) or reject (`REJECT`) manual submissions directly from the card footer or from within the specification pop-up modal.
+### 🤖 5. AI Scraper Control Engine (`/scraper`)
+* **Web Crawler Trigger**: One-click integration with the crawling engine.
+* **Staging Review Table**: Inspect AI confidence scores before promoting leads to the governance queue.
 
-### 📜 6. Governance & Attendance History (`/history`)
-* **Tab 1 — Queue Decisions History:** Audit log of all approved and rejected queue items. Includes a **30-Day Auto-Clear policy** (automatically hides decisions older than 30 days).
-* **Tab 2 — Attended Exhibitions Log:** Permanent record of exhibitions marked for attendance or exhibition. Accessible via `/history?tab=ATTENDED`. **Never expires.**
+### 📥 6. Governance & Review Queues (`/queues`)
+* **Double-Blind Verification**: Multi-tier review workflow for drafted or AI-discovered exhibitions.
+* **Approval & Rejection Controls**: Admins and Supervisors can inspect all 27 technical parameters before publishing.
 
-### 👥 7. User Management & Role-Based Access Control (`/users`)
-* **Role Hierarchy:**
-  * **`ADMIN`:** Full access (Create/Edit/Delete Events, Manage Users & Roles, System Configs).
-  * **`SUPERVISOR`:** Manage Events, Approve/Reject Queues, Access Reports & Scraper.
-  * **`INTERN`:** Submit Draft Events, Trigger Scrapers, View Catalog (no delete/publish permissions).
-* **Administration Interface:** Accessible from sidebar to view system accounts; Admin controls to add users, change roles, and remove accounts with password hashing.
+### 📜 7. Attendance & Governance History (`/history`)
+* **Review History Tab**: 30-day auto-maintained log of all approved and rejected queue items.
+* **Attended Exhibitions Log**: Permanent ledger of conferences attended by Lifewood delegates.
 
-### 📑 8. Executive Report Generator (`/reports`)
-* **Report Scopes:** Regional Summaries, Business Line Coverage, or Full Database Export.
-* **Branded Export Formats:** Official Lifewood HK Executive Report HTML or Raw CSV Spreadsheet dataset.
-* **Live Preview:** Rendered iframe preview before file downloading.
+### 👥 8. RBAC & User Management (`/users`)
+* **Role Permissions**:
+  * **`ADMIN` / `SUPERADMIN`**: Full permissions (manage users, create/edit/delete events, adjust settings).
+  * **`SUPERVISOR`**: Edit records, approve/reject review queues, generate reports.
+  * **`INTERN`**: Submit draft records, trigger scrapers, browse catalog.
 
 ---
 
-## ⚡ Setup & Local Development Guide
-
-Follow these steps to run the complete platform locally on your machine.
+## ⚡ Quick Start & Local Setup
 
 ### 📋 Prerequisites
-- **Node.js**: Version `18.17.0` or higher (`node -v`)
-- **npm**: Version `9.x` or higher (`npm -v`)
-- **Git** installed on your system
+* **Node.js**: `18.18.0` or higher
+* **npm**: `9.x` or higher
+* **Git**
 
 ---
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone & Install
 ```bash
 git clone https://github.com/Zycheee/TechExhebitionDashboard.git
 cd TechExhebitionDashboard
-```
-
-### 2️⃣ Install Dependencies
-```bash
 npm install
 ```
 
-### 3️⃣ Configure Environment Variables (`.env.example` vs `.env` / `.env.local`)
-
-This repository includes a template file named **`.env.example`** with all the required configuration keys.
-
-> **💡 What is `.env.example`?**  
-> It is an intentionally committed blueprint showing every environment variable the platform needs. It contains placeholder values so that you know what keys to configure without exposing any private API tokens to Git.
-
-Create your local environment files from `.env.example`:
-
+### 2️⃣ Environment Configuration
+Copy `.env.example` to create your local environment files:
 ```bash
-# For Next.js (Dashboard frontend & API routes)
+# Next.js App
 cp .env.example .env.local
 
-# For the Crawler Microservice (Express engine on port 5000)
+# Optional crawler service
 cp .env.example .env
 ```
 
-*Ensure `NEXTAUTH_SECRET` and `NEXTAUTH_URL` are present to avoid NextAuth `Configuration 500` errors:*
+Ensure `NEXTAUTH_SECRET` and `NEXTAUTH_URL` are set in `.env.local`:
 ```env
-NEXTAUTH_SECRET="lifewood-secret-key-super-secure-2026"
+NEXTAUTH_SECRET="lifewood-super-secure-jwt-key-2026"
 NEXTAUTH_URL="http://localhost:3000"
 ```
 
-Open `.env` (or `.env.local`) and configure your optional API keys for web scraping:
-- **`APIFY_TOKEN`**: *(Optional)* Required to discover real exhibition URLs using Apify Google Search scraper. [Get an Apify token](https://console.apify.com/account#/integrations).
-- **`GEMINI_API_KEY`**: *(Optional)* Required for AI-powered event extraction, normalization, and fit scoring. [Get a free Gemini API key](https://aistudio.google.com/app/apikey).
-- **`NEXTAUTH_SECRET`**: Set to any random secret string for session encryption.
-
-*(Note: If you do not provide Apify or Gemini keys, you can still use the full dashboard, view events, manage users, queues, and review cached scraped data!)*
-
-### 4️⃣ Initialize Database & Seed Default Data
-The platform uses **SQLite** (`prisma/dev.db`) by default for local development, so **no external database server is required**.
-
+### 3️⃣ Initialize Database & Migrate 2026 Exhibitions
 ```bash
-# Push Prisma schema to SQLite dev.db
+# Initialize SQLite database schema
 npx prisma db push
 
-# Seed default user accounts and initial demo exhibitions
-npx prisma db seed
+# Seed system roles & users (Admin, Supervisor, Intern)
+npm run db:seed
+
+# Migrate all 222 exhibitions from 'Tech Exhibitions 2026.xlsx'
+npm run db:migrate-excel
 ```
 
-### 5️⃣ Run the Application
-
-The platform consists of two services:
-1. **Next.js Web Application** (Dashboard, UI, Authentication, Queue & Event Management on port `3000`)
-2. **AI Crawler Microservice** (Express, Apify + Gemini extraction pipeline on port `5000`)
-
-#### Terminal 1 — Start Next.js App:
+### 4️⃣ Start Development Server
 ```bash
 npm run dev
 ```
-*The application will be available at `http://localhost:3000`.*  
-*(Note: If you just created or updated your `.env` file, make sure to stop (`Ctrl + C`) and restart `npm run dev` so Next.js reloads the environment variables).*
+Open **`http://localhost:3000`** in your browser.
 
-#### Terminal 2 — Start AI Discovery & Crawler Engine (Optional for live crawling):
+*(Optional)* To run the live web crawler microservice:
 ```bash
 npm run crawler
 ```
-*Runs the background crawling microservice engine on port 5000 (`http://localhost:5000`) for live web searches, real-time SSE extraction, and crawler caching.*
 
-### 6️⃣ Build for Production
+### 5️⃣ Production Build
 ```bash
 npm run build
+npm run start
 ```
 
 ---
 
-## 🔑 Default User Accounts & Credentials
+## 🔑 Default Credentials
 
-The seed script (`prisma/seed.ts`) populates default test accounts for each system role:
-
-| Role | Email | Default Password | Capabilities |
+| Role | Email | Password | Access Level |
 |---|---|---|---|
-| **Admin** | `admin@lifewood.com` | `admin123` | Full control over events, user accounts, roles, and settings. |
-| **Supervisor** | `supervisor@lifewood.com` | `supervisor123` | Edit records, approve/reject review queues, export reports. |
-| **Intern** | `intern@lifewood.com` | `intern123` | Submit event drafts, trigger web scraper, view catalog. |
+| **Admin** | `admin@lifewood.com` | `admin123` | Full system governance, users & events |
+| **Supervisor** | `supervisor@lifewood.com` | `supervisor123` | Review queues, reports & edits |
+| **Intern** | `intern@lifewood.com` | `intern123` | Draft submissions & exploration |
 
 ---
 
-## 🛠️ Common Troubleshooting & FAQ
+## 📦 Available Scripts
 
-<details>
-<summary><b>Q: I see "Failed to reach Crawling Engine on port 5000" in the scraper tab.</b></summary>
-
-The live web scraper runs as a microservice on port 5000. Open a second terminal window and run:
-```bash
-npm run crawler
-```
-If you only run `npm run dev`, you can still view previously cached events and test manual event additions without running the crawler.
-</details>
-
-<details>
-<summary><b>Q: How do I reset the local database?</b></summary>
-
-To wipe and re-seed the SQLite database:
-```bash
-npx prisma db push --force-reset
-npx prisma db seed
-```
-</details>
-
-<details>
-<summary><b>Q: Why was `.env` tracked in git earlier?</b></summary>
-
-An initial commit included a blank `.env` with empty keys (`PORT=5000`, `APIFY_TOKEN=`, `GEMINI_API_KEY=`). `.gitignore` has now been updated to ensure that all local `.env` and `.env*.local` files containing your private API keys remain strictly local and are never committed.
-</details>
+* **`npm run dev`**: Starts Next.js development server on `http://localhost:3000`.
+* **`npm run build`**: Compiles optimized production build with zero type errors.
+* **`npm run start`**: Starts Next.js in production mode.
+* **`npm run db:seed`**: Seeds default user accounts.
+* **`npm run db:migrate-excel`**: Extracts and loads all 222 events from `Tech Exhibitions 2026.xlsx` into the database.
+* **`npm run crawler`**: Launches the background crawling microservice on port `5000`.
 
 ---
 
-## 🔒 Security & Rate Limiting
+## 🔒 Security & Data Integrity
 
-* **Password Hashing:** All user passwords are encrypted using `bcrypt.hash()` with a salt factor of 10.
-* **NextAuth & JWT Encryption:** NextAuth handles JWT session tokens signed using `NEXTAUTH_SECRET` (configured in `.env` and `src/lib/auth.ts`).
-* **Session Verification:** API endpoints enforce JWT session role validation (`ADMIN`, `SUPERVISOR`, `INTERN`).
-* **Environment Protection:** `.env` and `.env*.local` are ignored to prevent credential leakage.
+* **Password Security**: Passwords hashed using `bcrypt` (10 rounds).
+* **Token Protection**: JWT sessions signed and verified with `NEXTAUTH_SECRET`.
+* **RBAC Guard**: Server-side role enforcement on all mutation endpoints (`POST`, `PUT`, `DELETE`).
+* **Source Tracking**: All 222 imported events preserve original source spreadsheet provenance.
 
 ---
 
