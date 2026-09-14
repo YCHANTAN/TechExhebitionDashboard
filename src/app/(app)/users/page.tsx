@@ -237,82 +237,82 @@ export default function UsersPage() {
 
       {/* Role Summary Bento Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-2xl border border-[#D8D2C8] shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#081C12] p-4 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark flex items-center justify-between transition-all">
           <div>
-            <span className="text-[11px] font-bold text-[#666666] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#666666] dark:text-white/70 uppercase tracking-wider block">
               {locale === "zh" ? "总用户数" : "Total Users"}
             </span>
-            <span className="text-2xl font-extrabold text-[#133020]">{users.length}</span>
+            <span className="text-2xl font-extrabold text-[#133020] dark:text-white">{users.length}</span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-[#133020]/10 flex items-center justify-center text-[#133020]">
+          <div className="w-9 h-9 rounded-xl bg-[#133020]/10 dark:bg-white/10 flex items-center justify-center text-[#133020] dark:text-white">
             <Users className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#D8D2C8] shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#081C12] p-4 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark flex items-center justify-between transition-all">
           <div>
-            <span className="text-[11px] font-bold text-[#666666] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#666666] dark:text-white/70 uppercase tracking-wider block">
               {locale === "zh" ? "超级管理员" : "Superadmins"}
             </span>
-            <span className="text-2xl font-extrabold text-[#133020]">{superadminCount}</span>
+            <span className="text-2xl font-extrabold text-[#133020] dark:text-white">{superadminCount}</span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-[#FFB347]/20 flex items-center justify-center text-[#133020]">
-            <Shield className="w-5 h-5 text-[#C17110]" />
+          <div className="w-9 h-9 rounded-xl bg-[#FFB347]/20 flex items-center justify-center text-[#133020] dark:text-[#FFB347]">
+            <Shield className="w-5 h-5 text-[#C17110] dark:text-[#FFB347]" />
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#D8D2C8] shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#081C12] p-4 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark flex items-center justify-between transition-all">
           <div>
-            <span className="text-[11px] font-bold text-[#666666] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#666666] dark:text-white/70 uppercase tracking-wider block">
               {locale === "zh" ? "管理员" : "Admins"}
             </span>
-            <span className="text-2xl font-extrabold text-[#133020]">{adminCount}</span>
+            <span className="text-2xl font-extrabold text-[#133020] dark:text-white">{adminCount}</span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-[#046241]/10 flex items-center justify-center text-[#046241]">
+          <div className="w-9 h-9 rounded-xl bg-[#046241]/10 dark:bg-[#046241]/30 flex items-center justify-center text-[#046241] dark:text-[#52B788]">
             <UserCheck className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#D8D2C8] shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#081C12] p-4 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark flex items-center justify-between transition-all">
           <div>
-            <span className="text-[11px] font-bold text-[#666666] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#666666] dark:text-white/70 uppercase tracking-wider block">
               {locale === "zh" ? "普通用户" : "Users"}
             </span>
-            <span className="text-2xl font-extrabold text-[#133020]">{userCount}</span>
+            <span className="text-2xl font-extrabold text-[#133020] dark:text-white">{userCount}</span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-[#708E7C]/15 flex items-center justify-center text-[#708E7C]">
+          <div className="w-9 h-9 rounded-xl bg-[#708E7C]/15 dark:bg-white/10 flex items-center justify-center text-[#708E7C] dark:text-white">
             <Users className="w-5 h-5" />
           </div>
         </div>
       </div>
 
       {/* Search Input Bar */}
-      <div className="flex items-center justify-between gap-4 bg-white p-3.5 rounded-2xl border border-[#D8D2C8]">
+      <div className="flex items-center justify-between gap-4 bg-white dark:bg-[#081C12] p-3.5 rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark transition-all">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#999999] absolute left-3.5 top-2.5" />
+          <Search className="w-4 h-4 text-[#999999] dark:text-white/40 absolute left-3.5 top-2.5" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={locale === "zh" ? "按姓名、邮箱或角色搜索账号..." : "Search accounts by name, email, or role..."}
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#D8D2C8] bg-[#F9F7F7] text-xs text-[#133020] placeholder-[#999999] focus:outline-none focus:border-[#046241] focus:bg-white transition"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#D8D2C8] dark:border-white/15 bg-[#F9F7F7] dark:bg-white/5 text-xs text-[#133020] dark:text-white placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:bg-white dark:focus:bg-[#081C12] transition"
           />
         </div>
-        <span className="text-xs font-semibold text-[#666666]">
+        <span className="text-xs font-semibold text-[#666666] dark:text-white/70">
           {locale === "zh" ? `显示 ${filteredUsers.length} 个账号` : `Showing ${filteredUsers.length} accounts`}
         </span>
       </div>
 
       {/* Users Table */}
       {loading ? (
-        <div className="py-20 flex flex-col items-center justify-center text-[#046241]">
+        <div className="py-20 flex flex-col items-center justify-center text-[#046241] dark:text-[#52B788]">
           <Loader2 className="w-8 h-8 animate-spin mb-2" />
-          <span className="text-xs font-semibold text-[#133020]">
+          <span className="text-xs font-semibold text-[#133020] dark:text-white">
             {locale === "zh" ? "正在加载系统账号列表..." : "Loading registered system accounts..."}
           </span>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-[#D8D2C8] shadow-xs overflow-hidden">
+        <div className="bg-white dark:bg-[#081C12] rounded-2xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark overflow-hidden transition-all">
           <table className="w-full text-xs text-left border-collapse">
             <thead>
               <tr className="bg-[#133020] text-white font-bold uppercase tracking-wider text-[10px]">
@@ -323,10 +323,10 @@ export default function UsersPage() {
                 <th className="p-3.5 px-4 text-right">{locale === "zh" ? "操作" : "Actions"}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D8D2C8]">
+            <tbody className="divide-y divide-[#D8D2C8] dark:divide-white/10">
               {filteredUsers.map((u) => (
-                <tr key={u.id} className="hover:bg-[#F9F7F7] transition">
-                  <td className="p-3.5 px-4 font-bold text-[#133020]">
+                <tr key={u.id} className="hover:bg-[#F9F7F7] dark:hover:bg-white/5 transition">
+                  <td className="p-3.5 px-4 font-bold text-[#133020] dark:text-white">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-[#046241] text-white flex items-center justify-center font-extrabold text-xs shadow-xs">
                         {u.name.charAt(0).toUpperCase()}
@@ -441,10 +441,10 @@ export default function UsersPage() {
           </button>
         </div>
 
-        <div className="p-6 sm:p-8 bg-white font-manrope space-y-4">
+        <div className="p-6 sm:p-8 bg-white dark:bg-[#081C12] font-manrope space-y-4 text-[#133020] dark:text-white">
           <form onSubmit={handleCreateUser} className="space-y-4 text-xs">
             <div>
-              <label className="block font-bold text-[#133020] uppercase tracking-wider mb-1">
+              <label className="block font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "用户姓名" : "Full Name"}
               </label>
               <input
@@ -453,12 +453,12 @@ export default function UsersPage() {
                 placeholder={locale === "zh" ? "例如：Alex Wong" : "e.g. Alex Wong"}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] rounded-xl text-xs bg-[#F9F7F7] focus:bg-white focus:outline-none focus:border-[#046241]"
+                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:bg-white dark:focus:bg-[#081C12] focus:outline-none focus:border-[#046241]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-[#133020] uppercase tracking-wider mb-1">
+              <label className="block font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "电子邮箱" : "Email Address"}
               </label>
               <input
@@ -467,12 +467,12 @@ export default function UsersPage() {
                 placeholder="alex@lifewood.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] rounded-xl text-xs bg-[#F9F7F7] focus:bg-white focus:outline-none focus:border-[#046241]"
+                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:bg-white dark:focus:bg-[#081C12] focus:outline-none focus:border-[#046241]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-[#133020] uppercase tracking-wider mb-1">
+              <label className="block font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "初始密码" : "Password"}
               </label>
               <input
@@ -481,12 +481,12 @@ export default function UsersPage() {
                 placeholder="••••••••"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] rounded-xl text-xs bg-[#F9F7F7] focus:bg-white focus:outline-none focus:border-[#046241]"
+                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:bg-white dark:focus:bg-[#081C12] focus:outline-none focus:border-[#046241]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-[#133020] uppercase tracking-wider mb-1">
+              <label className="block font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1">
                 {locale === "zh" ? "系统角色" : "System Role"}
               </label>
               <LifewoodDropdown
@@ -501,7 +501,7 @@ export default function UsersPage() {
               <button
                 type="button"
                 onClick={() => setShowAddModal(false)}
-                className="px-4 py-2 border border-[#D8D2C8] rounded-xl text-xs text-[#666666] font-bold hover:bg-[#F9F7F7]"
+                className="px-4 py-2 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#666666] dark:text-white/60 font-bold hover:bg-[#F9F7F7] dark:hover:bg-white/10"
               >
                 {locale === "zh" ? "取消" : "Cancel"}
               </button>
@@ -540,10 +540,10 @@ export default function UsersPage() {
           </button>
         </div>
 
-        <div className="p-6 sm:p-8 bg-white font-manrope space-y-4">
+        <div className="p-6 sm:p-8 bg-white dark:bg-[#081C12] font-manrope space-y-4 text-[#133020] dark:text-white">
           <form onSubmit={handleResetPassword} className="space-y-4 text-xs">
             <div>
-              <label className="block font-bold text-[#133020] uppercase tracking-wider mb-1.5">
+              <label className="block font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-1.5">
                 {locale === "zh" ? "新安全密码" : "New Security Password"}
               </label>
               <input
@@ -553,7 +553,7 @@ export default function UsersPage() {
                 placeholder={locale === "zh" ? "输入至少 6 位字符" : "Enter at least 6 characters"}
                 value={newPasswordValue}
                 onChange={(e) => setNewPasswordValue(e.target.value)}
-                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] rounded-xl text-xs bg-[#F9F7F7] text-[#133020] focus:bg-white focus:outline-none focus:border-[#046241]"
+                className="w-full px-3.5 py-2.5 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#133020] dark:text-white bg-[#F9F7F7] dark:bg-white/5 focus:bg-white dark:focus:bg-[#081C12] focus:outline-none focus:border-[#046241]"
               />
             </div>
 
@@ -561,14 +561,14 @@ export default function UsersPage() {
               <button
                 type="button"
                 onClick={() => setResetPasswordUser(null)}
-                className="px-4 py-2 border border-[#D8D2C8] rounded-xl text-xs text-[#666666] font-bold hover:bg-[#F9F7F7]"
+                className="px-4 py-2 border border-[#D8D2C8] dark:border-white/15 rounded-xl text-xs text-[#666666] dark:text-white/60 font-bold hover:bg-[#F9F7F7] dark:hover:bg-white/10"
               >
                 {locale === "zh" ? "取消" : "Cancel"}
               </button>
               <button
                 type="submit"
                 disabled={resetting}
-                className="px-5 py-2.5 bg-[#133020] hover:bg-[#046241] text-white font-bold text-xs rounded-xl transition shadow-sm disabled:opacity-50"
+                className="px-5 py-2.5 bg-[#133020] dark:bg-[#046241] hover:bg-[#046241] text-white font-bold text-xs rounded-xl transition shadow-sm disabled:opacity-50"
               >
                 {resetting
                   ? locale === "zh" ? "正在更新密码..." : "Updating Password..."

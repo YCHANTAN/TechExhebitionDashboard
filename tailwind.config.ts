@@ -74,6 +74,29 @@ const config: Config = {
         lg: "12px",
         md: "8px",
         sm: "6px",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+        "4xl": "2rem",
+        "5xl": "2.5rem",
+      },
+      boxShadow: {
+        "floating-dark": "0 10px 30px -5px rgba(255, 255, 255, 0.08), 0 4px 12px -2px rgba(255, 255, 255, 0.05)",
+        "floating-dark-lg": "0 16px 36px -2px rgba(255, 255, 255, 0.14), 0 6px 16px -2px rgba(255, 255, 255, 0.08)",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 35s linear infinite",
+        "marquee-reverse": "marquee-reverse 35s linear infinite",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },

@@ -48,7 +48,7 @@ export function BorderGlow({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{ borderRadius }}
-      className={`relative p-[1.5px] bg-[#D8D2C8] transition-colors duration-200 overflow-hidden ${className}`}
+      className={`relative p-[1.5px] bg-[#D8D2C8] dark:bg-white/10 transition-colors duration-200 overflow-hidden ${className}`}
     >
       {/* Dynamic Cursor Border Glow */}
       <div
@@ -63,7 +63,7 @@ export function BorderGlow({
       {/* Solid White Surface Container */}
       <div
         style={{ borderRadius: `calc(${borderRadius} - 1px)` }}
-        className="relative h-full w-full bg-white z-10"
+        className="relative h-full w-full bg-white dark:bg-[#081C12] z-10"
       >
         {children}
       </div>

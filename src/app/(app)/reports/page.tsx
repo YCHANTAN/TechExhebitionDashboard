@@ -211,10 +211,10 @@ export default function ReportsPage() {
       </div>
 
       {/* Config Form */}
-      <div className="bg-white p-10 rounded-xl border border-[#D8D2C8] shadow-xs space-y-5">
+      <div className="bg-white dark:bg-[#081C12] p-10 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark space-y-5 transition-all">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
           <div>
-            <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
               {locale === "zh" ? "报告类型" : "Report Type"}
             </label>
             <LifewoodDropdown
@@ -225,9 +225,9 @@ export default function ReportsPage() {
             />
           </div>
 
-                  {reportType === "businessLine" ? (
+          {reportType === "businessLine" ? (
             <div>
-              <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
                 {locale === "zh" ? "选择业务线" : "Business Line Selection"}
               </label>
               <LifewoodDropdown
@@ -239,16 +239,16 @@ export default function ReportsPage() {
             </div>
           ) : reportType === "full" ? (
             <div>
-              <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
                 {locale === "zh" ? "范围" : "Scope"}
               </label>
-              <div className="w-full px-3.5 py-2.5 rounded-lg border border-[#D8D2C8] bg-[#F5EEDB] text-xs text-[#666666] italic">
+              <div className="w-full px-3.5 py-2.5 rounded-lg border border-[#D8D2C8] dark:border-white/15 bg-[#F5EEDB] dark:bg-white/5 text-xs text-[#666666] dark:text-white/60 italic">
                 {locale === "zh" ? "包含全部区域与业务线" : "Includes all regions & business lines"}
               </div>
             </div>
           ) : (
             <div>
-              <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
                 {locale === "zh" ? "选择区域" : "Region Selection"}
               </label>
               <LifewoodDropdown
@@ -261,7 +261,7 @@ export default function ReportsPage() {
           )}
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
               {locale === "zh" ? "时间范围" : "Time Range / Period"}
             </label>
             <LifewoodDropdown
@@ -273,7 +273,7 @@ export default function ReportsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#133020] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#133020] dark:text-white uppercase tracking-wider mb-2">
               {locale === "zh" ? "导出格式" : "Export Format"}
             </label>
             <LifewoodDropdown
@@ -287,29 +287,29 @@ export default function ReportsPage() {
 
         {/* Custom Date Range Picker Inputs */}
         {timeRange === "CUSTOM" && (
-          <div className="bg-[#F5EEDB] p-4 rounded-xl border border-[#D8D2C8] grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-200">
+          <div className="bg-[#F5EEDB] dark:bg-white/5 p-4 rounded-xl border border-[#D8D2C8] dark:border-white/10 grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-200">
             <div>
-              <label className="flex items-center gap-1.5 text-xs font-bold text-[#133020] mb-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#046241]" />
+              <label className="flex items-center gap-1.5 text-xs font-bold text-[#133020] dark:text-white mb-1.5">
+                <Calendar className="w-3.5 h-3.5 text-[#046241] dark:text-emerald-400" />
                 <span>{locale === "zh" ? "起始日期" : "Start Date"}</span>
               </label>
               <input
                 type="date"
                 value={customStartDate}
                 onChange={(e) => setCustomStartDate(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-[#D8D2C8] rounded-lg text-xs font-medium text-[#133020] focus:outline-none focus:ring-2 focus:ring-[#046241]"
+                className="w-full px-3 py-2 bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-lg text-xs font-medium text-[#133020] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#046241]"
               />
             </div>
             <div>
-              <label className="flex items-center gap-1.5 text-xs font-bold text-[#133020] mb-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#046241]" />
+              <label className="flex items-center gap-1.5 text-xs font-bold text-[#133020] dark:text-white mb-1.5">
+                <Calendar className="w-3.5 h-3.5 text-[#046241] dark:text-emerald-400" />
                 <span>{locale === "zh" ? "截止日期" : "End Date"}</span>
               </label>
               <input
                 type="date"
                 value={customEndDate}
                 onChange={(e) => setCustomEndDate(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-[#D8D2C8] rounded-lg text-xs font-medium text-[#133020] focus:outline-none focus:ring-2 focus:ring-[#046241]"
+                className="w-full px-3 py-2 bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-lg text-xs font-medium text-[#133020] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#046241]"
               />
             </div>
           </div>
@@ -338,15 +338,15 @@ export default function ReportsPage() {
 
       {/* Preview Section */}
       {generatedHtml && (
-        <div className="bg-white p-6 rounded-xl border border-[#D8D2C8] shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-[#D8D2C8] pb-3">
+        <div className="bg-white dark:bg-[#081C12] p-6 rounded-xl border border-[#D8D2C8] dark:border-white/10 shadow-xs dark:shadow-floating-dark space-y-4 transition-all">
+          <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-white/10 pb-3">
             <div className="flex items-center gap-2">
-              <Eye className="w-5 h-5 text-[#046241]" />
+              <Eye className="w-5 h-5 text-[#046241] dark:text-emerald-400" />
               <div>
-                <h3 className="text-sm font-bold text-[#133020]">
+                <h3 className="text-sm font-bold text-[#133020] dark:text-white">
                   {locale === "zh" ? `实时报告预览（共 ${count} 条记录）` : `Live Report Preview (${count} Records)`}
                 </h3>
-                <p className="text-[11px] text-[#666666]">
+                <p className="text-[11px] text-[#666666] dark:text-white/60">
                   {locale === "zh" ? "按官方香港报告视觉规范渲染" : "Rendered in official HK Report design language"}
                 </p>
               </div>
@@ -354,14 +354,14 @@ export default function ReportsPage() {
 
             <button
               onClick={handleDownloadHtml}
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#133020] hover:bg-[#046241] text-white text-xs font-bold rounded-lg transition shadow-xs"
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#133020] dark:bg-[#046241] hover:bg-[#046241] text-white text-xs font-bold rounded-lg transition shadow-xs"
             >
               <Download className="w-4 h-4" />
               <span>{locale === "zh" ? "下载 HTML 文件" : "Download HTML File"}</span>
             </button>
           </div>
 
-          <div className="border border-[#D8D2C8] rounded-xl overflow-hidden bg-[#F5EEDB] p-4 max-h-[600px] overflow-y-auto">
+          <div className="border border-[#D8D2C8] dark:border-white/10 rounded-xl overflow-hidden bg-[#F5EEDB] dark:bg-white/5 p-4 max-h-[600px] overflow-y-auto">
             <iframe
               srcDoc={generatedHtml}
               className="w-full min-h-[500px] rounded-lg border border-[#D8D2C8] bg-white shadow-inner"

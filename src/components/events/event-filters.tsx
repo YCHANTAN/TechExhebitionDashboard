@@ -98,7 +98,7 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
               "events.searchPlaceholder",
               "Search event name, city, organizer..."
             )}
-            className="w-full pl-9 pr-8 py-2 rounded-[8px] border-[1.5px] border-[#D8D2C8] dark:border-[#235338] bg-white dark:bg-[#1A3D2A] text-xs text-[#133020] dark:text-white placeholder-[#999999] dark:placeholder-slate-400 focus:outline-none focus:border-[#046241] focus:ring-2 focus:ring-[#046241]/15 transition"
+            className="w-full pl-9 pr-8 py-2 rounded-[8px] border-[1.5px] border-[#D8D2C8] dark:border-white/15 bg-white dark:bg-[#081C12] text-xs text-[#133020] dark:text-white placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-2 focus:ring-[#046241]/15 transition"
           />
           {filters.search && (
             <button
@@ -120,7 +120,7 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
             className={`flex items-center gap-2 px-3.5 py-2 rounded-[8px] border-[1.5px] text-xs font-bold transition-all shadow-2xs cursor-pointer ${
               showFilterPanel || activeFilterCount > 0
                 ? "bg-[#133020] dark:bg-[#046241] text-white border-[#133020] dark:border-[#046241]"
-                : "bg-white dark:bg-[#1A3D2A] text-[#133020] dark:text-slate-200 border-[#D8D2C8] dark:border-[#235338] hover:bg-[#F9F7F7]"
+                : "bg-white dark:bg-[#081C12] text-[#133020] dark:text-white border-[#D8D2C8] dark:border-white/15 hover:bg-[#F9F7F7] dark:hover:bg-white/5"
             }`}
           >
             <SlidersHorizontal className="w-4 h-4 text-[#FFB347]" />
@@ -139,7 +139,7 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
 
           {/* Main Sort Options Popover Dropdown (Visible only in Card View) */}
           {viewMode === "card" && (
-            <div className="flex items-center gap-1.5 bg-white dark:bg-[#1A3D2A] border-[1.5px] border-[#D8D2C8] dark:border-[#235338] rounded-[8px] px-3.5 py-1.5 text-xs font-bold shadow-2xs hover:bg-[#F9F7F7] transition cursor-pointer">
+            <div className="flex items-center gap-1.5 bg-white dark:bg-[#081C12] border-[1.5px] border-[#D8D2C8] dark:border-white/15 rounded-[8px] px-3.5 py-1.5 text-xs font-bold shadow-2xs hover:bg-[#F9F7F7] dark:hover:bg-white/5 transition cursor-pointer">
               <ArrowUpDown className="w-4 h-4 text-[#FFB347] shrink-0" />
               <LifewoodDropdown
                 variant="compact"
@@ -168,8 +168,8 @@ export function EventFilters({ filters, viewMode = "card", onChange, onClear, on
 
       {/* EXPANDABLE FILTER OPTIONS PANEL */}
       {showFilterPanel && (
-        <div className="p-4 rounded-[10px] bg-white dark:bg-[#1A3D2A] border border-[#D8D2C8] dark:border-[#235338] space-y-4 shadow-sm animate-in fade-in duration-200">
-          <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-[#235338] pb-2">
+        <div className="p-4 rounded-[10px] bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/10 space-y-4 shadow-sm dark:shadow-floating-dark animate-in fade-in duration-200">
+          <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-white/10 pb-2">
             <span className="text-xs font-bold text-[#133020] dark:text-white flex items-center gap-1.5">
               <Filter className="w-3.5 h-3.5 text-[#046241] dark:text-[#FFB347]" />
               <span>{locale === "zh" ? "按类别精准筛选展会" : "Select Filter Dimensions"}</span>

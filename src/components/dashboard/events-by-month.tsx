@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -46,9 +46,23 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
   const DEFAULT_START_DATE = "2026-09-01";
   const [startDate, setStartDate] = useState(DEFAULT_START_DATE);
   const [endDate, setEndDate] = useState("");
+  const [isDark, setIsDark] = useState(false);
 
-  const axisTickColor = "#133020";
-  const axisLineColor = "#D8D2C8";
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkDark();
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const axisTickColor = isDark ? "#FFFFFF" : "#133020";
+  const axisLineColor = isDark ? "rgba(255, 255, 255, 0.15)" : "#D8D2C8";
 
   const formattedData = useMemo(() => {
     if (!data || data.length === 0) return [];
@@ -106,16 +120,16 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
   };
 
   return (
-    <div className="bg-white p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] shadow-[0_2px_16px_rgba(0,0,0,0.05)] font-manrope h-full min-h-[420px] flex flex-col justify-between">
-      <div className="flex items-center justify-between min-h-[52px] flex-wrap gap-3 mb-4 border-b border-[#D8D2C8] pb-3">
+    <div className="bg-white dark:bg-[#081C12] p-5 rounded-[12px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 shadow-[0_2px_16px_rgba(0,0,0,0.05)] dark:shadow-floating-dark font-manrope h-full min-h-[420px] flex flex-col justify-between transition-all">
+      <div className="flex items-center justify-between min-h-[52px] flex-wrap gap-3 mb-4 border-b border-[#D8D2C8] dark:border-white/10 pb-3">
         <div>
-          <h3 className="text-[14px] font-semibold text-[#133020]">
+          <h3 className="text-[14px] font-semibold text-[#133020] dark:text-white">
             {locale === "zh"
               ? "各月份展会分布"
               : "Exhibitions distribution by month"}
           </h3>
 
-          <p className="text-[11px] text-[#666666]">
+          <p className="text-[11px] text-[#666666] dark:text-white/70">
             {locale === "zh"
               ? "目标阈值：每月 ≥ 5 场展会（空缺月份以藏红橙高亮）"
               : "Target threshold: ≥ 5 exhibitions per month (gaps highlighted in Saffron)"}
@@ -123,9 +137,9 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
         </div>
 
         {/* Date Range Picker */}
-        <div className="flex items-center gap-2 bg-[#F9F7F7] px-3 py-1.5 rounded-[8px] border-[1.5px] border-[#D8D2C8] text-xs">
+        <div className="flex items-center gap-2 bg-[#F9F7F7] dark:bg-white/5 px-3 py-1.5 rounded-[8px] border-[1.5px] border-[#D8D2C8] dark:border-white/10 text-xs">
           <div className="flex items-center gap-1.5">
-            <span className="font-bold text-[#133020] text-[11px]">
+            <span className="font-bold text-[#133020] dark:text-white text-[11px]">
               {locale === "zh" ? "从" : "From"}:
             </span>
 
@@ -133,14 +147,14 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-transparent text-xs font-semibold text-[#133020] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-semibold text-[#133020] dark:text-white focus:outline-none cursor-pointer"
             />
           </div>
 
-          <span className="text-[#999999] font-bold">—</span>
+          <span className="text-[#999999] dark:text-white/40 font-bold">—</span>
 
           <div className="flex items-center gap-1.5">
-            <span className="font-bold text-[#133020] text-[11px]">
+            <span className="font-bold text-[#133020] dark:text-white text-[11px]">
               {locale === "zh" ? "至" : "To"}:
             </span>
 
@@ -148,7 +162,7 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-transparent text-xs font-semibold text-[#133020] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-semibold text-[#133020] dark:text-white focus:outline-none cursor-pointer"
             />
           </div>
 
@@ -160,7 +174,7 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
                   ? "重置日期范围"
                   : "Reset Date Range"
               }
-              className="ml-1 px-1.5 py-0.5 text-[#046241] bg-[#046241]/10 hover:bg-[#046241]/20 rounded-[6px] transition flex items-center gap-1 font-semibold text-[11px]"
+              className="ml-1 px-1.5 py-0.5 text-[#046241] dark:text-[#52B788] bg-[#046241]/10 dark:bg-[#046241]/25 hover:bg-[#046241]/20 rounded-[6px] transition flex items-center gap-1 font-semibold text-[11px]"
             >
               <RotateCcw className="w-3.5 h-3.5" />
 
@@ -174,9 +188,9 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
 
       <div className="flex items-center justify-end gap-3 mb-2 text-xs font-medium">
         <div className="flex items-center gap-1.5 text-[11px]">
-          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#046241] inline-block" />
+          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#046241] dark:bg-[#52B788] inline-block" />
 
-          <span className="text-[#133020]">
+          <span className="text-[#133020] dark:text-white">
             {locale === "zh"
               ? "达标 (≥ 5 场展会)"
               : "Target met (≥ 5 exhibitions)"}
@@ -186,7 +200,7 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
         <div className="flex items-center gap-1.5 text-[11px]">
           <span className="w-2.5 h-2.5 rounded-[2px] bg-[#FFB347] inline-block" />
 
-          <span className="text-[#C17110]">
+          <span className="text-[#C17110] dark:text-[#FFB347]">
             {locale === "zh"
               ? "空缺 (< 5 场展会)"
               : "Gap (< 5 exhibitions)"}
@@ -246,7 +260,7 @@ export function EventsByMonthChart({ data }: EventsByMonthProps) {
               <LabelList
                 dataKey="exhibitions"
                 position="top"
-                style={{ fontSize: 10, fontWeight: 700, fill: "#133020" }}
+                style={{ fontSize: 10, fontWeight: 700, fill: isDark ? "#FFFFFF" : "#133020" }}
               />
             </Bar>
           </BarChart>

@@ -147,36 +147,36 @@ export function LifewoodMultiSelect({
         onClick={() => setIsOpen((prev) => !prev)}
         className={`w-full h-[42px] px-3.5 rounded-xl border text-sm flex items-center justify-between gap-2 transition-all cursor-pointer text-left ${
           isOpen
-            ? "border-[#046241] ring-2 ring-[#046241]/20 bg-white"
+            ? "border-[#046241] ring-2 ring-[#046241]/20 bg-white dark:bg-[#081C12] text-[#111827] dark:text-white"
             : selected.length > 0
-            ? "border-[#d1d5db] bg-white text-[#111827] hover:border-[#9ca3af]"
-            : "border-[#d1d5db] bg-white text-[#9ca3af] hover:border-[#9ca3af]"
-        } ${disabled ? "opacity-50 cursor-not-allowed bg-gray-100" : ""}`}
+            ? "border-[#d1d5db] dark:border-white/15 bg-white dark:bg-[#081C12] text-[#111827] dark:text-white hover:border-[#9ca3af]"
+            : "border-[#d1d5db] dark:border-white/15 bg-white dark:bg-[#081C12] text-[#9ca3af] dark:text-white/40 hover:border-[#9ca3af]"
+        } ${disabled ? "opacity-50 cursor-not-allowed bg-gray-100 dark:bg-white/5" : ""}`}
       >
         <span className="truncate flex-1 font-normal">
           {displayText || placeholder}
         </span>
 
         <ChevronDown
-          className={`w-4 h-4 text-[#6b7280] shrink-0 transition-transform duration-200 ${
-            isOpen ? "rotate-180 text-[#046241]" : ""
+          className={`w-4 h-4 text-[#6b7280] dark:text-white/60 shrink-0 transition-transform duration-200 ${
+            isOpen ? "rotate-180 text-[#046241] dark:text-[#52B788]" : ""
           }`}
         />
       </button>
 
       {/* Popover Content */}
       {isOpen && (
-        <div className="absolute z-50 mt-1.5 w-full min-w-[260px] max-w-md rounded-xl border border-[#d8d2c8] bg-white p-2.5 shadow-xl animate-in fade-in-50 zoom-in-95 duration-150">
+        <div className="absolute z-50 mt-1.5 w-full min-w-[260px] max-w-md rounded-xl border border-[#d8d2c8] dark:border-white/15 bg-white dark:bg-[#081C12] p-2.5 shadow-xl dark:shadow-floating-dark animate-in fade-in-50 zoom-in-95 duration-150 font-manrope">
           {/* Optional Search */}
           {searchable && (
             <div className="relative mb-2">
-              <Search className="w-3.5 h-3.5 text-[#9ca3af] absolute left-2.5 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#9ca3af] dark:text-white/40 absolute left-2.5 top-2.5" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search..."
-                className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-[#e5e7eb] bg-[#f9fafb] text-xs text-[#111827] placeholder-[#9ca3af] focus:outline-none focus:border-[#046241]"
+                className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-[#e5e7eb] dark:border-white/10 bg-[#f9fafb] dark:bg-white/5 text-xs text-[#111827] dark:text-white placeholder-[#9ca3af] dark:placeholder-white/40 focus:outline-none focus:border-[#046241]"
               />
             </div>
           )}
@@ -275,14 +275,14 @@ export function LifewoodMultiSelect({
                     onClick={() => toggleOption(opt.value)}
                     className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs cursor-pointer transition ${
                       isSelected
-                        ? "bg-[#046241]/10 text-[#046241] font-semibold"
-                        : "hover:bg-[#f9fafb] text-[#1f2937] font-normal"
+                        ? "bg-[#046241]/10 dark:bg-[#046241]/30 text-[#046241] dark:text-[#52B788] font-semibold"
+                        : "hover:bg-[#f9fafb] dark:hover:bg-white/10 text-[#1f2937] dark:text-white font-normal"
                     }`}
                   >
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="truncate">{opt.label}</span>
                       {opt.region && (
-                        <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.2 rounded font-normal shrink-0">
+                        <span className="text-[10px] text-gray-500 dark:text-white/60 bg-gray-100 dark:bg-white/10 px-1.5 py-0.2 rounded font-normal shrink-0">
                           {opt.region}
                         </span>
                       )}
@@ -291,7 +291,7 @@ export function LifewoodMultiSelect({
                       className={`w-4 h-4 rounded border flex items-center justify-center transition shrink-0 ml-2 ${
                         isSelected
                           ? "bg-[#046241] border-[#046241] text-white"
-                          : "border-[#d1d5db] bg-white"
+                          : "border-[#d1d5db] dark:border-white/20 bg-white dark:bg-[#081C12]"
                       }`}
                     >
                       {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
