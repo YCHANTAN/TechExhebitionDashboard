@@ -159,7 +159,7 @@ export function BusinessLines() {
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 activeCategory === cat.id
                   ? "bg-[#133020] text-white dark:bg-[#FFB347] dark:text-[#133020] shadow-sm"
-                  : "bg-white/80 dark:bg-white/5 text-[#133020]/70 dark:text-white/70 hover:bg-white dark:hover:bg-white/10 border border-[#D8D2C8]/60 dark:border-white/10"
+                  : "bg-white/80 dark:bg-white/5 text-[#133020]/70 dark:text-white/70 hover:bg-white dark:hover:bg-white/10 border border-gray-200 dark:border-white/10"
               }`}
             >
               {locale === "zh" ? cat.labelZh : cat.labelEn}
@@ -175,18 +175,18 @@ export function BusinessLines() {
               <div
                 key={item.id}
                 onClick={() => setSelectedLineId(isSelected ? null : item.id)}
-                className={`group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#081C12] border transition-all duration-300 cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1.5 ${
+                className={`group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-zinc-950 border transition-all duration-300 cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1.5 ${
                   isSelected
                     ? "border-[#046241] dark:border-[#FFB347] ring-2 ring-[#FFB347]/30"
-                    : "border-[#D8D2C8] dark:border-white/15"
+                    : "border-gray-200 dark:border-white/15"
                 }`}
               >
                 {/* Top Accent Line */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#F9F7F7] dark:bg-white/10 flex items-center justify-center text-[#133020] dark:text-[#FFB347] transition-transform group-hover:scale-110">
+                  <div className="w-12 h-12 rounded-2xl bg-gray-50 dark:bg-white/10 flex items-center justify-center text-[#133020] dark:text-[#FFB347] transition-transform group-hover:scale-110">
                     <item.icon className="w-6 h-6" />
                   </div>
-                  <span className="text-[10px] font-black tracking-widest px-2.5 py-1 rounded-full bg-[#133020]/5 dark:bg-white/5 text-[#708E7C] dark:text-[#FFB347] border border-[#D8D2C8]/50 dark:border-white/10 uppercase">
+                  <span className="text-[10px] font-black tracking-widest px-2.5 py-1 rounded-full bg-[#133020]/5 dark:bg-white/5 text-[#708E7C] dark:text-[#FFB347] border border-gray-200 dark:border-white/10 uppercase">
                     {item.badge}
                   </span>
                 </div>
@@ -202,7 +202,7 @@ export function BusinessLines() {
                 </div>
 
                 {/* Target Summits Footer */}
-                <div className="pt-4 border-t border-[#D8D2C8]/50 dark:border-white/10">
+                <div className="pt-4 border-t border-gray-100 dark:border-white/10">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[10px] uppercase font-bold text-[#708E7C] dark:text-white/50">
                       {locale === "zh" ? "重点对标展会" : "Target Summits"}
@@ -215,7 +215,7 @@ export function BusinessLines() {
                     {item.targetSummits.map((summit, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-[#F9F7F7] dark:bg-[#133020] text-[#133020] dark:text-[#F5EEDB] border border-[#D8D2C8]/40 dark:border-white/10"
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-gray-50 dark:bg-white/5 text-[#133020] dark:text-zinc-300 border border-gray-200 dark:border-white/10"
                       >
                         {summit}
                       </span>
@@ -229,7 +229,7 @@ export function BusinessLines() {
 
         {/* Selected Line Interactive Inspection Drawer */}
         {selectedLine && (
-          <div className="mt-8 p-6 rounded-3xl bg-white dark:bg-[#081C12] border border-[#046241]/30 dark:border-[#FFB347]/30 shadow-xl animate-in fade-in slide-in-from-bottom-3 duration-200">
+          <div className="mt-8 p-6 rounded-3xl bg-white dark:bg-zinc-950 border border-[#046241]/30 dark:border-white/20 shadow-xl animate-in fade-in slide-in-from-bottom-3 duration-200">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#C17110] dark:text-[#FFB347] block mb-1">

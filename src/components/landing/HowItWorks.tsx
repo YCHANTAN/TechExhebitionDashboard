@@ -88,7 +88,7 @@ export function HowItWorks() {
         <div className="relative">
           {/* Vertical continuous accent line */}
           <div
-            className="absolute left-6 top-6 h-[calc(100%-5rem)] w-0.5 -translate-x-1/2 bg-[#D8D2C8] dark:bg-white/10"
+            className="absolute left-6 top-6 h-[calc(100%-5rem)] w-0.5 -translate-x-1/2 bg-gray-200 dark:bg-white/10"
             aria-hidden="true"
           >
             <div
@@ -110,7 +110,7 @@ export function HowItWorks() {
                   <div
                     className={`relative flex gap-5 sm:gap-6 p-5 sm:p-6 rounded-3xl transition-all duration-300 ${
                       isActive
-                        ? "bg-white dark:bg-[#081C12] border border-[#046241]/30 dark:border-[#FFB347]/30 shadow-xl"
+                        ? "bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/20 shadow-xl"
                         : "bg-transparent hover:bg-white/50 dark:hover:bg-white/5 border border-transparent"
                     }`}
                   >
@@ -118,8 +118,8 @@ export function HowItWorks() {
                     <div
                       className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-2 transition-all duration-300 ${
                         isActive
-                          ? "bg-[#FFB347] text-[#133020] shadow-lg shadow-[#FFB347]/30 border-white dark:border-[#133020] scale-110"
-                          : "bg-white dark:bg-[#081C12] text-[#708E7C] dark:text-white/60 border-[#D8D2C8] dark:border-white/15"
+                          ? "bg-[#FFB347] text-[#133020] shadow-lg shadow-[#FFB347]/30 border-white dark:border-zinc-900 scale-110"
+                          : "bg-white dark:bg-zinc-950 text-[#708E7C] dark:text-white/60 border-gray-200 dark:border-white/15"
                       }`}
                     >
                       <step.icon className="h-5 w-5" />

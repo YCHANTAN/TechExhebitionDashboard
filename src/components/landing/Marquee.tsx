@@ -149,7 +149,7 @@ export function Marquee() {
             <button
               key={`summit-1-${idx}`}
               onClick={() => setSelectedSummit(item)}
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/90 dark:bg-[#081C12]/90 border border-[#D8D2C8]/80 dark:border-white/10 shadow-xs hover:shadow-md hover:border-[#046241] dark:hover:border-[#FFB347] hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
+              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white dark:bg-zinc-950 border border-gray-200/90 dark:border-white/15 shadow-xs hover:shadow-md hover:border-[#046241] dark:hover:border-[#FFB347] hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
             >
               <div className="w-8 h-8 rounded-xl bg-[#133020]/5 dark:bg-white/5 flex items-center justify-center text-[#046241] dark:text-[#FFB347] group-hover:scale-110 transition-transform">
                 <item.icon className="w-4 h-4" />
@@ -173,7 +173,7 @@ export function Marquee() {
             <button
               key={`summit-2-${idx}`}
               onClick={() => setSelectedSummit(item)}
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/90 dark:bg-[#081C12]/90 border border-[#D8D2C8]/80 dark:border-white/10 shadow-xs hover:shadow-md hover:border-[#046241] dark:hover:border-[#FFB347] hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
+              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white dark:bg-zinc-950 border border-gray-200/90 dark:border-white/15 shadow-xs hover:shadow-md hover:border-[#046241] dark:hover:border-[#FFB347] hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
             >
               <div className="w-8 h-8 rounded-xl bg-[#133020]/5 dark:bg-white/5 flex items-center justify-center text-[#046241] dark:text-[#FFB347] group-hover:scale-110 transition-transform">
                 <item.icon className="w-4 h-4" />
@@ -204,7 +204,7 @@ export function Marquee() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-3xl bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
+            className="relative w-full max-w-lg rounded-3xl bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/15 p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
           >
             {/* Close Button */}
             <button
@@ -238,7 +238,7 @@ export function Marquee() {
 
             {/* Metrics Breakdown Grid */}
             <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8]/50 dark:border-white/10">
+              <div className="p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200/60 dark:border-white/10">
                 <span className="text-[10px] text-[#708E7C] dark:text-white/60 uppercase font-semibold block mb-1 flex items-center gap-1">
                   <Calendar className="w-3 h-3" /> Date
                 </span>
@@ -246,7 +246,7 @@ export function Marquee() {
                   {selectedSummit.date}
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8]/50 dark:border-white/10">
+              <div className="p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200/60 dark:border-white/10">
                 <span className="text-[10px] text-[#708E7C] dark:text-white/60 uppercase font-semibold block mb-1 flex items-center gap-1">
                   <MapPin className="w-3 h-3" /> Venue
                 </span>

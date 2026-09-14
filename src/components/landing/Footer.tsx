@@ -9,9 +9,9 @@ export function Footer() {
   const { locale } = useLocaleStore();
 
   return (
-    <footer className="w-full bg-[#F5EEDB] dark:bg-[#06160e] border-t border-[#D8D2C8] dark:border-white/10 pt-16 pb-12 px-6">
+    <footer className="w-full bg-white dark:bg-black border-t border-gray-200 dark:border-white/10 pt-16 pb-12 px-6">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#D8D2C8]/70 dark:border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-200 dark:border-white/10">
           {/* Brand Column */}
           <div className="md:col-span-1 flex flex-col justify-between">
             <div>

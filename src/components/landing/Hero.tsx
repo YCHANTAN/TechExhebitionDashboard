@@ -85,13 +85,13 @@ export function Hero() {
     >
       {/* Dynamic Aura & Background */}
       <div
-        className="absolute inset-0 pointer-events-none -z-10 overflow-hidden bg-gradient-to-b from-[#F5EEDB] via-[#F9F7F7] to-[#F5EEDB] dark:from-[#081C12] dark:via-[#0c2419] dark:to-[#081C12] border-b border-[#D8D2C8]/50 dark:border-white/10"
+        className="absolute inset-0 pointer-events-none -z-10 overflow-hidden bg-white dark:bg-black border-b border-gray-200/80 dark:border-white/10"
         aria-hidden="true"
       >
         {/* Ambient Radial Highlights */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-[#FFB347]/18 dark:bg-[#046241]/30 rounded-full blur-3xl" />
-        <div className="absolute -top-24 left-10 w-96 h-96 bg-[#046241]/12 dark:bg-[#FFB347]/12 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#FFB347]/15 rounded-full blur-3xl" />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-[#FFB347]/10 dark:bg-[#046241]/25 rounded-full blur-3xl" />
+        <div className="absolute -top-24 left-10 w-96 h-96 bg-[#046241]/8 dark:bg-[#FFB347]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#FFB347]/10 rounded-full blur-3xl" />
 
         {/* Lifewood Canvas Particles */}
         <LivingWoodNetwork variant="dark" />
@@ -113,7 +113,7 @@ export function Hero() {
         </h1>
 
         {/* Subtitle Description */}
-        <p className="max-w-2xl text-sm sm:text-base text-[#133020]/75 dark:text-[#F5EEDB]/80 font-normal leading-relaxed mb-8">
+        <p className="max-w-2xl text-sm sm:text-base text-[#133020]/75 dark:text-white/80 font-normal leading-relaxed mb-8">
           {locale === "zh"
             ? "专为 Lifewood 商务开拓与高管团队打造。涵盖 500+ 场全球顶级工业峰会追踪、27 项标准审核维度、AI 自动化抓取引擎，以及贯穿 6 大核心数据业务线的战略契合度评估。"
             : "The unified market intelligence portal empowering Lifewood's BD and executive teams to discover, audit, score, and conquer 500+ global industrial exhibitions across 6 core AI data service lines."}
@@ -131,28 +131,28 @@ export function Hero() {
         </div>
 
         {/* Quick Highlights Counters */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 w-full max-w-3xl pt-8 border-t border-[#D8D2C8]/60 dark:border-white/10">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 w-full max-w-3xl pt-8 border-t border-gray-200 dark:border-white/10">
           <div className="flex flex-col items-center">
             <span className="text-2xl sm:text-3xl font-black text-[#133020] dark:text-white">520+</span>
-            <span className="text-xs font-semibold text-[#708E7C] dark:text-[#F5EEDB]/70">
+            <span className="text-xs font-semibold text-[#708E7C] dark:text-white/70">
               {locale === "zh" ? "全球科技峰会" : "Audited Exhibitions"}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-2xl sm:text-3xl font-black text-[#046241] dark:text-[#FFB347]">4.8 / 5</span>
-            <span className="text-xs font-semibold text-[#708E7C] dark:text-[#F5EEDB]/70">
+            <span className="text-xs font-semibold text-[#708E7C] dark:text-white/70">
               {locale === "zh" ? "平均战略契合度" : "Average Fit Score"}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-2xl sm:text-3xl font-black text-[#133020] dark:text-white">6 大</span>
-            <span className="text-xs font-semibold text-[#708E7C] dark:text-[#F5EEDB]/70">
+            <span className="text-xs font-semibold text-[#708E7C] dark:text-white/70">
               {locale === "zh" ? "核心 AI 业务线" : "Core Business Lines"}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-2xl sm:text-3xl font-black text-[#C17110] dark:text-[#FFB347]">100%</span>
-            <span className="text-xs font-semibold text-[#708E7C] dark:text-[#F5EEDB]/70">
+            <span className="text-xs font-semibold text-[#708E7C] dark:text-white/70">
               {locale === "zh" ? "双重审查治理" : "Verified Governance"}
             </span>
           </div>
@@ -173,10 +173,10 @@ export function Hero() {
               transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${isHovered ? "scale3d(1.01, 1.01, 1.01)" : "scale3d(1, 1, 1)"}`,
               transition: isHovered ? "transform 0.1s ease-out" : "transform 0.5s ease-out",
             }}
-            className="relative mx-auto rounded-3xl p-2 sm:p-3 bg-gradient-to-b from-[#133020]/20 via-[#133020]/10 to-transparent dark:from-white/15 dark:via-white/5 dark:to-transparent border border-[#D8D2C8] dark:border-white/15 shadow-2xl backdrop-blur-md transform-style-3d cursor-default"
+            className="relative mx-auto rounded-3xl p-2 sm:p-3 bg-gradient-to-b from-[#133020]/20 via-[#133020]/10 to-transparent dark:from-white/15 dark:via-white/5 dark:to-transparent border border-gray-200 dark:border-white/15 shadow-2xl backdrop-blur-md transform-style-3d cursor-default"
           >
             {/* Command Center Window Chrome Header */}
-            <div className="h-11 px-3 sm:px-4 flex items-center justify-between rounded-t-2xl bg-[#133020] dark:bg-[#081C12] text-white">
+            <div className="h-11 px-3 sm:px-4 flex items-center justify-between rounded-t-2xl bg-[#133020] dark:bg-zinc-900 text-white">
               {/* Left: Window Dots & Protocol URL */}
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
@@ -234,7 +234,7 @@ export function Hero() {
             </div>
 
             {/* Command Center Dynamic View Area */}
-            <div className="relative overflow-hidden rounded-b-2xl bg-[#081C12] text-white min-h-[440px] sm:min-h-[520px] flex flex-col justify-center">
+            <div className="relative overflow-hidden rounded-b-2xl bg-black text-white min-h-[440px] sm:min-h-[520px] flex flex-col justify-center">
               {/* TAB 1: LIVE DASHBOARD SCREENSHOT WITH FLOATING INTERACTIVE BADGES */}
               {activeTab === "preview" && (
                 <div className="relative w-full aspect-[16/9] max-h-[560px] overflow-hidden mask-fade-b animate-in fade-in duration-200">

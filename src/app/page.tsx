@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen w-full bg-[#F5EEDB] dark:bg-[#081C12] text-[#133020] dark:text-[#F5EEDB] selection:bg-[#FFB347] selection:text-[#133020] transition-colors duration-300 overflow-x-hidden font-manrope">
+    <div className="relative min-h-screen w-full bg-white dark:bg-black text-[#133020] dark:text-white selection:bg-[#FFB347] selection:text-[#133020] transition-colors duration-300 overflow-x-hidden font-manrope">
       {/* Liquid Transparent Header Navigation */}
       <Navbar />
 

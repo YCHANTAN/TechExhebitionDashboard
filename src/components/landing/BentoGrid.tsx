@@ -63,7 +63,7 @@ export function BentoGrid() {
           className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-5 relative"
         >
           {/* Card 1: Tall Vertical Card (Left Column) */}
-          <div className="group relative bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-4xl p-6 sm:p-8 pb-0 overflow-hidden min-h-[520px] md:row-span-2 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all duration-300">
+          <div className="group relative bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/15 rounded-4xl p-6 sm:p-8 pb-0 overflow-hidden min-h-[520px] md:row-span-2 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all duration-300">
             {/* Ambient Radial Spotlight */}
             <div
               className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -90,12 +90,12 @@ export function BentoGrid() {
 
             {/* Simulated Phone Screen Mockup */}
             <div className="flex-1 flex justify-center items-end transition-transform duration-300 group-hover:scale-[1.02]">
-              <div className="relative bg-white dark:bg-[#133020] shadow-2xl border-[#133020] dark:border-white/20 overflow-hidden z-10 w-60 sm:w-68 h-96 sm:h-108 rounded-t-4xl border-4 sm:border-6 border-b-0">
+              <div className="relative bg-white dark:bg-zinc-900 shadow-2xl border-[#133020] dark:border-white/20 overflow-hidden z-10 w-60 sm:w-68 h-96 sm:h-108 rounded-t-4xl border-4 sm:border-6 border-b-0">
                 {/* Top Notch */}
                 <div className="absolute left-1/2 -translate-x-1/2 bg-[#133020] dark:bg-black rounded-full z-20 top-2 w-20 h-4.5" />
 
                 {/* Device Screen Content */}
-                <div className="absolute inset-0 pt-10 px-4 bg-[#F9F7F7] dark:bg-[#0c2419]">
+                <div className="absolute inset-0 pt-10 px-4 bg-gray-50 dark:bg-black">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-bold text-[#133020] dark:text-white flex items-center gap-1">
                       <Radio className="w-3.5 h-3.5 text-[#046241] dark:text-[#FFB347] animate-pulse" />
@@ -133,7 +133,7 @@ export function BentoGrid() {
                   </div>
 
                   {/* Second Item */}
-                  <div className="p-3 bg-white dark:bg-[#133020] rounded-xl border border-[#D8D2C8] dark:border-white/10 flex items-center justify-between">
+                  <div className="p-3 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-white/10 flex items-center justify-between">
                     <div>
                       <p className="text-xs font-bold text-[#133020] dark:text-white">
                         VivaTech Paris 2027
@@ -152,7 +152,7 @@ export function BentoGrid() {
           </div>
 
           {/* Card 2: Wide Card (Top Right) with Interactive Weight Simulation */}
-          <div className="group relative bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-4xl p-6 sm:p-8 overflow-hidden min-h-[300px] flex flex-col md:flex-row justify-between items-center shadow-lg hover:shadow-2xl transition-all duration-300">
+          <div className="group relative bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/15 rounded-4xl p-6 sm:p-8 overflow-hidden min-h-[300px] flex flex-col md:flex-row justify-between items-center shadow-lg hover:shadow-2xl transition-all duration-300">
             {/* Ambient Radial Spotlight */}
             <div
               className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -242,7 +242,7 @@ export function BentoGrid() {
           {/* Sub-grid for Bottom Right (Cards 3 & 4) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Card 3: Global Market Coverage */}
-            <div className="group relative bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-4xl p-6 flex flex-col justify-between items-center text-center min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="group relative bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/15 rounded-4xl p-6 flex flex-col justify-between items-center text-center min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300">
               <div className="transition-transform duration-300 group-hover:scale-[1.02]">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#046241] dark:text-[#FFB347] mb-1 block">
                   {locale === "zh" ? "全球覆盖" : "Global Footprint"}
@@ -262,19 +262,19 @@ export function BentoGrid() {
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
                   alt="Reviewer"
-                  className="w-10 h-10 rounded-full border-2 border-white dark:border-[#133020] object-cover"
+                  className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-800 object-cover"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
                   alt="Reviewer"
-                  className="w-10 h-10 rounded-full border-2 border-white dark:border-[#133020] object-cover"
+                  className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-800 object-cover"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
                   alt="Reviewer"
-                  className="w-10 h-10 rounded-full border-2 border-white dark:border-[#133020] object-cover"
+                  className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-800 object-cover"
                 />
-                <div className="w-10 h-10 rounded-full border-2 border-white dark:border-[#133020] bg-[#FFB347] text-[#133020] font-black text-xs flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-800 bg-[#FFB347] text-[#133020] font-black text-xs flex items-center justify-center">
                   50+
                 </div>
               </div>
@@ -286,7 +286,7 @@ export function BentoGrid() {
             </div>
 
             {/* Card 4: Enterprise Scale */}
-            <div className="group relative bg-white dark:bg-[#081C12] border border-[#D8D2C8] dark:border-white/15 rounded-4xl p-6 flex flex-col justify-between min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div className="group relative bg-white dark:bg-zinc-950 border border-gray-200 dark:border-white/15 rounded-4xl p-6 flex flex-col justify-between min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300">
               <div className="transition-transform duration-300 group-hover:scale-[1.02]">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#046241] dark:text-[#FFB347] mb-1 block">
                   {locale === "zh" ? "治理体系" : "Data Accuracy"}
@@ -300,14 +300,14 @@ export function BentoGrid() {
               </div>
 
               <div className="space-y-2 mt-4">
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8]/40 dark:border-white/10 text-xs font-bold text-[#133020] dark:text-white">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-bold text-[#133020] dark:text-white">
                   <span className="flex items-center gap-2">
                     <span className="text-base">🚀</span>
                     520+ {locale === "zh" ? "场已核验" : "Audited"}
                   </span>
                   <span className="text-[#046241] dark:text-[#FFB347]">+28% YoY</span>
                 </div>
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9F7F7] dark:bg-white/5 border border-[#D8D2C8]/40 dark:border-white/10 text-xs font-bold text-[#133020] dark:text-white">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-bold text-[#133020] dark:text-white">
                   <span className="flex items-center gap-2">
                     <span className="text-base">⚡</span>
                     99.8% {locale === "zh" ? "数据准确率" : "Accuracy"}
