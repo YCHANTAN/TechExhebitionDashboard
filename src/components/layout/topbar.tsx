@@ -77,7 +77,7 @@ export function Topbar() {
           href="/dashboard"
           className="hover:text-[#046241] dark:hover:text-[#2EA87A] transition font-medium"
         >
-          Lifewood 活树
+          Lifewood
         </Link>
 
         <ChevronRight className="w-3 h-3 text-[#999999] dark:text-white/40" />
