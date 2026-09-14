@@ -78,27 +78,22 @@ export function Navbar() {
       }`}
     >
       <div className="w-full px-5 sm:px-8 lg:px-12 h-16 sm:h-18 flex items-center justify-between relative">
-        {/* Far Top-Left: Brand Logo & Site Name Flush to Left */}
+        {/* Far Top-Left: Brand Logo Flush to Left */}
         <div className="flex items-center">
           <Link
             href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none"
+            className="flex items-center group focus:outline-none transition-transform duration-200 group-hover:scale-105"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#133020] dark:bg-[#046241] flex items-center justify-center p-1.5 shadow-xs border border-[#FFB347]/25 transition-transform duration-200 group-hover:scale-105">
-              <img
-                src="/ICON_logo.png"
-                alt="LifeScout Logo"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-bold tracking-tight text-[#133020] dark:text-white transition-colors">
-                LifeScout
-              </span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#708E7C] dark:text-[#D8D2C8]/70 font-semibold -mt-0.5">
-                Exhibition Intelligence
-              </span>
-            </div>
+            <img
+              src="/LIFEVENT Light Mode.png"
+              alt="LIFEVENT"
+              className="h-8 sm:h-9 w-auto object-contain dark:hidden"
+            />
+            <img
+              src="/LIFEVENT Dark Mode.png"
+              alt="LIFEVENT"
+              className="h-8 sm:h-9 w-auto object-contain hidden dark:block"
+            />
           </Link>
         </div>
 
@@ -230,7 +225,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full h-10 rounded-xl text-xs font-semibold tracking-wide flex items-center justify-center bg-[#133020] hover:bg-[#046241] text-white dark:bg-[#F5EEDB] dark:text-[#133020] dark:hover:bg-white transition-all shadow-xs"
               >
-                {locale === "zh" ? "登录系统" : "Sign In to LifeScout"}
+                {locale === "zh" ? "登录系统" : "Sign In to LIFEVENT"}
               </Link>
             </div>
           </nav>

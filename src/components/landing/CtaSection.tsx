@@ -33,7 +33,7 @@ export function CtaSection() {
               {locale === "zh" ? (
                 <>
                   重构全球展会商业智能 <br />
-                  <span className="text-[#FFB347]">立即启动 LifeScout</span>
+                  <span className="text-[#FFB347]">立即启动 LIFEVENT</span>
                 </>
               ) : (
                 <>

@@ -12,12 +12,12 @@ export function AuthIntroTransition() {
   useEffect(() => {
     const shouldTrigger =
       typeof window !== "undefined" &&
-      (sessionStorage.getItem("lifescout_auth_intro") === "true" ||
+      (sessionStorage.getItem("lifevent_auth_intro") === "true" ||
         searchParams.get("intro") === "1");
 
     if (shouldTrigger) {
       setActive(true);
-      sessionStorage.removeItem("lifescout_auth_intro");
+      sessionStorage.removeItem("lifevent_auth_intro");
 
       // Wait a brief natural moment for the dashboard to compile/mount (approx 500ms),
       // then immediately trigger the cinematic zoom-in flythrough.
@@ -104,15 +104,15 @@ export function AuthIntroTransition() {
 
               {/* Light Mode Logo */}
               <img
-                src="/LifeScout Light Mode.png"
-                alt="LifeScout"
+                src="/LIFEVENT Light Mode.png"
+                alt="LIFEVENT"
                 className="h-24 sm:h-28 md:h-32 w-auto object-contain drop-shadow-2xl dark:hidden"
               />
 
               {/* Dark Mode Logo */}
               <img
-                src="/LifeScout Dark Mode.png"
-                alt="LifeScout"
+                src="/LIFEVENT Dark Mode.png"
+                alt="LIFEVENT"
                 className="h-24 sm:h-28 md:h-32 w-auto object-contain drop-shadow-[0_0_40px_rgba(4,98,65,0.7)] hidden dark:block"
               />
             </motion.div>

@@ -45,9 +45,9 @@ export function FaqSection() {
       qEn: "Does the platform support multiple languages?",
       qZh: "平台是否原生支持多语种界面与国际化切换？",
       aEn:
-        "Yes, LifeScout features instant hot-swapping between English (EN) and Simplified Chinese (中文) powered by a persisted Zustand store, with typography optimized for both Western and CJK typography.",
+        "Yes, LIFEVENT features instant hot-swapping between English (EN) and Simplified Chinese (中文) powered by a persisted Zustand store, with typography optimized for both Western and CJK typography.",
       aZh:
-        "是的，LifeScout 支持 English（英文）与 简体中文（ZH）毫秒级无缝热切换，由 Zustand 状态持久化驱动，并针对中英文字体进行了专属字偶距与行高优化。",
+        "是的，LIFEVENT 支持 English（英文）与 简体中文（ZH）毫秒级无缝热切换，由 Zustand 状态持久化驱动，并针对中英文字体进行了专属字偶距与行高优化。",
     },
   ];
 

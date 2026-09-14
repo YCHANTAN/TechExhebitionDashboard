@@ -239,13 +239,13 @@ export function Hero() {
               {activeTab === "preview" && (
                 <div className="relative w-full aspect-[16/9] max-h-[560px] overflow-hidden mask-fade-b animate-in fade-in duration-200">
                   <img
-                    src="/LifeScout Light Mode.png"
-                    alt="LifeScout Exhibition Intelligence Dashboard"
+                    src="/LIFEVENT Light Mode.png"
+                    alt="LIFEVENT Exhibition Intelligence Dashboard"
                     className="w-full h-full object-cover object-top dark:hidden"
                   />
                   <img
-                    src="/LifeScout Dark Mode.png"
-                    alt="LifeScout Exhibition Intelligence Dashboard Dark"
+                    src="/LIFEVENT Dark Mode.png"
+                    alt="LIFEVENT Exhibition Intelligence Dashboard Dark"
                     className="w-full h-full object-cover object-top hidden dark:block"
                   />
 

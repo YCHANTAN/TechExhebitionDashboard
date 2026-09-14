@@ -71,7 +71,7 @@ export function LoginForm() {
         }
       } else if (res?.ok) {
         if (typeof window !== "undefined") {
-          sessionStorage.setItem("lifescout_auth_intro", "true");
+          sessionStorage.setItem("lifevent_auth_intro", "true");
         }
         router.push(callbackUrl);
         router.refresh();
@@ -95,13 +95,13 @@ export function LoginForm() {
       {/* Brand Logo & Portal Access Badge Side-by-Side */}
       <div className="flex items-center justify-between gap-4 mb-5">
         <img
-          src="/LifeScout Light Mode.png"
-          alt="Lifewood Data Technology"
+          src="/LIFEVENT Light Mode.png"
+          alt="LIFEVENT Data Technology"
           className="h-12 sm:h-20 w-auto object-contain shrink-0 dark:hidden"
         />
         <img
-          src="/Lifewood Dark Mode.png"
-          alt="Lifewood Data Technology"
+          src="/LIFEVENT Dark Mode.png"
+          alt="LIFEVENT Data Technology"
           className="h-12 sm:h-20 w-auto object-contain shrink-0 hidden dark:block"
         />
         <span className="text-[10px] font-bold text-[#046241] dark:text-[#52B788] uppercase tracking-wider bg-[#046241]/10 dark:bg-[#046241]/30 px-3 py-1.5 rounded-full shrink-0">

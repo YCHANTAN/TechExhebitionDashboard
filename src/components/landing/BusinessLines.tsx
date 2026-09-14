@@ -239,7 +239,7 @@ export function BusinessLines() {
                   {selectedLine.titleEn}
                 </h4>
                 <p className="text-xs text-[#133020]/70 dark:text-white/70 mt-1 max-w-2xl">
-                  LifeScout continuously maps this capability to upcoming international conferences, scoring keynote tracks, sponsor levels, and attendee buyer intent.
+                  LIFEVENT continuously maps this capability to upcoming international conferences, scoring keynote tracks, sponsor levels, and attendee buyer intent.
                 </p>
               </div>
 

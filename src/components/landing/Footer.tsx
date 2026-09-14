@@ -24,7 +24,7 @@ export function Footer() {
                   />
                 </div>
                 <span className="text-base font-black tracking-tight text-[#133020] dark:text-white">
-                  LifeScout
+                  LIFEVENT
                 </span>
               </div>
               <p className="text-xs text-[#133020]/75 dark:text-white/70 leading-relaxed mb-4">

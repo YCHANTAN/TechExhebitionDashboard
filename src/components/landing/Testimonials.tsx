@@ -20,9 +20,9 @@ const TESTIMONIALS: Testimonial[] = [
     avatar:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
     quoteEn:
-      "LifeScout eliminated weeks of manual research across our European and North American expansion. The 27-point audit and Fit Score pinpoint exactly which summits justify executive attendance.",
+      "LIFEVENT eliminated weeks of manual research across our European and North American expansion. The 27-point audit and Fit Score pinpoint exactly which summits justify executive attendance.",
     quoteZh:
-      "LifeScout 帮我们省去了数周跨欧洲与北美市场的繁琐手动调研。27 项审核参数与契合度评分系统，精准指明了哪些高价值峰会值得高管亲自参展。",
+      "LIFEVENT 帮我们省去了数周跨欧洲与北美市场的繁琐手动调研。27 项审核参数与契合度评分系统，精准指明了哪些高价值峰会值得高管亲自参展。",
   },
   {
     id: 1,

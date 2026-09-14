@@ -10,7 +10,7 @@ import { CtaSection } from "@/components/landing/CtaSection";
 import { Footer } from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "LifeScout — Global Tech Exhibition Intelligence Platform",
+  title: "LIFEVENT — Global Tech Exhibition Intelligence Platform",
   description:
     "The modern exhibition intelligence portal tracking, evaluating, and auditing 500+ global industrial exhibitions, conferences, and AI summits for Lifewood Data Technology.",
 };

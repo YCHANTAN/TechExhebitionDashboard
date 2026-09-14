@@ -9,10 +9,10 @@ export function TextReveal() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const englishSentence =
-    "Modern enterprise leadership uses LifeScout to evaluate every global tech exhibition touchpoint, blending autonomous AI crawling with strategic fit scoring across Lifewood's six core service lines in a unified system that drives measurable ROI worldwide.";
+    "Modern enterprise leadership uses LIFEVENT to evaluate every global tech exhibition touchpoint, blending autonomous AI crawling with strategic fit scoring across Lifewood's six core service lines in a unified system that drives measurable ROI worldwide.";
 
   const chineseSentence =
-    "现代化企业高管团队依托 LifeScout 深度评估全球科技展会每一个战略契机，将自动化 AI 爬虫采集与 Lifewood 六大核心业务线的战略契合度评估深度融合，驱动全球参展业务实现更高投资回报。";
+    "现代化企业高管团队依托 LIFEVENT 深度评估全球科技展会每一个战略契机，将自动化 AI 爬虫采集与 Lifewood 六大核心业务线的战略契合度评估深度融合，驱动全球参展业务实现更高投资回报。";
 
   const words = (locale === "zh" ? chineseSentence : englishSentence).split(" ");
 
@@ -56,7 +56,7 @@ export function TextReveal() {
                   filter: isRevealed ? "blur(0px)" : "blur(4px)",
                   transform: isRevealed ? "translateY(0)" : "translateY(4px)",
                   color: isRevealed
-                    ? word.includes("LifeScout") ||
+                    ? word.includes("LIFEVENT") ||
                       word.includes("AI") ||
                       word.includes("ROI") ||
                       word.includes("Lifewood")
