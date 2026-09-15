@@ -15,17 +15,19 @@ export function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-1 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-8 h-8 rounded-xl bg-[#133020] dark:bg-[#046241] flex items-center justify-center p-1.5 shadow-xs">
+              <div className="flex items-center mb-4">
+                <Link href="/" className="inline-block focus:outline-none">
                   <img
-                    src="/ICON_logo.png"
-                    alt="Lifewood Icon"
-                    className="w-full h-full object-contain"
+                    src="/LIFEVENT Light Mode.png"
+                    alt="LIFEVENT"
+                    className="h-8 sm:h-9 w-auto object-contain dark:hidden"
                   />
-                </div>
-                <span className="text-base font-black tracking-tight text-[#133020] dark:text-white">
-                  LIFEVENT
-                </span>
+                  <img
+                    src="/LIFEVENT Dark Mode.png"
+                    alt="LIFEVENT"
+                    className="h-8 sm:h-9 w-auto object-contain hidden dark:block"
+                  />
+                </Link>
               </div>
               <p className="text-xs text-[#133020]/75 dark:text-white/70 leading-relaxed mb-4">
                 {locale === "zh"

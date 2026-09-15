@@ -2,8 +2,13 @@ import "@/app/globals.css";
 import { Providers } from "@/app/providers";
 
 export const metadata = {
-  title: "Lifewood Exhibition Dashboard",
-  description: "Global Tech Exhibition Intelligence Platform",
+  title: "LIFEVENT",
+  description: "Lifewood Tech Exhibition Intelligence Platform",
+  icons: {
+    icon: "/LIFEVENT ICON.png",
+    shortcut: "/LIFEVENT ICON.png",
+    apple: "/LIFEVENT ICON.png",
+  },
 };
 
 export default function RootLayout({

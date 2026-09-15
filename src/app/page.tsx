@@ -10,9 +10,12 @@ import { CtaSection } from "@/components/landing/CtaSection";
 import { Footer } from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "LIFEVENT — Global Tech Exhibition Intelligence Platform",
+  title: "LIFEVENT",
   description:
-    "The modern exhibition intelligence portal tracking, evaluating, and auditing 500+ global industrial exhibitions, conferences, and AI summits for Lifewood Data Technology.",
+    "The modern exhibition intelligence portal tracking, evaluating, and auditing 500+ industrial exhibitions, conferences, and AI summits for Lifewood Data Technology.",
+  icons: {
+    icon: "/LIFEVENT ICON.png",
+  },
 };
 
 export default function LandingPage() {
