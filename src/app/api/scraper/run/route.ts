@@ -12,14 +12,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userId = (session.user as any).id || "user";
-    const limitCheck = checkRateLimit(`scraper-run-${userId}`, 10, 60 * 60 * 1000); // 10 per hour
-    if (!limitCheck.success) {
-      return NextResponse.json(
-        { error: "Rate limit exceeded: Maximum 10 scraper triggers per hour." },
-        { status: 429 }
-      );
-    }
+
 
     const body = await req.json();
     const regions = body.regions || [];

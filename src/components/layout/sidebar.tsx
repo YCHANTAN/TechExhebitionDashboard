@@ -90,7 +90,7 @@ export function Sidebar() {
     <motion.aside
       animate={{ width: collapsed ? 80 : 256 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="bg-[#F9F7F7] dark:bg-[#081C12] text-[#133020] dark:text-white flex flex-col justify-between relative z-50 h-screen sticky top-0 shadow-xl border-r border-[#D8D2C8] dark:border-[#046241]/40 font-manrope transition-colors duration-300"
+      className="bg-[#FFFFFF] dark:bg-[#081C12] text-[#133020] dark:text-white flex flex-col justify-between relative z-50 h-screen sticky top-0 shadow-xl border-r border-[#D8D2C8] dark:border-[#046241]/40 font-manrope transition-colors duration-300"
     >
       {/* Collapse Toggle Button */}
       <button
