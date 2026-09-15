@@ -1,0 +1,31 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# local env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# local cache
+/data/
+
+node_modules/
+.tmp/
+
+Batch11_Tech_Exhibition_Dashboard_Weekly_Task_Brief.pdf
+*.xlsx

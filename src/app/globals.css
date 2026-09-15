@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-paper: #F5EEDB;
+    --bg-white: #FFFFFF;
+    --bg-light: #F9F7F7;
+    --bg-dark: #133020;
+    --green-accent: #046241;
+    --accent: #FFB347;
+    --accent-soft: #FFC370;
+
+    --fit-5: #133020;
+    --fit-4: #046241;
+    --fit-3: #708E7C;
+
+    --priority-high: #C17110;
+    --priority-medium: #FFB347;
+    --priority-low: #9CAFA4;
+  }
+
+  body {
+    background-color: var(--bg-paper);
+    color: var(--bg-dark);
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html[lang="zh"] body,
+  .font-zh {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', system-ui, sans-serif;
+  }
+
+  html[lang="zh"] h1,
+  html[lang="zh"] h2,
+  html[lang="zh"] h3,
+  html[lang="zh"] h4,
+  .font-zh-heading {
+    font-family: 'Alimama ShuHeiTi', 'Microsoft YaHei', 'PingFang SC', 'SimHei', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(19, 48, 32, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(19, 48, 32, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(19, 48, 32, 0.45);
+}
+
+/* Hide scrollbars cleanly */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   Lifewood Unified Dropdown (Select) UI System
+   ========================================================================== */
+
+@layer components {
+  /* Standard Form, Card & Modal Dropdown */
+  .lifewood-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem; /* text-xs: 12px */
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #133020;
+    background-color: #FFFFFF;
+    border: 1px solid #D8D2C8;
+    border-radius: 0.5rem; /* rounded-lg: 8px */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 2.25rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23133020' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .lifewood-select:hover:not(:disabled) {
+    border-color: rgba(4, 98, 65, 0.6);
+    background-color: #FAFAF8;
+  }
+
+  .lifewood-select:focus {
+    outline: none;
+    border-color: #046241;
+    box-shadow: 0 0 0 2px rgba(4, 98, 65, 0.18);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23046241' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  .lifewood-select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #F5EEDB;
+    border-color: #D8D2C8;
+    color: #999999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  /* Compact Variant for Table Cells & Inline Controls */
+  .lifewood-select-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.6rem;
+    padding-right: 1.85rem;
+    font-size: 0.75rem;
+    border-radius: 0.375rem; /* rounded-md: 6px */
+    background-position: right 0.5rem center;
+    background-size: 0.875rem 0.875rem;
+  }
+
+  /* Filter Pill Chip Variant for Catalog Filtering */
+  .lifewood-select-pill {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    font-size: 0.78125rem; /* 12.5px */
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #555555;
+    background-color: #FFFFFF;
+    border: 1.5px solid #D8D2C8;
+    border-radius: 9999px;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.875rem;
+    padding-right: 2.125rem;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 0.875rem 0.875rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  .lifewood-select-pill:hover:not(:disabled) {
+    border-color: rgba(19, 48, 32, 0.4);
+    color: #133020;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23133020' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  .lifewood-select-pill:focus {
+    outline: none;
+    border-color: #046241;
+    box-shadow: 0 0 0 2px rgba(4, 98, 65, 0.18);
+  }
+
+  /* Active Pill Filter (Selected Non-Default Criteria) */
+  .lifewood-select-pill-active {
+    background-color: #133020 !important;
+    border-color: #133020 !important;
+    color: #FFFFFF !important;
+    font-weight: 600;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FFB347' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  }
+
+  .lifewood-select-pill-active:hover:not(:disabled) {
+    background-color: #046241 !important;
+    border-color: #046241 !important;
+  }
+
+  /* Pop-out options readability */
+  .lifewood-select option,
+  .lifewood-select-pill option {
+    background-color: #FFFFFF;
+    color: #133020;
+    font-weight: 500;
+    padding: 4px 8px;
+  }
+
+  /* Universal fallback: ensure any bare select inherits the Lifewood style */
+  select:not(.lifewood-select-pill) {
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Dark mode variants for lifewood-select */
+  .dark .lifewood-select {
+    color: #FFFFFF;
+    background-color: #081C12;
+    border-color: rgba(255, 255, 255, 0.18);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.04);
+  }
+
+  .dark .lifewood-select:hover:not(:disabled) {
+    border-color: #52B788;
+    background-color: #0d281a;
+  }
+
+  .dark .lifewood-select:focus {
+    border-color: #52B788;
+    box-shadow: 0 0 0 2px rgba(82, 183, 136, 0.25);
+  }
+
+  .dark .lifewood-select option {
+    background-color: #081C12;
+    color: #FFFFFF;
+  }
+
+  .dark .lifewood-select-pill {
+    color: #FFFFFF;
+    background-color: #081C12;
+    border-color: rgba(255, 255, 255, 0.18);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  .dark .lifewood-select-pill:hover:not(:disabled) {
+    border-color: #52B788;
+    color: #FFFFFF;
+    background-color: #0d281a;
+  }
+
+  .dark .lifewood-select-pill option {
+    background-color: #081C12;
+    color: #FFFFFF;
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Card Elevation & Floating White Shadow System
+   - All cards that are white become #081C12 in dark mode
+   - Text inside cards transforms from black to white
+   - Floating white shadow creates elevated 3D depth
+   ========================================================================== */
+
+.dark .lifewood-card,
+.dark [data-card="true"] {
+  background-color: #081C12 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.08), 0 4px 12px -2px rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Automatically apply floating white shadow and #081C12 to all white card elements in dark mode */
+.dark .bg-white:not(button):not(input):not(select):not(textarea):not(option):not([role="option"]):not([data-keep-white="true"]),
+.dark .bg-\[\#fcfdfc\]:not(button):not(input):not(select),
+.dark .bg-\[\#F9F7F7\]:not(button):not(input):not(select) {
+  background-color: #081C12 !important;
+  color: #FFFFFF !important;
+}
+
+.dark [class*="rounded-"][class*="border"].bg-white,
+.dark [class*="rounded-"][class*="shadow"].bg-white,
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\],
+.dark [class*="rounded-"][class*="shadow"].bg-\[\#fcfdfc\] {
+  box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.08), 0 4px 12px -2px rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Text color transition: Black / Dark Green (#133020) -> White (#FFFFFF) */
+.dark .lifewood-card .text-\[\#133020\],
+.dark [data-card="true"] .text-\[\#133020\],
+.dark [data-card="true"] .text-black,
+.dark [data-card="true"] .text-\[\#111827\],
+.dark [class*="rounded-"][class*="border"].bg-white .text-\[\#133020\],
+.dark [class*="rounded-"][class*="border"].bg-white .text-black,
+.dark [class*="rounded-"][class*="border"].bg-white .text-\[\#111827\],
+.dark [class*="rounded-"][class*="shadow"].bg-white .text-\[\#133020\],
+.dark [class*="rounded-"][class*="shadow"].bg-white .text-black,
+.dark [class*="rounded-"][class*="shadow"].bg-white .text-\[\#111827\],
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\] .text-\[\#133020\],
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\] .text-black,
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\] .text-\[\#111827\] {
+  color: #FFFFFF !important;
+}
+
+/* Secondary muted text contrast adjustment */
+.dark .lifewood-card .text-\[\#666666\],
+.dark [data-card="true"] .text-\[\#666666\],
+.dark [class*="rounded-"][class*="border"].bg-white .text-\[\#666666\],
+.dark [class*="rounded-"][class*="shadow"].bg-white .text-\[\#666666\],
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\] .text-\[\#666666\] {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Border color subtlety adjustment for cards */
+.dark .lifewood-card .border-\[\#D8D2C8\],
+.dark [data-card="true"] .border-\[\#D8D2C8\],
+.dark [class*="rounded-"][class*="border"].bg-white .border-\[\#D8D2C8\],
+.dark [class*="rounded-"][class*="shadow"].bg-white .border-\[\#D8D2C8\],
+.dark [class*="rounded-"][class*="border"].bg-\[\#fcfdfc\] .border-\[\#e5e7eb\] {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* ==========================================================================
+   React Bits Architectural Site Frame & Curved Corners
+   ========================================================================== */
+.site-frame {
+  position: fixed;
+  z-index: 9990;
+  pointer-events: none;
+  background-color: #F5EEDB;
+  transition: background-color 0.3s ease;
+}
+.dark .site-frame {
+  background-color: #081C12;
+}
+
+.site-frame--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+.site-frame--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+.site-frame--left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+}
+.site-frame--right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+}
+
+.site-corner {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9991;
+  color: #F5EEDB;
+  width: 36px;
+  height: 36px;
+  transition: color 0.3s ease;
+}
+.dark .site-corner {
+  color: #081C12;
+}
+
+.site-corner--top-left {
+  top: 10px;
+  left: 10px;
+}
+.site-corner--top-right {
+  top: 10px;
+  right: 10px;
+  transform: rotate(90deg);
+}
+.site-corner--bottom-right {
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+.site-corner--bottom-left {
+  bottom: 10px;
+  left: 10px;
+  transform: rotate(270deg);
+}
+
+/* Mask helpers */
+.mask-fade-b {
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Cinematic 3D & Ambient Glow Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-2000 {
+  perspective: 2000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+@keyframes pulse-halo {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.06);
+  }
+}
+
+.animate-halo {
+  animation: pulse-halo 6s ease-in-out infinite;
+}
+
+
+/* Skeleton shimmer animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #D8D2C8 25%,
+    #FFFFFF 50%,
+    #D8D2C8 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
