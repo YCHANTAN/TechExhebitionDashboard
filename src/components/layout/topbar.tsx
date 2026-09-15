@@ -70,7 +70,7 @@ export function Topbar() {
   const title = getPageTitle(pathname);
 
   return (
-    <header className="h-16 bg-[#F5EEDB]/95 dark:bg-[#133020]/95 backdrop-blur-md border-b border-[#D8D2C8] dark:border-[#1E4830] px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs transition-colors font-manrope">
+    <header className="h-16 bg-[#F7F7F7]/95 dark:bg-[#133020]/95 backdrop-blur-md border-b border-[#D8D2C8] dark:border-[#1E4830] px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs transition-colors font-manrope">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-1.5 text-xs text-[#666666] dark:text-white/60">
         <Link

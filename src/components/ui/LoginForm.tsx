@@ -14,8 +14,8 @@ export function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("from") || "/dashboard";
 
-  const [email, setEmail] = useState("admin@lifewood.com");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -151,10 +151,11 @@ export function LoginForm() {
             <input
               type="email"
               required
+              autoComplete="email"
               disabled={cooldownSeconds > 0}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@lifewood.com"
+              placeholder="name@lifewood.com"
               className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[#D8D2C8] dark:border-white/15 text-xs text-[#133020] dark:text-white bg-white dark:bg-white/5 placeholder-[#999999] dark:placeholder-white/40 focus:outline-none focus:border-[#046241] focus:ring-1 focus:ring-[#046241]/20 transition disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
           </div>
@@ -169,6 +170,7 @@ export function LoginForm() {
             <input
               type={showPassword ? "text" : "password"}
               required
+              autoComplete="current-password"
               disabled={cooldownSeconds > 0}
               value={password}
               onChange={(e) => setPassword(e.target.value)}

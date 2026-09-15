@@ -6,7 +6,8 @@
 
 @layer base {
   :root {
-    --bg-paper: #F5EEDB;
+    --bg-paper: #F7F7F7;
+    --bg-main: #F7F7F7;
     --bg-white: #FFFFFF;
     --bg-light: #F9F7F7;
     --bg-dark: #133020;
