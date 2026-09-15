@@ -29,7 +29,7 @@ export async function runLiveWebCrawler(
 ): Promise<CrawledEventResult[]> {
   const crawledResults: CrawledEventResult[] = [];
 
-  const targetSources = [
+  const allSources = [
     {
       name: "HKTDC InnoEX 2026",
       url: "https://www.hktdc.com/event/innoex/en",
@@ -37,6 +37,14 @@ export async function runLiveWebCrawler(
       country: "Hong Kong",
       city: "Hong Kong",
       defaultCategory: "Smart City & Enterprise AI Exhibition",
+    },
+    {
+      name: "Singapore Tech Week 2026",
+      url: "https://www.techweeksingapore.com/",
+      region: "Asia",
+      country: "Singapore",
+      city: "Singapore",
+      defaultCategory: "Cloud, AI & Big Data Summit",
     },
     {
       name: "GITEX Global 2026",
@@ -54,7 +62,47 @@ export async function runLiveWebCrawler(
       city: "San Diego",
       defaultCategory: "Search Marketing & AI Search Summit",
     },
+    {
+      name: "AI & Big Data Expo Global 2026",
+      url: "https://www.ai-expo.net/global/",
+      region: "Europe",
+      country: "United Kingdom",
+      city: "London",
+      defaultCategory: "Enterprise AI & Big Data Expo",
+    },
+    {
+      name: "Viva Technology 2026",
+      url: "https://vivatechnology.com/",
+      region: "Europe",
+      country: "France",
+      city: "Paris",
+      defaultCategory: "European Tech Innovation Summit",
+    },
+    {
+      name: "Tech in Asia Conference 2026",
+      url: "https://conference.techinasia.com/",
+      region: "Asia",
+      country: "Indonesia",
+      city: "Jakarta",
+      defaultCategory: "Asian Tech Ecosystem & AI Summit",
+    },
+    {
+      name: "AI Summit New York 2026",
+      url: "https://newyork.theaisummit.com/",
+      region: "North America",
+      country: "USA",
+      city: "New York",
+      defaultCategory: "Commercial AI Applications Conference",
+    },
   ];
+
+  const targetSources = regionsFilter.length > 0
+    ? allSources.filter((s) =>
+        regionsFilter.some(
+          (r) => r.toLowerCase() === s.region.toLowerCase() || r.toLowerCase() === s.country.toLowerCase()
+        )
+      )
+    : allSources;
 
   for (const source of targetSources) {
     try {

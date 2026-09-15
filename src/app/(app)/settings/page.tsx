@@ -85,7 +85,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen -m-8 p-8 space-y-8 font-manrope bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
+    <div className="min-h-screen -m-8 p-8 space-y-8 font-manrope bg-[#F7F7F7] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#D8D2C8] dark:border-[#1E4830] pb-5">
         <div className="flex items-center gap-3">

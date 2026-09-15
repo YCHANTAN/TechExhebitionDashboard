@@ -8,7 +8,7 @@ export default function ScraperPage() {
   const { locale } = useLocaleStore();
 
   return (
-    <div className="min-h-screen -m-8 p-8 space-y-6 font-manrope bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
+    <div className="min-h-screen -m-8 p-8 space-y-6 font-manrope bg-[#F7F7F7] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300">
       {/* Header Bar */}
       <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#D8D2C8] dark:border-[#1E4830] pb-4">
         <div>

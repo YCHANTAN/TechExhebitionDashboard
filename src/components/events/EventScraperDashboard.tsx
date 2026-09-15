@@ -158,12 +158,106 @@ export default function EventScraperDashboard() {
   const abortControllerRef = useRef<AbortController | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const uniqueCount = events.filter((e) => !e.is_duplicate).length;
-  const duplicateCount = events.filter((e) => e.is_duplicate).length;
+  // Month mapping and validation helpers
+  const MONTH_NAMES_MAP: Record<string, number> = {
+    january: 1, jan: 1,
+    february: 2, feb: 2,
+    march: 3, mar: 3,
+    april: 4, apr: 4,
+    may: 5,
+    june: 6, jun: 6,
+    july: 7, jul: 7,
+    august: 8, aug: 8,
+    september: 9, sep: 9, sept: 9,
+    october: 10, oct: 10,
+    november: 11, nov: 11,
+    december: 12, dec: 12,
+  };
+
+  const matchesSelectedMonths = (dateStr: string, eventName: string, targetMonths: string[]) => {
+    if (!targetMonths || targetMonths.length === 0) return true;
+    const targetNums = new Set(
+      targetMonths.map((m) => MONTH_NAMES_MAP[m.toLowerCase().trim()]).filter(Boolean)
+    );
+    if (targetNums.size === 0) return true;
+
+    const combined = `${dateStr || ""} ${eventName || ""}`.toLowerCase();
+    const foundNums = new Set<number>();
+
+    const patterns = [
+      { num: 1, regex: /\b(january|jan)\b/i },
+      { num: 2, regex: /\b(february|feb)\b/i },
+      { num: 3, regex: /\b(march|mar)\b/i },
+      { num: 4, regex: /\b(april|apr)\b/i },
+      { num: 5, regex: /\b(may)\b/i },
+      { num: 6, regex: /\b(june|jun)\b/i },
+      { num: 7, regex: /\b(july|jul)\b/i },
+      { num: 8, regex: /\b(august|aug)\b/i },
+      { num: 9, regex: /\b(september|sep|sept)\b/i },
+      { num: 10, regex: /\b(october|oct)\b/i },
+      { num: 11, regex: /\b(november|nov)\b/i },
+      { num: 12, regex: /\b(december|dec)\b/i },
+    ];
+
+    for (const p of patterns) {
+      if (p.regex.test(combined)) {
+        foundNums.add(p.num);
+      }
+    }
+
+    if (foundNums.size > 0) {
+      return Array.from(foundNums).some((n) => targetNums.has(n));
+    }
+
+    // Allow TBA / unspecified month to avoid omitting announced but unscheduled events
+    return true;
+  };
+
+  const matchesSelectedYears = (dateStr: string, eventName: string, targetYears: string[]) => {
+    if (!targetYears || targetYears.length === 0) return true;
+    const combined = `${dateStr || ""} ${eventName || ""}`;
+    const yearsFound = combined.match(/\b(20\d\d)\b/g);
+    if (yearsFound && yearsFound.length > 0) {
+      return yearsFound.some((y) => targetYears.includes(y));
+    }
+    return true;
+  };
+
+  const filteredEventsForCount = events.filter((e) => {
+    if (!matchesSelectedMonths(e.dates, e.event_name, selectedMonths)) return false;
+    if (!matchesSelectedYears(e.dates, e.event_name, selectedYears)) return false;
+    if (selectedRegion && selectedRegion !== "All Regions") {
+      if (e.region && !e.region.toLowerCase().includes(selectedRegion.toLowerCase())) return false;
+    }
+    if (selectedCountries.length > 0) {
+      if (e.country && !selectedCountries.some((c) => e.country.toLowerCase().includes(c.toLowerCase()))) return false;
+    }
+    return true;
+  });
+
+  const uniqueCount = filteredEventsForCount.filter((e) => !e.is_duplicate).length;
+  const duplicateCount = filteredEventsForCount.filter((e) => e.is_duplicate).length;
 
   const displayedEvents = events.filter((e) => {
-    if (filterMode === "unique") return !e.is_duplicate;
-    if (filterMode === "duplicates") return e.is_duplicate;
+    if (filterMode === "unique" && e.is_duplicate) return false;
+    if (filterMode === "duplicates" && !e.is_duplicate) return false;
+
+    // Filter by active target months
+    if (!matchesSelectedMonths(e.dates, e.event_name, selectedMonths)) return false;
+
+    // Filter by active target years
+    if (!matchesSelectedYears(e.dates, e.event_name, selectedYears)) return false;
+
+    // Filter by active target region
+    if (selectedRegion && selectedRegion !== "All Regions") {
+      if (e.region && !e.region.toLowerCase().includes(selectedRegion.toLowerCase())) return false;
+    }
+
+    // Filter by active target countries
+    if (selectedCountries.length > 0) {
+      if (e.country && !selectedCountries.some((c) => e.country.toLowerCase().includes(c.toLowerCase()))) return false;
+    }
+
     return true;
   });
 
@@ -188,16 +282,18 @@ export default function EventScraperDashboard() {
       parts.push("tech exhibition");
     }
 
-    if (selectedMonths.length > 0) {
-      parts.push(selectedMonths.join(" OR "));
-    }
-
     // Strictly ensure no year below 2026 is included
     const validYears = selectedYears.filter((y) => parseInt(y, 10) >= 2026);
-    if (validYears.length > 0) {
-      parts.push(validYears.join(" OR "));
+    const yearsToUse = validYears.length > 0 ? validYears : ["2026"];
+
+    if (selectedMonths.length > 0) {
+      // Form precise "Month Year" combinations to guide Google Search accurately
+      const monthYearCombos = selectedMonths.flatMap((m) =>
+        yearsToUse.map((y) => `"${m} ${y}"`)
+      );
+      parts.push(`(${monthYearCombos.join(" OR ")})`);
     } else {
-      parts.push("2026");
+      parts.push(`(${yearsToUse.map((y) => `"${y}"`).join(" OR ")})`);
     }
 
     if (selectedCountries.length > 0) {
@@ -276,8 +372,14 @@ export default function EventScraperDashboard() {
     abortControllerRef.current = controller;
     const effectiveQuery = buildScrapeQuery();
 
+    const dynamicLimit = Math.min(
+      50,
+      Math.max(15, (selectedCountries.length || 1) * 5 + (selectedMonths.length || 1) * 3)
+    );
+
     const requestPayload = {
       query: effectiveQuery,
+      limit: dynamicLimit,
       existingEvents: events,
       targetWindow: {
         executionDate: initialWindow.executionDate.toISOString(),
@@ -359,6 +461,10 @@ export default function EventScraperDashboard() {
               } else if (payload.type === "event") {
                 // 🌟 REAL-TIME EVENT STREAMED DIRECTLY TO SCREEN!
                 const incoming = payload.data;
+                if (!matchesSelectedMonths(incoming.dates, incoming.event_name, selectedMonths)) {
+                  console.warn("[Scraper Filter] Excluded incoming event outside target month:", incoming.event_name, incoming.dates);
+                  continue;
+                }
                 setEvents((prev) => {
                   const idx = prev.findIndex(
                     (p) =>
@@ -607,12 +713,6 @@ export default function EventScraperDashboard() {
         </div>
 
         <div className="flex items-center gap-3 text-xs">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F9F7F7] border border-[#D8D2C8] rounded-full text-[#133020]">
-            <span className="w-2 h-2 rounded-full bg-[#046241] animate-pulse" />
-            <span className="font-semibold">
-              {locale === "zh" ? "引擎端口：5000" : "Engine Port: 5000"}
-            </span>
-          </div>
           {events.length > 0 && (
             <span className="font-semibold text-[#046241] bg-[#046241]/10 px-2.5 py-1 rounded-full">
               {locale === "zh"

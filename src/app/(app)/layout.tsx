@@ -9,7 +9,7 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-[#F5EEDB] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300 relative">
+    <div className="flex min-h-screen bg-[#F7F7F7] dark:bg-[#133020] text-[#133020] dark:text-white transition-colors duration-300 relative">
       <Suspense fallback={null}>
         <AuthIntroTransition />
       </Suspense>

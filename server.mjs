@@ -266,18 +266,65 @@ function saveToCache(items) {
 }
 
 // ==========================================
-// 1. ROUTE-LEVEL RATE LIMITER
+// Month & Date Filtering Helpers
 // ==========================================
-const scrapeLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10,
-  message: {
-    success: false,
-    error: 'Rate limit exceeded: Maximum 10 crawl runs per 15 minutes per IP.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const MONTH_NAMES_MAP = {
+  january: 1, jan: 1,
+  february: 2, feb: 2,
+  march: 3, mar: 3,
+  april: 4, apr: 4,
+  may: 5,
+  june: 6, jun: 6,
+  july: 7, jul: 7,
+  august: 8, aug: 8,
+  september: 9, sep: 9, sept: 9,
+  october: 10, oct: 10,
+  november: 11, nov: 11,
+  december: 12, dec: 12,
+};
+
+function getMonthNumbers(monthNames) {
+  if (!Array.isArray(monthNames)) return [];
+  const nums = new Set();
+  for (const name of monthNames) {
+    const clean = String(name).toLowerCase().trim();
+    if (MONTH_NAMES_MAP[clean]) {
+      nums.add(MONTH_NAMES_MAP[clean]);
+    }
+  }
+  return Array.from(nums);
+}
+
+function extractMonthsFromDateText(text) {
+  if (!text) return [];
+  const s = String(text).toLowerCase();
+  const monthsFound = new Set();
+  const patterns = [
+    { num: 1, regex: /\b(january|jan)\b/i },
+    { num: 2, regex: /\b(february|feb)\b/i },
+    { num: 3, regex: /\b(march|mar)\b/i },
+    { num: 4, regex: /\b(april|apr)\b/i },
+    { num: 5, regex: /\b(may)\b/i },
+    { num: 6, regex: /\b(june|jun)\b/i },
+    { num: 7, regex: /\b(july|jul)\b/i },
+    { num: 8, regex: /\b(august|aug)\b/i },
+    { num: 9, regex: /\b(september|sep|sept)\b/i },
+    { num: 10, regex: /\b(october|oct)\b/i },
+    { num: 11, regex: /\b(november|nov)\b/i },
+    { num: 12, regex: /\b(december|dec)\b/i },
+  ];
+  for (const p of patterns) {
+    if (p.regex.test(s)) {
+      monthsFound.add(p.num);
+    }
+  }
+  return Array.from(monthsFound);
+}
+
+// ==========================================
+// 1. ROUTE-LEVEL RATE LIMITER (REMOVED)
+// ==========================================
+// Rate limiting disabled as requested to allow unconstrained scraping based on user filters.
 
 // ==========================================
 // 2. THROTTLING & EXPONENTIAL RETRY HELPERS
@@ -446,8 +493,8 @@ app.delete('/api/crawl-events/cache/item', (req, res) => {
 // ==========================================
 // 4. API PIPELINE ROUTE (WITH REAL-TIME STREAMING & PARALLEL BATCHING)
 // ==========================================
-app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
-  const { query } = req.body;
+app.post('/api/crawl-events', async (req, res) => {
+  const { query, limit, filters } = req.body;
   const searchQuery = query || 'tech exhibition 2027 Singapore OR "Hong Kong" OR "United States"';
 
   const isStream =
@@ -499,7 +546,22 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
     // ----------------------------------------------------
     // STEP 1: Fast Google Discovery Search (Apify)
     // ----------------------------------------------------
-    console.log(`[Step 1] Running Discovery Search: "${searchQuery}"`);
+    // Calculate dynamic discovery quota based on filters (selected countries, months, or explicit limit)
+    const countryCount = (filters?.countries && Array.isArray(filters.countries)) ? filters.countries.length : 0;
+    const monthCount = (filters?.months && Array.isArray(filters.months)) ? filters.months.length : 0;
+
+    let targetLimit = limit ? parseInt(limit, 10) : 15;
+    if (!limit) {
+      if (countryCount >= 5 || monthCount >= 4) {
+        targetLimit = 30;
+      } else if (countryCount >= 2 || monthCount >= 2) {
+        targetLimit = 20;
+      } else {
+        targetLimit = 15;
+      }
+    }
+
+    console.log(`[Step 1] Running Discovery Search (Target Capacity: ${targetLimit}): "${searchQuery}"`);
     sendSSE({
       type: 'status',
       step: 1,
@@ -509,8 +571,8 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
     const searchRun = await callWithRetry(() =>
       apify.actor('apify/google-search-scraper').call({
         queries: searchQuery,
-        maxPagesPerQuery: 1,
-        resultsPerPage: 5,
+        maxPagesPerQuery: Math.max(1, Math.ceil(targetLimit / 10)),
+        resultsPerPage: Math.min(targetLimit, 30),
       })
     );
 
@@ -539,7 +601,7 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
 
     const targetUrls = [];
     for (const url of candidateUrls) {
-      if (targetUrls.length >= 5) break;
+      if (targetUrls.length >= targetLimit) break;
       const domain = normalizeDomain(url);
       if (!AGGREGATOR_DOMAINS.includes(domain) && knownDomains.has(domain)) {
         console.log(`[Deduplication] Prioritizing unvisited domain over known: ${domain}`);
@@ -548,7 +610,7 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
       targetUrls.push(url);
     }
     if (targetUrls.length === 0) {
-      targetUrls.push(...candidateUrls.slice(0, 5));
+      targetUrls.push(...candidateUrls.slice(0, targetLimit));
     }
     console.log(`Discovered ${targetUrls.length} candidate URLs:`, targetUrls);
     sendSSE({
@@ -569,13 +631,13 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
     const pageDataMap = new Map();
 
     try {
-      // Run Apify website-content-crawler in BATCH with fast Cheerio crawler (seconds instead of minutes)
+      // Run Apify website-content-crawler in BATCH with fast Cheerio crawler
       const crawlRun = await callWithRetry(() =>
         apify.actor('apify/website-content-crawler').call({
           startUrls: targetUrls.map((url) => ({ url })),
           crawlerType: 'cheerio',
           maxCrawlPages: targetUrls.length,
-          maxCrawlingDurationSecs: 35,
+          maxCrawlingDurationSecs: Math.max(60, targetUrls.length * 6),
         })
       );
 
@@ -623,6 +685,15 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
           message: `AI auditing ${index}/${targetUrls.length}: ${new URL(targetUrl).hostname}...`,
         });
 
+        // Inject dynamic month and year constraints into AI instruction
+        let dynamicInstruction = PROMPT_SYSTEM;
+        if (filters?.months && Array.isArray(filters.months) && filters.months.length > 0) {
+          dynamicInstruction += `\n\nCRITICAL DATE CONSTRAINT (TARGET MONTHS):\nThe user is specifically searching for tech exhibitions taking place in: ${filters.months.join(', ')}.\nIf this event explicitly takes place in another month (e.g. event is in September or February, but target is ${filters.months.join(', ')}), you MUST mark "is_in_scope": false.\nOnly set "is_in_scope": true if the event takes place in ${filters.months.join(', ')} or if exact dates are wholly TBA.`;
+        }
+        if (filters?.years && Array.isArray(filters.years) && filters.years.length > 0) {
+          dynamicInstruction += `\nCRITICAL DATE CONSTRAINT (TARGET YEARS):\nThe event start year MUST match one of: ${filters.years.join(', ')}. If in a different year, mark "is_in_scope": false.`;
+        }
+
         const response = await callWithRetry(async () => {
           let lastErr = null;
           for (const modelName of candidateModels) {
@@ -631,7 +702,7 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
                 model: modelName,
                 contents: `Source URL: ${targetUrl}\n\nPage Text:\n${rawText}`,
                 config: {
-                  systemInstruction: PROMPT_SYSTEM,
+                  systemInstruction: dynamicInstruction,
                   responseMimeType: 'application/json',
                   temperature: 0.1,
                 },
@@ -650,12 +721,46 @@ app.post('/api/crawl-events', scrapeLimiter, async (req, res) => {
 
         // Quality Gate: Within date scope, Year >= 2026, and Fit Score >= 3
         if (parsed.is_in_scope && parsed.fit_score >= 3 && parsed.data) {
-          // Reject any event taking place below the year 2026
           const dateStr = (parsed.data.dates || '');
-          const yearsFound = dateStr.match(/\b(19\d\d|20\d\d)\b/g);
+          const combinedDateText = `${dateStr} ${parsed.data.event_name || ''}`;
+
+          // Reject any event taking place below the year 2026
+          const yearsFound = combinedDateText.match(/\b(19\d\d|20\d\d)\b/g);
           if (yearsFound && yearsFound.some((y) => parseInt(y, 10) < 2026)) {
             console.log(`[Quality Gate] Excluded event dated before 2026: "${parsed.data.event_name}" (${dateStr})`);
             continue;
+          }
+
+          // Strict Target Month Filter Check
+          if (filters?.months && Array.isArray(filters.months) && filters.months.length > 0) {
+            const targetMonthNums = getMonthNumbers(filters.months);
+            if (targetMonthNums.length > 0) {
+              const eventMonthNums = extractMonthsFromDateText(combinedDateText);
+              if (eventMonthNums.length > 0) {
+                const matchesTargetMonth = eventMonthNums.some((m) => targetMonthNums.includes(m));
+                if (!matchesTargetMonth) {
+                  console.log(
+                    `[Quality Gate] Excluded event outside target month(s) [${filters.months.join(', ')}]: "${parsed.data.event_name}" (${dateStr})`
+                  );
+                  continue;
+                }
+              }
+            }
+          }
+
+          // Strict Target Year Filter Check
+          if (filters?.years && Array.isArray(filters.years) && filters.years.length > 0) {
+            const targetYears = filters.years.map(String);
+            const eventYears = combinedDateText.match(/\b(20\d\d)\b/g);
+            if (eventYears && eventYears.length > 0) {
+              const matchesTargetYear = eventYears.some((y) => targetYears.includes(y));
+              if (!matchesTargetYear) {
+                console.log(
+                  `[Quality Gate] Excluded event outside target year(s) [${targetYears.join(', ')}]: "${parsed.data.event_name}" (${dateStr})`
+                );
+                continue;
+              }
+            }
           }
 
           // Check for duplicate against database records, local cache, and current batch
